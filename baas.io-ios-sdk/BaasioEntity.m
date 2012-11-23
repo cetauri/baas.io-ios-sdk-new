@@ -7,7 +7,6 @@
 
 #import "BaasioEntity.h"
 
-
 @implementation BaasioEntity {
 
 }
@@ -52,13 +51,42 @@
 
 }
 
-
 - (void)refresh {
 
 }
 
 
+#pragma mark - Data
 - (NSString *)objectForKey:(NSString *)string {
  return nil;
 }
+
+
+#pragma mark - Query
+- (BaasioEntity *)getEntity:(NSString *)uuid {
+    return nil;
+}
+
+- (BaasioEntity *)findEntity:(BaasioQuery *)query {
+    return nil;
+}
+
+- (NSArray *)findEntities:(BaasioQuery *)query {
+    return nil;
+}
+
+- (BaasioEntity *)getEntityInBackground:(NSString *)uuid {
+    return nil;
+}
+
+
+- (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query {
+    return nil;
+}
+
+- (NSArray *)findEntitiesInBackground:(BaasioQuery *)query {
+    return nil;
+}
+
+
 @end

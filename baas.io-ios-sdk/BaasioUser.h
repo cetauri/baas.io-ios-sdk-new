@@ -29,4 +29,5 @@
 - (void)signUp;
 - (void)signUpInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
+
 @end

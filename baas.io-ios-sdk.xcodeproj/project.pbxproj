@@ -7,15 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF429CCB165B4B0E001C78B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF429CCA165B4B0E001C78B5 /* UIKit.framework */; };
 		AFB9E3E9165A2BDC0021AA4C /* Baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E2165A2BDC0021AA4C /* Baasio.m */; };
 		AFB9E3EA165A2BDC0021AA4C /* BaasioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E4165A2BDC0021AA4C /* BaasioEntity.m */; };
 		AFB9E3EB165A2BDC0021AA4C /* BaasioQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E6165A2BDC0021AA4C /* BaasioQuery.m */; };
 		AFB9E3EC165A2BDC0021AA4C /* BaasioUser.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E8165A2BDC0021AA4C /* BaasioUser.m */; };
 		AFB9E3F2165A2BE20021AA4C /* EntityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3EF165A2BE20021AA4C /* EntityTest.m */; };
 		AFB9E3F3165A2BE20021AA4C /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3F1165A2BE20021AA4C /* UserTest.m */; };
+		AFB9E40E165A2D7B0021AA4C /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3FC165A2D7B0021AA4C /* AFHTTPClient.m */; };
+		AFB9E40F165A2D7B0021AA4C /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3FE165A2D7B0021AA4C /* AFHTTPRequestOperation.m */; };
+		AFB9E410165A2D7B0021AA4C /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E400165A2D7B0021AA4C /* AFImageRequestOperation.m */; };
+		AFB9E411165A2D7B0021AA4C /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E402165A2D7B0021AA4C /* AFJSONRequestOperation.m */; };
+		AFB9E412165A2D7B0021AA4C /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E404165A2D7B0021AA4C /* AFNetworkActivityIndicatorManager.m */; };
+		AFB9E413165A2D7B0021AA4C /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E407165A2D7B0021AA4C /* AFPropertyListRequestOperation.m */; };
+		AFB9E414165A2D7B0021AA4C /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E409165A2D7B0021AA4C /* AFURLConnectionOperation.m */; };
+		AFB9E415165A2D7B0021AA4C /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E40B165A2D7B0021AA4C /* AFXMLRequestOperation.m */; };
+		AFB9E416165A2D7B0021AA4C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E40D165A2D7B0021AA4C /* UIImageView+AFNetworking.m */; };
+		AFB9E419165A2D850021AA4C /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E418165A2D850021AA4C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AFD93F0B165A2B0E00FC9ED0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD93F0A165A2B0E00FC9ED0 /* Foundation.framework */; };
 		AFD93F1A165A2B0E00FC9ED0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD93F19165A2B0E00FC9ED0 /* SenTestingKit.framework */; };
-		AFD93F1C165A2B0E00FC9ED0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD93F1B165A2B0E00FC9ED0 /* UIKit.framework */; };
 		AFD93F1D165A2B0E00FC9ED0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD93F0A165A2B0E00FC9ED0 /* Foundation.framework */; };
 		AFD93F20165A2B0E00FC9ED0 /* libbaas.io-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD93F07165A2B0E00FC9ED0 /* libbaas.io-ios-sdk.a */; };
 		AFD93F26165A2B0E00FC9ED0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFD93F24165A2B0E00FC9ED0 /* InfoPlist.strings */; };
@@ -44,6 +54,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AF429CCA165B4B0E001C78B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AFB9E3E1165A2BDC0021AA4C /* Baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baasio.h; sourceTree = "<group>"; };
 		AFB9E3E2165A2BDC0021AA4C /* Baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baasio.m; sourceTree = "<group>"; };
 		AFB9E3E3165A2BDC0021AA4C /* BaasioEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioEntity.h; sourceTree = "<group>"; };
@@ -56,12 +67,32 @@
 		AFB9E3EF165A2BE20021AA4C /* EntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityTest.m; sourceTree = "<group>"; };
 		AFB9E3F0165A2BE20021AA4C /* UserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTest.h; sourceTree = "<group>"; };
 		AFB9E3F1165A2BE20021AA4C /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
+		AFB9E3FB165A2D7B0021AA4C /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = submodules/AFNetworking.git/AFNetworking/AFHTTPClient.h; sourceTree = "<group>"; };
+		AFB9E3FC165A2D7B0021AA4C /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = submodules/AFNetworking.git/AFNetworking/AFHTTPClient.m; sourceTree = "<group>"; };
+		AFB9E3FD165A2D7B0021AA4C /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = submodules/AFNetworking.git/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		AFB9E3FE165A2D7B0021AA4C /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = submodules/AFNetworking.git/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		AFB9E3FF165A2D7B0021AA4C /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFImageRequestOperation.h; path = submodules/AFNetworking.git/AFNetworking/AFImageRequestOperation.h; sourceTree = "<group>"; };
+		AFB9E400165A2D7B0021AA4C /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFImageRequestOperation.m; path = submodules/AFNetworking.git/AFNetworking/AFImageRequestOperation.m; sourceTree = "<group>"; };
+		AFB9E401165A2D7B0021AA4C /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFJSONRequestOperation.h; path = submodules/AFNetworking.git/AFNetworking/AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		AFB9E402165A2D7B0021AA4C /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFJSONRequestOperation.m; path = submodules/AFNetworking.git/AFNetworking/AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		AFB9E403165A2D7B0021AA4C /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = submodules/AFNetworking.git/AFNetworking/AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		AFB9E404165A2D7B0021AA4C /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = submodules/AFNetworking.git/AFNetworking/AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		AFB9E405165A2D7B0021AA4C /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = submodules/AFNetworking.git/AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
+		AFB9E406165A2D7B0021AA4C /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPropertyListRequestOperation.h; path = submodules/AFNetworking.git/AFNetworking/AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		AFB9E407165A2D7B0021AA4C /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFPropertyListRequestOperation.m; path = submodules/AFNetworking.git/AFNetworking/AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		AFB9E408165A2D7B0021AA4C /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = submodules/AFNetworking.git/AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		AFB9E409165A2D7B0021AA4C /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = submodules/AFNetworking.git/AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		AFB9E40A165A2D7B0021AA4C /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFXMLRequestOperation.h; path = submodules/AFNetworking.git/AFNetworking/AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		AFB9E40B165A2D7B0021AA4C /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFXMLRequestOperation.m; path = submodules/AFNetworking.git/AFNetworking/AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		AFB9E40C165A2D7B0021AA4C /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "submodules/AFNetworking.git/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		AFB9E40D165A2D7B0021AA4C /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "submodules/AFNetworking.git/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		AFB9E417165A2D850021AA4C /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = submodules/JSONKit.git/JSONKit.h; sourceTree = "<group>"; };
+		AFB9E418165A2D850021AA4C /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = submodules/JSONKit.git/JSONKit.m; sourceTree = "<group>"; };
 		AFD93F07165A2B0E00FC9ED0 /* libbaas.io-ios-sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libbaas.io-ios-sdk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFD93F0A165A2B0E00FC9ED0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFD93F0E165A2B0E00FC9ED0 /* baas.io-ios-sdk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "baas.io-ios-sdk-Prefix.pch"; sourceTree = "<group>"; };
 		AFD93F18165A2B0E00FC9ED0 /* baas.io-ios-sdkTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "baas.io-ios-sdkTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFD93F19165A2B0E00FC9ED0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		AFD93F1B165A2B0E00FC9ED0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AFD93F23165A2B0E00FC9ED0 /* baas.io-ios-sdkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "baas.io-ios-sdkTests-Info.plist"; sourceTree = "<group>"; };
 		AFD93F25165A2B0E00FC9ED0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,8 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF429CCB165B4B0E001C78B5 /* UIKit.framework in Frameworks */,
 				AFD93F1A165A2B0E00FC9ED0 /* SenTestingKit.framework in Frameworks */,
-				AFD93F1C165A2B0E00FC9ED0 /* UIKit.framework in Frameworks */,
 				AFD93F1D165A2B0E00FC9ED0 /* Foundation.framework in Frameworks */,
 				AFD93F20165A2B0E00FC9ED0 /* libbaas.io-ios-sdk.a in Frameworks */,
 			);
@@ -89,9 +120,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AFB9E3F7165A2D550021AA4C /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				AFB9E417165A2D850021AA4C /* JSONKit.h */,
+				AFB9E418165A2D850021AA4C /* JSONKit.m */,
+			);
+			name = JSONKit;
+			sourceTree = "<group>";
+		};
+		AFB9E3F9165A2D610021AA4C /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				AFB9E3FB165A2D7B0021AA4C /* AFHTTPClient.h */,
+				AFB9E3FC165A2D7B0021AA4C /* AFHTTPClient.m */,
+				AFB9E3FD165A2D7B0021AA4C /* AFHTTPRequestOperation.h */,
+				AFB9E3FE165A2D7B0021AA4C /* AFHTTPRequestOperation.m */,
+				AFB9E3FF165A2D7B0021AA4C /* AFImageRequestOperation.h */,
+				AFB9E400165A2D7B0021AA4C /* AFImageRequestOperation.m */,
+				AFB9E401165A2D7B0021AA4C /* AFJSONRequestOperation.h */,
+				AFB9E402165A2D7B0021AA4C /* AFJSONRequestOperation.m */,
+				AFB9E403165A2D7B0021AA4C /* AFNetworkActivityIndicatorManager.h */,
+				AFB9E404165A2D7B0021AA4C /* AFNetworkActivityIndicatorManager.m */,
+				AFB9E405165A2D7B0021AA4C /* AFNetworking.h */,
+				AFB9E406165A2D7B0021AA4C /* AFPropertyListRequestOperation.h */,
+				AFB9E407165A2D7B0021AA4C /* AFPropertyListRequestOperation.m */,
+				AFB9E408165A2D7B0021AA4C /* AFURLConnectionOperation.h */,
+				AFB9E409165A2D7B0021AA4C /* AFURLConnectionOperation.m */,
+				AFB9E40A165A2D7B0021AA4C /* AFXMLRequestOperation.h */,
+				AFB9E40B165A2D7B0021AA4C /* AFXMLRequestOperation.m */,
+				AFB9E40C165A2D7B0021AA4C /* UIImageView+AFNetworking.h */,
+				AFB9E40D165A2D7B0021AA4C /* UIImageView+AFNetworking.m */,
+			);
+			name = AFNetworking;
+			sourceTree = "<group>";
+		};
 		AFD93EFC165A2B0E00FC9ED0 = {
 			isa = PBXGroup;
 			children = (
+				AF429CCA165B4B0E001C78B5 /* UIKit.framework */,
 				AFD93F0C165A2B0E00FC9ED0 /* baas.io-ios-sdk */,
 				AFD93F21165A2B0E00FC9ED0 /* baas.io-ios-sdkTests */,
 				AFD93F09165A2B0E00FC9ED0 /* Frameworks */,
@@ -111,9 +178,10 @@
 		AFD93F09165A2B0E00FC9ED0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFB9E3F9165A2D610021AA4C /* AFNetworking */,
+				AFB9E3F7165A2D550021AA4C /* JSONKit */,
 				AFD93F0A165A2B0E00FC9ED0 /* Foundation.framework */,
 				AFD93F19165A2B0E00FC9ED0 /* SenTestingKit.framework */,
-				AFD93F1B165A2B0E00FC9ED0 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -265,6 +333,16 @@
 				AFB9E3EA165A2BDC0021AA4C /* BaasioEntity.m in Sources */,
 				AFB9E3EB165A2BDC0021AA4C /* BaasioQuery.m in Sources */,
 				AFB9E3EC165A2BDC0021AA4C /* BaasioUser.m in Sources */,
+				AFB9E40E165A2D7B0021AA4C /* AFHTTPClient.m in Sources */,
+				AFB9E40F165A2D7B0021AA4C /* AFHTTPRequestOperation.m in Sources */,
+				AFB9E410165A2D7B0021AA4C /* AFImageRequestOperation.m in Sources */,
+				AFB9E411165A2D7B0021AA4C /* AFJSONRequestOperation.m in Sources */,
+				AFB9E412165A2D7B0021AA4C /* AFNetworkActivityIndicatorManager.m in Sources */,
+				AFB9E413165A2D7B0021AA4C /* AFPropertyListRequestOperation.m in Sources */,
+				AFB9E414165A2D7B0021AA4C /* AFURLConnectionOperation.m in Sources */,
+				AFB9E415165A2D7B0021AA4C /* AFXMLRequestOperation.m in Sources */,
+				AFB9E416165A2D7B0021AA4C /* UIImageView+AFNetworking.m in Sources */,
+				AFB9E419165A2D850021AA4C /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,9 +427,16 @@
 		AFD93F2D165A2B0E00FC9ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					i386,
+					armv6,
+				);
 				DSTROOT = /tmp/baas_io_ios_sdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "baas.io-ios-sdk/baas.io-ios-sdk-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -361,9 +446,16 @@
 		AFD93F2E165A2B0E00FC9ED0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					i386,
+					armv6,
+				);
 				DSTROOT = /tmp/baas_io_ios_sdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "baas.io-ios-sdk/baas.io-ios-sdk-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -373,6 +465,10 @@
 		AFD93F30165A2B0E00FC9ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -380,7 +476,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "baas.io-ios-sdk/baas.io-ios-sdk-Prefix.pch";
 				INFOPLIST_FILE = "baas.io-ios-sdkTests/baas.io-ios-sdkTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -388,6 +487,10 @@
 		AFD93F31165A2B0E00FC9ED0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -395,7 +498,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "baas.io-ios-sdk/baas.io-ios-sdk-Prefix.pch";
 				INFOPLIST_FILE = "baas.io-ios-sdkTests/baas.io-ios-sdkTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;

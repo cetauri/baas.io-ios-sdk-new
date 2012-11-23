@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "BaasioQuery.h"
 
 @interface BaasioEntity : NSObject
 @property(strong) NSString *metadata;
@@ -33,12 +34,24 @@
 
 
 - (void)delete;
-
 - (void)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
 
 - (void)refresh;
 
+
+#pragma mark - Data
 - (NSString *)objectForKey:(NSString *)string;
+
+
+#pragma mark - Query
+- (BaasioEntity *)getEntity:(NSString *)uuid;
+- (BaasioEntity *)getEntityInBackground:(NSString *)uuid;
+
+- (BaasioEntity *)findEntity:(BaasioQuery *)query;
+- (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query;
+
+- (NSArray *)findEntities:(BaasioQuery *)query;
+- (NSArray *)findEntitiesInBackground:(BaasioQuery *)query;
 @end
