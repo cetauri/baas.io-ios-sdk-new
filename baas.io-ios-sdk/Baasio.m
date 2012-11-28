@@ -7,50 +7,37 @@
 
 #import "Baasio.h"
 
-static NSString * _apiURL;
-static NSString * _applicationName;
-static NSString * _orgName;
 @implementation Baasio {
 
 }
-+ (void)setApplicationInfo:(NSString *)orgName applicationName:(NSString *)applicationName{
-    _apiURL = @"https://api.baas.io";
-    [Baasio setApplicationInfo:_apiURL organizationName:orgName applicationName:applicationName];
 
-}
-
-+ (void)setApplicationInfo:(NSString *)apiURL organizationName:(NSString *)orgName applicationName:(NSString *)applicationName
++ (id)sharedInstance
 {
-    _apiURL = apiURL;
-    _applicationName = applicationName;
-    _orgName = orgName;
+  static dispatch_once_t pred;
+  static id _instance = nil;
+  dispatch_once(&pred, ^{
+    _instance = [[self alloc] init]; // or some other init method
+  });
+  return _instance;
 }
 
-//static BaasClient *instance = nil;
-+ (id) createInstance{
-    Baasio *baasIO = [[Baasio alloc] init];
-    return baasIO;
-}
-
-- (NSString *)getAppInfo{
-    NSString *info = [NSString stringWithFormat:@"%@/%@", _orgName, _applicationName];
-    return info;
-}
-
-- (NSString *)getAPIURL{
-    return [NSString stringWithFormat:@"%@/%@", self.getAPIHost, self.getAppInfo];
-}
-
-- (NSString *)getAPIHost{
-    return _apiURL;
-}
--(id)init
++ (void)setApplicationInfo:(NSString *)baasioID applicationName:(NSString *)applicationName
 {
-    if (self = [super init])
-    {
-        NSString *applicationID = [self getAppInfo];
-        NSString *baseURL = [self getAPIHost];
-    }
-    return self;
+    NSString *apiURL = @"https://api.baas.io";
+    [Baasio setApplicationInfo:apiURL baasioID:baasioID applicationName:applicationName];
 }
+
++ (void)setApplicationInfo:(NSString *)apiURL baasioID:(NSString *)baasioID applicationName:(NSString *)applicationName
+{
+    Baasio *baasio = [Baasio sharedInstance];
+    baasio.apiURL = apiURL;
+    baasio.baasioID = baasioID;
+    baasio.applicationName = applicationName;
+}
+
+- (NSURL *)getAPIURL{
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@", _apiURL, _baasioID, _applicationName];
+    return [NSURL URLWithString:url];
+}
+
 @end

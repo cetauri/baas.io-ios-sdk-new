@@ -10,6 +10,8 @@
 #import "BaasioQuery.h"
 
 @interface BaasioEntity : NSObject
+
+@property(strong) NSString *entityName;
 @property(strong) NSString *metadata;
 @property(strong) NSString *entitytId;
 @property(strong) NSDate *updated;
@@ -46,12 +48,12 @@
 
 
 #pragma mark - Query
-- (BaasioEntity *)getEntity:(NSString *)uuid;
-- (BaasioEntity *)getEntityInBackground:(NSString *)uuid;
++ (BaasioEntity *)getEntity:(NSString *)uuid;
++ (BaasioEntity *)getEntityInBackground:(NSString *)uuid;
 
-- (BaasioEntity *)findEntity:(BaasioQuery *)query;
-- (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query;
++ (BaasioEntity *)findEntity:(BaasioQuery *)query;
++ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query;
 
-- (NSArray *)findEntities:(BaasioQuery *)query;
-- (NSArray *)findEntitiesInBackground:(BaasioQuery *)query;
++ (NSArray *)findEntities:(BaasioQuery *)query;
++ (NSArray *)findEntitiesInBackground:(BaasioQuery *)query;
 @end

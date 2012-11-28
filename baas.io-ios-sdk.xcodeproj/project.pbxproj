@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27F2E0195C0A4CC3D57C60FD /* FileTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E22B2FFF3122F1CDEA60 /* FileTest.m */; };
+		27F2E0637105682525BF88B4 /* BaasioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */; };
+		27F2E1F9925413D92226BBDA /* QueryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E0CBDFE8F7046AE9CD5A /* QueryTest.m */; };
+		27F2E4A35AD03BDF2A1A9910 /* BaasioResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E04671874480B3D59873 /* BaasioResponse.m */; };
+		27F2E8F0565C911B20E307BE /* BaasioFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */; };
+		27F2EBB68B17F0A0788E3393 /* BaasioPush.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */; };
+		27F2EC15535C57DE1BB54EC2 /* PushTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E9910E5CEEFE958FAF32 /* PushTest.m */; };
+		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
 		AF429CCB165B4B0E001C78B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF429CCA165B4B0E001C78B5 /* UIKit.framework */; };
 		AFB9E3E9165A2BDC0021AA4C /* Baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E2165A2BDC0021AA4C /* Baasio.m */; };
 		AFB9E3EA165A2BDC0021AA4C /* BaasioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E4165A2BDC0021AA4C /* BaasioEntity.m */; };
@@ -48,12 +56,26 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				27F2EBB68B17F0A0788E3393 /* BaasioPush.h in CopyFiles */,
+				27F2E8F0565C911B20E307BE /* BaasioFile.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		27F2E04671874480B3D59873 /* BaasioResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioResponse.m; sourceTree = "<group>"; };
+		27F2E0CBDFE8F7046AE9CD5A /* QueryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryTest.m; sourceTree = "<group>"; };
+		27F2E22B2FFF3122F1CDEA60 /* FileTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTest.m; sourceTree = "<group>"; };
+		27F2E2C9DCA5E3A2FD760F2F /* BaasioResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioResponse.h; sourceTree = "<group>"; };
+		27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioPush.h; sourceTree = "<group>"; };
+		27F2E5AE3D9F8C239E74D737 /* QueryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryTest.h; sourceTree = "<group>"; };
+		27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioFile.m; sourceTree = "<group>"; };
+		27F2E94830BD93C460528B68 /* PushTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTest.h; sourceTree = "<group>"; };
+		27F2E9910E5CEEFE958FAF32 /* PushTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTest.m; sourceTree = "<group>"; };
+		27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioFile.h; sourceTree = "<group>"; };
+		27F2EDE6DD9FE4D30839706E /* FileTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTest.h; sourceTree = "<group>"; };
+		27F2EE6A9471C3869236C589 /* BaasioPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioPush.m; sourceTree = "<group>"; };
 		AF429CCA165B4B0E001C78B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AFB9E3E1165A2BDC0021AA4C /* Baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baasio.h; sourceTree = "<group>"; };
 		AFB9E3E2165A2BDC0021AA4C /* Baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baasio.m; sourceTree = "<group>"; };
@@ -198,6 +220,12 @@
 				AFB9E3E7165A2BDC0021AA4C /* BaasioUser.h */,
 				AFB9E3E8165A2BDC0021AA4C /* BaasioUser.m */,
 				AFD93F0D165A2B0E00FC9ED0 /* Supporting Files */,
+				27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */,
+				27F2EE6A9471C3869236C589 /* BaasioPush.m */,
+				27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */,
+				27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */,
+				27F2E04671874480B3D59873 /* BaasioResponse.m */,
+				27F2E2C9DCA5E3A2FD760F2F /* BaasioResponse.h */,
 			);
 			path = "baas.io-ios-sdk";
 			sourceTree = "<group>";
@@ -218,6 +246,12 @@
 				AFB9E3F0165A2BE20021AA4C /* UserTest.h */,
 				AFB9E3F1165A2BE20021AA4C /* UserTest.m */,
 				AFD93F22165A2B0E00FC9ED0 /* Supporting Files */,
+				27F2E0CBDFE8F7046AE9CD5A /* QueryTest.m */,
+				27F2E5AE3D9F8C239E74D737 /* QueryTest.h */,
+				27F2E9910E5CEEFE958FAF32 /* PushTest.m */,
+				27F2E94830BD93C460528B68 /* PushTest.h */,
+				27F2E22B2FFF3122F1CDEA60 /* FileTest.m */,
+				27F2EDE6DD9FE4D30839706E /* FileTest.h */,
 			);
 			path = "baas.io-ios-sdkTests";
 			sourceTree = "<group>";
@@ -343,6 +377,8 @@
 				AFB9E415165A2D7B0021AA4C /* AFXMLRequestOperation.m in Sources */,
 				AFB9E416165A2D7B0021AA4C /* UIImageView+AFNetworking.m in Sources */,
 				AFB9E419165A2D850021AA4C /* JSONKit.m in Sources */,
+				27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */,
+				27F2E0637105682525BF88B4 /* BaasioFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +388,10 @@
 			files = (
 				AFB9E3F2165A2BE20021AA4C /* EntityTest.m in Sources */,
 				AFB9E3F3165A2BE20021AA4C /* UserTest.m in Sources */,
+				27F2E1F9925413D92226BBDA /* QueryTest.m in Sources */,
+				27F2EC15535C57DE1BB54EC2 /* PushTest.m in Sources */,
+				27F2E0195C0A4CC3D57C60FD /* FileTest.m in Sources */,
+				27F2E4A35AD03BDF2A1A9910 /* BaasioResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

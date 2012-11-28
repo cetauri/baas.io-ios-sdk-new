@@ -8,6 +8,7 @@
 #import "BaasioEntity.h"
 
 @implementation BaasioEntity {
+    NSMutableDictionary *_dictionary;
 
 }
 @synthesize entitytId = _entitytId;
@@ -17,13 +18,20 @@
 @synthesize created = _created;
 @synthesize metadata = _metadata;
 
-
-- (void)setObject:(NSNumber *)number forKey:(NSString *)key {
-
+-(id) init
+{
+    self = [super init];
+    if (self){
+        _dictionary= [NSMutableDictionary dictionary];
+    }
+    return self;
 }
 
-+ (BaasioEntity *)entitytWithName:(NSString *)string {
- return nil;
+
++ (BaasioEntity *)entitytWithName:(NSString *)entityName {
+    BaasioEntity *entity = [[BaasioEntity alloc] init];
+    entity.entityName = entityName;
+    return entity ;
 }
 
 - (void)save {
@@ -57,34 +65,38 @@
 
 
 #pragma mark - Data
-- (NSString *)objectForKey:(NSString *)string {
- return nil;
+- (id)objectForKey:(NSString *)key {
+    return [_dictionary objectForKey:key];
+}
+
+- (void)setObject:(id)value forKey:(NSString *)key {
+    [_dictionary setObject:value forKey:key];
 }
 
 
 #pragma mark - Query
-- (BaasioEntity *)getEntity:(NSString *)uuid {
++ (BaasioEntity *)getEntity:(NSString *)uuid {
     return nil;
 }
 
-- (BaasioEntity *)findEntity:(BaasioQuery *)query {
++ (BaasioEntity *)findEntity:(BaasioQuery *)query {
     return nil;
 }
 
-- (NSArray *)findEntities:(BaasioQuery *)query {
++ (NSArray *)findEntities:(BaasioQuery *)query {
     return nil;
 }
 
-- (BaasioEntity *)getEntityInBackground:(NSString *)uuid {
++ (BaasioEntity *)getEntityInBackground:(NSString *)uuid {
     return nil;
 }
 
 
-- (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query {
++ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query {
     return nil;
 }
 
-- (NSArray *)findEntitiesInBackground:(BaasioQuery *)query {
++ (NSArray *)findEntitiesInBackground:(BaasioQuery *)query {
     return nil;
 }
 

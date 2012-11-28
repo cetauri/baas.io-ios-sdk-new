@@ -6,3 +6,4 @@
     #import <Foundation/Foundation.h>
 #endif
 
+#define NSLog( s, ... ) NSLog( @"<%@:(%d)> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
