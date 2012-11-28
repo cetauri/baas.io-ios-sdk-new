@@ -15,6 +15,7 @@
 		27F2EBB68B17F0A0788E3393 /* BaasioPush.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */; };
 		27F2EC15535C57DE1BB54EC2 /* PushTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E9910E5CEEFE958FAF32 /* PushTest.m */; };
 		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
+		AF26A27F166667F5006A7225 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E418165A2D850021AA4C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AF429CCB165B4B0E001C78B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF429CCA165B4B0E001C78B5 /* UIKit.framework */; };
 		AFB9E3E9165A2BDC0021AA4C /* Baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E2165A2BDC0021AA4C /* Baasio.m */; };
 		AFB9E3EA165A2BDC0021AA4C /* BaasioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E4165A2BDC0021AA4C /* BaasioEntity.m */; };
@@ -386,6 +387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF26A27F166667F5006A7225 /* JSONKit.m in Sources */,
 				AFB9E3F2165A2BE20021AA4C /* EntityTest.m in Sources */,
 				AFB9E3F3165A2BE20021AA4C /* UserTest.m in Sources */,
 				27F2E1F9925413D92226BBDA /* QueryTest.m in Sources */,

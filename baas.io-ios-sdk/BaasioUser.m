@@ -69,42 +69,30 @@ static BaasioUser  *currentUser;
 - (void)signUpInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock
 {
-    NSDictionary *params = @{@"name":@"username",@"password":@"cetauri",@"username":@"cetauri4",@"email":@"cetauri+4@gmail.com"};
+    NSDictionary *params = @{
+                            @"name":self.name,
+                            @"password":self.password,
+                            @"username":self.username,
+                            @"email":self.email
+                            };
 
 
-    NSURL *url = [NSURL URLWithString:@"http://localhost:8080/teaaaast.push/sandbox"];//[[Baasio sharedInstance] getAPIURL];
+    NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 
-//    [httpClient postPath:@"users"
-//              parameters:params
-//                 success:^(AFHTTPRequestOperation *operation, id responseObject){
-//                     NSLog(@"--------- Operation succeeded");
-//
-//                 }
-//                 failure:^(AFHTTPRequestOperation *operation, NSError *error){
-//                     NSLog(@"--------- Operation failed : %@", error.localizedDescription);
-//
-//                 }];
-//
-//    NSLog(@"%@", httpClient.baseURL.description);
-    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"users" parameters:nil];
+    NSError *error;
+    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
+    if (error != nil) {
+        failureBlock(error);
+        return;
+    }
+    request.HTTPBody = data;
 
-//    NSString *path = [NSString stringWithFormat:@"%@/users", [[Baasio sharedInstance] getAPIURL].absoluteString];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"users" parameters:params];
-
-//    AFFormURLParameterEncoding,
-//    AFJSONParameterEncoding,
-//    AFPropertyListParameterEncoding,
-
-//    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [self success:successBlock];
-//    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [self failure:failureBlock];
+    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [self success:successBlock];
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [self failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                                            NSLog(@"Operation succeeded");
-
-                                                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                                                                            NSLog(@"Operation failed : %@", error.localizedDescription);
-                                                                                        }];
+                                                                                        success:success failure:failure];
 
     [operation start];
 }

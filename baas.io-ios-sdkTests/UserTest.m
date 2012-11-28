@@ -19,9 +19,9 @@
     exitRunLoop = NO;
 
 //    [Baasio setApplicationInfo:@"https://api.usergrid.com/" baasioID:@"c3e0fa60-0162-11e2-bf27-12313b0c5ebb" applicationName:@"sandbox"];
-//    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
     
-    [Baasio setApplicationInfo:@"http://localhost:8080/" baasioID:@"test.push" applicationName:@"sandbox"];
+//    [Baasio setApplicationInfo:@"http://localhost:8080/" baasioID:@"test.push" applicationName:@"sandbox"];
 }
 
 - (void)tearDown
@@ -53,11 +53,11 @@
 - (void)testSignUp
 {
     BaasioUser *user = [BaasioUser user];
-    user.username = @"cetdauri";
-    user.email = @"cetaudri@gmail.com";
-    user.name = @"cetaudfri";
-    user.password = @"cedtauri";
-//    [user signUp];
+    user.username = @"cetauri";
+    user.email = @"cetauri@gmail.com";
+    user.name = @"권오상";
+    user.password = @"cetauri";
+    
     [user signUpInBackground:^(void) {
             NSLog(@"success");
             exitRunLoop = YES;
