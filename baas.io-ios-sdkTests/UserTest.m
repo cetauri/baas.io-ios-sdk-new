@@ -19,7 +19,7 @@
     exitRunLoop = NO;
 
 //    [Baasio setApplicationInfo:@"https://api.usergrid.com/" baasioID:@"c3e0fa60-0162-11e2-bf27-12313b0c5ebb" applicationName:@"sandbox"];
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+    [Baasio setApplicationInfo:@"cetauri" applicationName:@"asdfafasd"];
     
 //    [Baasio setApplicationInfo:@"http://localhost:8080/" baasioID:@"test.push" applicationName:@"sandbox"];
 }
@@ -31,33 +31,14 @@
     [super tearDown];
 }
 
-//- (void)testSignIn
-//{
-//    BaasioUser *user = [BaasioUser user];
-//    user.username = @"cetauri";
-//    user.password = @"cetauri";
-//
-//    [user signInBackground:^(void) {
-//                    NSLog(@"success");
-//                    exitRunLoop = YES;
-//              }
-//              failureBlock:^(NSError *error) {
-//                    NSLog(@"fail : %@", error.localizedDescription);
-//
-//                    exitRunLoop = YES;
-//                    STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-//              }];
-//    [self runTestLoop];
-//}
-
-- (void)testSignUp
+- (void)test_1_SignUp
 {
     BaasioUser *user = [BaasioUser user];
     user.username = @"cetauri";
     user.email = @"cetauri@gmail.com";
     user.name = @"권오상";
     user.password = @"cetauri";
-    
+
     [user signUpInBackground:^(void) {
             NSLog(@"success");
             exitRunLoop = YES;
@@ -70,20 +51,43 @@
         [self runTestLoop];
 }
 
-//- (void)testCurrentUser
-//{
-//    BaasioUser *user = [BaasioUser currtuser];
-//}
-//
-//- (void)testUserInfo{
-//    BaasioUser *user = [BaasioUser user];
-//}
-//
-//- (void)testSignOut
-//{
-//    [BaasioUser signOut];
-//}
-//
+- (void)test_2_SignIn
+{
+    BaasioUser *user = [BaasioUser user];
+    user.username = @"cetauri";
+    user.password = @"cetauri";
+
+    [user signInBackground:^(void) {
+                    NSLog(@"success");
+                    exitRunLoop = YES;
+              }
+              failureBlock:^(NSError *error) {
+                    NSLog(@"fail : %@", error.localizedDescription);
+
+                    exitRunLoop = YES;
+                    STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+              }];
+    [self runTestLoop];
+}
+
+
+- (void)test_9_unsubscribe
+{
+    BaasioUser *user = [BaasioUser user];
+
+    [user unsubscribeInBackground:^(void) {
+        NSLog(@"success");
+        exitRunLoop = YES;
+    }
+              failureBlock:^(NSError *error) {
+                  NSLog(@"fail : %@", error.localizedDescription);
+                  
+                  exitRunLoop = YES;
+                  STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+              }];
+    [self runTestLoop];
+}
+
 
 - (void)runTestLoop{
     while (!exitRunLoop){

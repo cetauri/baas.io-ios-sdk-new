@@ -15,9 +15,10 @@
 @property(strong) NSString *password;
 @property(strong) NSString *name;
 
+
 + (BaasioUser *)user;
 
-+ (BaasioUser *)currtuser;
+//+ (BaasioUser *)currtuser;
 
 + (BaasioUser *)signOut;
 
@@ -29,5 +30,6 @@
 - (void)signUp;
 - (void)signUpInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
-
+- (void)unsubscribeInBackground:(void (^)(void))successBlock
+                   failureBlock:(void (^)(NSError *error))failureBlock;
 @end

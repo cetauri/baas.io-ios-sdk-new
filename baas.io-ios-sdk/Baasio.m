@@ -8,7 +8,7 @@
 #import "Baasio.h"
 
 @implementation Baasio {
-
+    NSString *_token;
 }
 
 + (id)sharedInstance
@@ -38,6 +38,50 @@
 - (NSURL *)getAPIURL{
     NSString *url = [NSString stringWithFormat:@"%@/%@/%@", _apiURL, _baasioID, _applicationName];
     return [NSURL URLWithString:url];
+}
+
+@end
+
+@implementation Baasio(Private)
+
+- (void)setToken:(NSString*)token{
+    _token = token;
+}
+
+#pragma mark - API Authorization method
+- (NSMutableURLRequest *)setAuthorization:(NSMutableURLRequest *)request{
+    if (_token != nil) {
+        [request addValue:[@"Bearer " stringByAppendingString:_token] forHTTPHeaderField:@"Authorization"];
+    }
+    
+    return request;
+}
+
+#pragma mark - API response method
+- (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock {
+    
+    void (^failure)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+        if (JSON == nil){
+            failureBlock(error);
+            return;
+        }
+        NSMutableDictionary* details = [NSMutableDictionary dictionary];
+        [details setValue:[JSON objectForKey:@"error_description"] forKey:NSLocalizedDescriptionKey];
+        
+        NSString *domain = [JSON objectForKey:@"error"];
+        NSError *e = [NSError errorWithDomain:domain code:error.code userInfo:details];
+        
+        failureBlock(e);
+    };
+    return failure;
+}
+
+- (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(void))successBlock {
+    void (^success)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+        //        NSLog(@"json : :%@", JSON);
+        successBlock();
+    };
+    return success;
 }
 
 @end

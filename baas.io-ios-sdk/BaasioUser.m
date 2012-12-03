@@ -9,29 +9,49 @@
 #import "Baasio.h"
 #import "JSONKit.h"
 #import "AFNetworking.h"
-static BaasioUser  *currentUser;
 @implementation BaasioUser {
-
+    NSString *_token;
 }
 //@synthesize username = _username;
 //@synthesize email = _email;
 //@synthesize password = _password;
 //@synthesize name = _name;
 
-
-+ (BaasioUser *)user {
-    return [[BaasioUser alloc]init];
++ (id)user
+{
+    static dispatch_once_t pred;
+    static id _instance = nil;
+    dispatch_once(&pred, ^{
+        _instance = [[self alloc] init]; // or some other init method
+    });
+    return _instance;
 }
+
 
 - (void)signIn:(NSError **)error {
        //에러 응답은?
 }
 
-//- (void)addAuthorization:(NSMutableURLRequest *)request{
-//    if (_access_token != nil && ![_access_token isEqualToString:@""]){
-//        [request addValue:[NSString stringWithFormat:@"Bearer %@", _access_token] forHTTPHeaderField:@"Authorization"];
-//    }
-//}
+
+
+- (void)unsubscribeInBackground:(void (^)(void))successBlock
+            failureBlock:(void (^)(NSError *error))failureBlock
+{
+    NSString *path = [@"users/" stringByAppendingString:@"cetauri"];
+    AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
+    
+    request = [[Baasio sharedInstance] setAuthorization:request];
+
+    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] success:successBlock];
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:success
+                                                                                        failure:failure];
+    [operation start];
+}
+
 
 - (void)signInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock
@@ -44,18 +64,24 @@ static BaasioUser  *currentUser;
     AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:@"token" parameters:params];
 
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [self success:successBlock];
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [self failure:failureBlock];
+    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] success:successBlock];
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
 
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:success
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            NSString *access_token = [JSON objectForKey:@"access_token"];
+                                                                                            [[Baasio sharedInstance]setToken:access_token];
+                                                                                            
+                                                                                            success(request, response, JSON);
+                                                                                        }
                                                                                         failure:failure];
     [operation start];
 }
-//
-//+ (BaasioUser *)currtuser {
-//    return currentUser;
-//}
+
++ (BaasioUser *)currtuser {
+    return [self user];
+}
+
 //
 //
 //+ (BaasioUser *)signOut {
@@ -66,6 +92,7 @@ static BaasioUser  *currentUser;
 //
 //}
 //
+
 - (void)signUpInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock
 {
@@ -89,39 +116,14 @@ static BaasioUser  *currentUser;
     }
     request.HTTPBody = data;
 
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [self success:successBlock];
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [self failure:failureBlock];
+    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] success:successBlock];
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:success failure:failure];
 
     [operation start];
 }
 
-#pragma mark - API response method
-- (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock {
-//    failureBlock:(void (^)(NSError *error))failureBlock
-    void (^failure)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-        if (JSON == nil){
-            failureBlock(error);
-            return;
-        }
-        NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:[JSON objectForKey:@"error_description"] forKey:NSLocalizedDescriptionKey];
 
-        NSString *domain = [JSON objectForKey:@"error"];
-        NSError *e = [NSError errorWithDomain:domain code:error.code userInfo:details];
-
-        failureBlock(e);
-    };
-    return failure;
-}
-
-- (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(void))successBlock {
-    void (^success)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-        NSLog(@"json : :%@", JSON);
-        successBlock();
-    };
-    return success;
-}
 
 @end
