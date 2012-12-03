@@ -20,14 +20,14 @@
 
 //+ (BaasioUser *)currtuser;
 
-+ (BaasioUser *)signOut;
+//+ (BaasioUser *)signOut;
 
 
-- (void)signIn;
+//- (void)signIn;
 - (void)signInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock;
 
-- (void)signUp;
+//- (void)signUp;
 - (void)signUpInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 - (void)unsubscribeInBackground:(void (^)(void))successBlock

@@ -35,11 +35,3 @@
 @end
 
 
-@interface Baasio(Private)
-+ (id)sharedInstance;
-- (void)setToken:(NSString*)token;
-- (NSMutableURLRequest *)setAuthorization:(NSMutableURLRequest *)request;
-- (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(void))successBlock;
-- (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock;
-
-@end

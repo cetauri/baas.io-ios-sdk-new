@@ -9,9 +9,8 @@
 #import "Baasio.h"
 #import "JSONKit.h"
 #import "AFNetworking.h"
-@implementation BaasioUser {
-    NSString *_token;
-}
+#import "Baasio+Private.h"
+@implementation BaasioUser 
 //@synthesize username = _username;
 //@synthesize email = _email;
 //@synthesize password = _password;

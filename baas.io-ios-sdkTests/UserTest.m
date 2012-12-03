@@ -19,7 +19,7 @@
     exitRunLoop = NO;
 
 //    [Baasio setApplicationInfo:@"https://api.usergrid.com/" baasioID:@"c3e0fa60-0162-11e2-bf27-12313b0c5ebb" applicationName:@"sandbox"];
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"asdfafasd"];
+    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
     
 //    [Baasio setApplicationInfo:@"http://localhost:8080/" baasioID:@"test.push" applicationName:@"sandbox"];
 }

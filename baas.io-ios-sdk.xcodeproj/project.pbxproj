@@ -78,6 +78,7 @@
 		27F2EDE6DD9FE4D30839706E /* FileTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTest.h; sourceTree = "<group>"; };
 		27F2EE6A9471C3869236C589 /* BaasioPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioPush.m; sourceTree = "<group>"; };
 		AF429CCA165B4B0E001C78B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AFA32C22166C8A7A0076AEEC /* Baasio+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Baasio+Private.h"; sourceTree = "<group>"; };
 		AFB9E3E1165A2BDC0021AA4C /* Baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baasio.h; sourceTree = "<group>"; };
 		AFB9E3E2165A2BDC0021AA4C /* Baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baasio.m; sourceTree = "<group>"; };
 		AFB9E3E3165A2BDC0021AA4C /* BaasioEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioEntity.h; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 		AFD93F0C165A2B0E00FC9ED0 /* baas.io-ios-sdk */ = {
 			isa = PBXGroup;
 			children = (
+				AFA32C22166C8A7A0076AEEC /* Baasio+Private.h */,
 				AFB9E3E1165A2BDC0021AA4C /* Baasio.h */,
 				AFB9E3E2165A2BDC0021AA4C /* Baasio.m */,
 				AFB9E3E3165A2BDC0021AA4C /* BaasioEntity.h */,
@@ -220,13 +222,13 @@
 				AFB9E3E6165A2BDC0021AA4C /* BaasioQuery.m */,
 				AFB9E3E7165A2BDC0021AA4C /* BaasioUser.h */,
 				AFB9E3E8165A2BDC0021AA4C /* BaasioUser.m */,
-				AFD93F0D165A2B0E00FC9ED0 /* Supporting Files */,
 				27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */,
 				27F2EE6A9471C3869236C589 /* BaasioPush.m */,
 				27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */,
 				27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */,
 				27F2E04671874480B3D59873 /* BaasioResponse.m */,
 				27F2E2C9DCA5E3A2FD760F2F /* BaasioResponse.h */,
+				AFD93F0D165A2B0E00FC9ED0 /* Supporting Files */,
 			);
 			path = "baas.io-ios-sdk";
 			sourceTree = "<group>";
@@ -246,13 +248,13 @@
 				AFB9E3EF165A2BE20021AA4C /* EntityTest.m */,
 				AFB9E3F0165A2BE20021AA4C /* UserTest.h */,
 				AFB9E3F1165A2BE20021AA4C /* UserTest.m */,
-				AFD93F22165A2B0E00FC9ED0 /* Supporting Files */,
 				27F2E0CBDFE8F7046AE9CD5A /* QueryTest.m */,
 				27F2E5AE3D9F8C239E74D737 /* QueryTest.h */,
 				27F2E9910E5CEEFE958FAF32 /* PushTest.m */,
 				27F2E94830BD93C460528B68 /* PushTest.h */,
 				27F2E22B2FFF3122F1CDEA60 /* FileTest.m */,
 				27F2EDE6DD9FE4D30839706E /* FileTest.h */,
+				AFD93F22165A2B0E00FC9ED0 /* Supporting Files */,
 			);
 			path = "baas.io-ios-sdkTests";
 			sourceTree = "<group>";

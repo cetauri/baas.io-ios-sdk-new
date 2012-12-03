@@ -78,7 +78,7 @@
 
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(void))successBlock {
     void (^success)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-        //        NSLog(@"json : :%@", JSON);
+        NSLog(@"json : :%@", JSON);
         successBlock();
     };
     return success;
