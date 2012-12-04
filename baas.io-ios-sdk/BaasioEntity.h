@@ -21,21 +21,20 @@
 
 + (BaasioEntity *)entitytWithName:(NSString *)string;
 
-- (void)setObject:(NSNumber *)number forKey:(NSString *)key;
 
-- (void)save;
+//- (void)save;
 
-- (void)saveInBackground:(void (^)(void))successBlock
+- (void)saveInBackground:(void (^)(NSDictionary *response))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock;
 
 
-- (void)update;
+//- (void)update;
 
 - (void)updateInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
 
-- (void)delete;
+//- (void)delete;
 - (void)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
@@ -45,7 +44,8 @@
 
 #pragma mark - Data
 - (NSString *)objectForKey:(NSString *)string;
-
+- (void)setObject:(id)value forKey:(NSString *)key;
+//- (void)setValue:(id)value forKey:(NSString *)key;
 
 #pragma mark - Query
 + (BaasioEntity *)getEntity:(NSString *)uuid;

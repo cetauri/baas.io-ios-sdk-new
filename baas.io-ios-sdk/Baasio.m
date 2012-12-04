@@ -76,12 +76,19 @@
     return failure;
 }
 
-- (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(void))successBlock {
+- (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(NSDictionary *response))successBlock {
+    void (^success)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+        NSLog(@"json : :%@", JSON);
+        successBlock(JSON);
+    };
+    return success;
+}
+
+- (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))successWithVoid:(void (^)(void))successBlock {
     void (^success)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
         NSLog(@"json : :%@", JSON);
         successBlock();
     };
     return success;
 }
-
 @end

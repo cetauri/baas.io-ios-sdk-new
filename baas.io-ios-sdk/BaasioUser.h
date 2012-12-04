@@ -26,7 +26,8 @@
 //- (void)signIn;
 - (void)signInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock;
-
+//- (void)signUp:(void (^)(void))successBlock
+//  failureBlock:(void (^)(NSError *error))failureBlock;
 //- (void)signUp;
 - (void)signUpInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
