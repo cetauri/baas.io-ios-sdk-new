@@ -11,19 +11,10 @@
 #import "AFNetworking.h"
 #import "Baasio+Private.h"
 @implementation BaasioUser 
-//@synthesize username = _username;
-//@synthesize email = _email;
-//@synthesize password = _password;
-//@synthesize name = _name;
 
-+ (id)user
++ (BaasioUser *)user
 {
-    static dispatch_once_t pred;
-    static id _instance = nil;
-    dispatch_once(&pred, ^{
-        _instance = [[self alloc] init]; // or some other init method
-    });
-    return _instance;
+    return [[BaasioUser alloc] init];
 }
 
 
@@ -39,7 +30,6 @@
     NSString *path = [@"users/" stringByAppendingString:@"cetauri"];
     AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
-    
     request = [[Baasio sharedInstance] setAuthorization:request];
 
     
@@ -58,8 +48,8 @@
 {
     NSDictionary *params = @{
                                 @"grant_type" : @"password",
-                                @"username" : _username,
-                                @"password" : _password
+                                @"username" : self.username,
+                                @"password" : self.password
                             };
     AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:@"token" parameters:params];
@@ -68,24 +58,33 @@
 
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            NSString *access_token = [JSON objectForKey:@"access_token"];
-                                                                                            [[Baasio sharedInstance]setToken:access_token];
+
+                                                                                            Baasio *baasio = [Baasio sharedInstance];
+                                                                                            NSString *access_token = JSON[@"access_token"];
+                                                                                            [baasio setToken:access_token];
+                                                                                            
+                                                                                            NSDictionary *userReponse = JSON[@"user"];
+                                                                                            BaasioUser *loginUser = [BaasioUser user];
+                                                                                            [loginUser setEntity:userReponse];
+                                                                                            [baasio setCurrentUser:loginUser];
+                                                                                            
                                                                                             successBlock();
                                                                                         }
                                                                                         failure:failure];
     [operation start];
 }
 
-+ (BaasioUser *)currtuser {
-    return [self user];
++ (BaasioUser *)currtuser{
+    BaasioUser *user =  [[Baasio sharedInstance]currentUser];
+    return user;
 }
 
-//
-//
-//+ (BaasioUser *)signOut {
-// return nil;
-//}
-//
+
++ (void)signOut {
+    [[Baasio sharedInstance] setCurrentUser:nil];
+    [[Baasio sharedInstance] setToken:nil];
+}
+
 //- (void)signUp {
 //
 //}
@@ -96,7 +95,7 @@
               failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSDictionary *params = @{
-                            @"name":self.name,
+                            @"name":[self objectForKey:@"name"],
                             @"password":self.password,
                             @"username":self.username,
                             @"email":self.email
@@ -123,6 +122,34 @@
     [operation start];
 }
 
+#pragma mark - etc
+-(NSString*)username{
+    return [self objectForKey:@"username"];
+}
 
+-(NSString*)email{
+    return [self objectForKey:@"email"];
+}
+
+-(NSString*)password{
+    return [self objectForKey:@"password"];
+}
+-(NSString*)name{
+    return [self objectForKey:@"name"];
+}
+-(void)setUsername:(NSString*)username{
+    [self setObject:username forKey:@"username"];
+}
+
+-(void)setEmail:(NSString*)email{
+    [self setObject:email forKey:@"email"];
+}
+
+-(void)setPassword:(NSString*)password{
+    [self setObject:password forKey:@"password"];
+}
+-(void)setName:(NSString*)name{
+    [self setObject:name forKey:@"name"];
+}
 
 @end

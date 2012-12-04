@@ -5,7 +5,6 @@
 //
 
 
-#import <Foundation/Foundation.h>
 #import "BaasioResponse.h"
 
 @interface BaasioFile : NSObject

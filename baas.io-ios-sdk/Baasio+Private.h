@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "BaasioUser.h"
 @interface Baasio(Private)
-+ (id)sharedInstance;
+- (BaasioUser*)currentUser;
+- (void)setCurrentUser:(BaasioUser*)currentUser;
+
 - (void)setToken:(NSString*)token;
+
 - (NSMutableURLRequest *)setAuthorization:(NSMutableURLRequest *)request;
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(NSDictionary *response))successBlock;
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))successWithVoid:(void (^)(void))successBlock;

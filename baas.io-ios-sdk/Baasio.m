@@ -9,6 +9,7 @@
 
 @implementation Baasio {
     NSString *_token;
+    BaasioUser *_currentUser;
 }
 
 + (id)sharedInstance
@@ -53,24 +54,24 @@
     if (_token != nil) {
         [request addValue:[@"Bearer " stringByAppendingString:_token] forHTTPHeaderField:@"Authorization"];
     }
-    
+
     return request;
 }
 
 #pragma mark - API response method
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock {
-    
+
     void (^failure)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
         if (JSON == nil){
             failureBlock(error);
             return;
         }
         NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:[JSON objectForKey:@"error_description"] forKey:NSLocalizedDescriptionKey];
-        
-        NSString *domain = [JSON objectForKey:@"error"];
+        [details setValue:JSON[@"error_description"] forKey:NSLocalizedDescriptionKey];
+
+        NSString *domain = JSON[@"error"];
         NSError *e = [NSError errorWithDomain:domain code:error.code userInfo:details];
-        
+
         failureBlock(e);
     };
     return failure;
@@ -91,4 +92,13 @@
     };
     return success;
 }
+
+- (BaasioUser*)currentUser{
+    return _currentUser;
+}
+
+- (void)setCurrentUser:(BaasioUser*)currentUser{
+    _currentUser = currentUser;
+}
+
 @end

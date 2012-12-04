@@ -6,30 +6,30 @@
 
 
 #import "BaasioEntity.h"
-#import "Baasio.h"
-#import "Baasio+Private.h"
-#import "JSONKit.h"
-#import "AFNetworking.h"
-@implementation BaasioEntity {
-    NSMutableDictionary *_dictionary;
+#import "BaasioFile.h"
 
+
+
+@implementation BaasioEntity {
+    NSMutableDictionary *_entity;
 }
-@synthesize entitytId = _entitytId;
-@synthesize updated = _updated;
-@synthesize type = _type;
-@synthesize name = _name;
-@synthesize created = _created;
-@synthesize metadata = _metadata;
+
+//@synthesize entity = _entity;
+
 
 -(id) init
 {
     self = [super init];
     if (self){
-        _dictionary= [NSMutableDictionary dictionary];
+        _entity = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
+-(void)setEntity:(NSDictionary *)entity
+{
+    _entity = [NSMutableDictionary dictionaryWithDictionary:entity];
+}
 
 + (BaasioEntity *)entitytWithName:(NSString *)entityName {
     BaasioEntity *entity = [[BaasioEntity alloc] init];
@@ -41,32 +41,32 @@
 
 }
 
-- (void)saveInBackground:(void (^)(NSDictionary *response))successBlock
+- (void)saveInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock{
     
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:self.entityName parameters:nil];
+    request = [[Baasio sharedInstance] setAuthorization:request];
+    
     NSError *error;
-    NSData *data = [_dictionary JSONDataWithOptions:JKSerializeOptionNone error:&error];
+    NSData *data = [_entity JSONDataWithOptions:JKSerializeOptionNone error:&error];
     if (error != nil) {
         failureBlock(error);
         return;
     }
     request.HTTPBody = data;
     
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] success:successBlock];
+    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            NSLog(@"JSON : %@", JSON);
-                                                                                            NSDictionary *entities = [[JSON objectForKey:@"entities"] objectAtIndex:0];
-                                                                                            self.entitytId = [entities objectForKey:@"uuid"];
+                                                                                            NSDictionary *entity = JSON[@"entities"][0];
+                                                                                            [self setEntity:entity];
                                                                                             success(request, response, JSON);
                                                                                         }
                                                                                         failure:failure];
-    
     [operation start];
 }
 
@@ -80,10 +80,12 @@
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
-    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.entitytId];
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
+    request = [[Baasio sharedInstance] setAuthorization:request];
+    
     NSError *error;
-    NSData *data = [_dictionary JSONDataWithOptions:JKSerializeOptionNone error:&error];
+    NSData *data = [_entity JSONDataWithOptions:JKSerializeOptionNone error:&error];
     if (error != nil) {
         failureBlock(error);
         return;
@@ -113,11 +115,19 @@
 
 #pragma mark - Data
 - (id)objectForKey:(NSString *)key {
-    return [_dictionary objectForKey:key];
+    return _entity[key];
 }
 
 - (void)setObject:(id)value forKey:(NSString *)key {
-    [_dictionary setObject:value forKey:key];
+    if ([value isMemberOfClass:[BaasioFile class]]){
+//        STFail(@"check this", nil);
+        exit(0);
+    } else if ([value isMemberOfClass:[BaasioUser class]]){
+//        STFail(@"check this", nil);
+        exit(0);
+    } else{
+        [_entity setObject:value forKey:key];
+    }
 }
 
 //- (void)setValue:(id)value forKey:(NSString *)key {
@@ -151,5 +161,27 @@
     return nil;
 }
 
+#pragma mark - super
+- (NSString *)description{
+    return _entity.description;
+}
+
+#pragma mark - etc
+-(NSString*)created{
+    return _entity[@"created"];
+}
+-(NSString*)modified{
+    return _entity[@"modified"];
+}
+-(NSString*)uuid{
+    return _entity[@"uuid"];
+}
+-(NSString*)type{
+    return _entity[@"type"];
+}
+
+-(void)setUuid:(NSString*)uuid{
+    _entity[@"uuid"] = uuid;
+}
 
 @end

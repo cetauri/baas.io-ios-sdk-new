@@ -11,12 +11,12 @@
 		27F2E0637105682525BF88B4 /* BaasioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */; };
 		27F2E1F9925413D92226BBDA /* QueryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E0CBDFE8F7046AE9CD5A /* QueryTest.m */; };
 		27F2E4A35AD03BDF2A1A9910 /* BaasioResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E04671874480B3D59873 /* BaasioResponse.m */; };
+		27F2E88853FB7BECDC14F23C /* Baas.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2E2A118B72209D0AB96AF /* Baas.h */; };
 		27F2E8F0565C911B20E307BE /* BaasioFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */; };
 		27F2EBB68B17F0A0788E3393 /* BaasioPush.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */; };
 		27F2EC15535C57DE1BB54EC2 /* PushTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E9910E5CEEFE958FAF32 /* PushTest.m */; };
 		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
 		AF26A27F166667F5006A7225 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E418165A2D850021AA4C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		AF429CCB165B4B0E001C78B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF429CCA165B4B0E001C78B5 /* UIKit.framework */; };
 		AFB9E3E9165A2BDC0021AA4C /* Baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E2165A2BDC0021AA4C /* Baasio.m */; };
 		AFB9E3EA165A2BDC0021AA4C /* BaasioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E4165A2BDC0021AA4C /* BaasioEntity.m */; };
 		AFB9E3EB165A2BDC0021AA4C /* BaasioQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E6165A2BDC0021AA4C /* BaasioQuery.m */; };
@@ -38,6 +38,12 @@
 		AFD93F1D165A2B0E00FC9ED0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD93F0A165A2B0E00FC9ED0 /* Foundation.framework */; };
 		AFD93F20165A2B0E00FC9ED0 /* libbaas.io-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD93F07165A2B0E00FC9ED0 /* libbaas.io-ios-sdk.a */; };
 		AFD93F26165A2B0E00FC9ED0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFD93F24165A2B0E00FC9ED0 /* InfoPlist.strings */; };
+		AFF46360166E2C4800866306 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF429CCA165B4B0E001C78B5 /* UIKit.framework */; };
+		AFF46361166E2C5100866306 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF429CCA165B4B0E001C78B5 /* UIKit.framework */; };
+		AFF46362166E2C6C00866306 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */; };
+		AFF46363166E2C7100866306 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */; };
+		AFF46364166E2C8700866306 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */; };
+		AFF46365166E2C8C00866306 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +65,7 @@
 			files = (
 				27F2EBB68B17F0A0788E3393 /* BaasioPush.h in CopyFiles */,
 				27F2E8F0565C911B20E307BE /* BaasioFile.h in CopyFiles */,
+				27F2E88853FB7BECDC14F23C /* Baas.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +75,7 @@
 		27F2E04671874480B3D59873 /* BaasioResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioResponse.m; sourceTree = "<group>"; };
 		27F2E0CBDFE8F7046AE9CD5A /* QueryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryTest.m; sourceTree = "<group>"; };
 		27F2E22B2FFF3122F1CDEA60 /* FileTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTest.m; sourceTree = "<group>"; };
+		27F2E2A118B72209D0AB96AF /* Baas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baas.h; sourceTree = "<group>"; };
 		27F2E2C9DCA5E3A2FD760F2F /* BaasioResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioResponse.h; sourceTree = "<group>"; };
 		27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioPush.h; sourceTree = "<group>"; };
 		27F2E5AE3D9F8C239E74D737 /* QueryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryTest.h; sourceTree = "<group>"; };
@@ -78,6 +86,8 @@
 		27F2EDE6DD9FE4D30839706E /* FileTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTest.h; sourceTree = "<group>"; };
 		27F2EE6A9471C3869236C589 /* BaasioPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioPush.m; sourceTree = "<group>"; };
 		AF429CCA165B4B0E001C78B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		AFA32C22166C8A7A0076AEEC /* Baasio+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Baasio+Private.h"; sourceTree = "<group>"; };
 		AFB9E3E1165A2BDC0021AA4C /* Baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baasio.h; sourceTree = "<group>"; };
 		AFB9E3E2165A2BDC0021AA4C /* Baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baasio.m; sourceTree = "<group>"; };
@@ -126,6 +136,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF46363166E2C7100866306 /* MobileCoreServices.framework in Frameworks */,
+				AFF46362166E2C6C00866306 /* SystemConfiguration.framework in Frameworks */,
+				AFF46360166E2C4800866306 /* UIKit.framework in Frameworks */,
 				AFD93F0B165A2B0E00FC9ED0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,7 +147,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF429CCB165B4B0E001C78B5 /* UIKit.framework in Frameworks */,
+				AFF46365166E2C8C00866306 /* MobileCoreServices.framework in Frameworks */,
+				AFF46364166E2C8700866306 /* SystemConfiguration.framework in Frameworks */,
+				AFF46361166E2C5100866306 /* UIKit.framework in Frameworks */,
 				AFD93F1A165A2B0E00FC9ED0 /* SenTestingKit.framework in Frameworks */,
 				AFD93F1D165A2B0E00FC9ED0 /* Foundation.framework in Frameworks */,
 				AFD93F20165A2B0E00FC9ED0 /* libbaas.io-ios-sdk.a in Frameworks */,
@@ -182,7 +197,8 @@
 		AFD93EFC165A2B0E00FC9ED0 = {
 			isa = PBXGroup;
 			children = (
-				AF429CCA165B4B0E001C78B5 /* UIKit.framework */,
+				AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */,
+				AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */,
 				AFD93F0C165A2B0E00FC9ED0 /* baas.io-ios-sdk */,
 				AFD93F21165A2B0E00FC9ED0 /* baas.io-ios-sdkTests */,
 				AFD93F09165A2B0E00FC9ED0 /* Frameworks */,
@@ -204,6 +220,7 @@
 			children = (
 				AFB9E3F9165A2D610021AA4C /* AFNetworking */,
 				AFB9E3F7165A2D550021AA4C /* JSONKit */,
+				AF429CCA165B4B0E001C78B5 /* UIKit.framework */,
 				AFD93F0A165A2B0E00FC9ED0 /* Foundation.framework */,
 				AFD93F19165A2B0E00FC9ED0 /* SenTestingKit.framework */,
 			);
@@ -213,6 +230,7 @@
 		AFD93F0C165A2B0E00FC9ED0 /* baas.io-ios-sdk */ = {
 			isa = PBXGroup;
 			children = (
+				27F2E2A118B72209D0AB96AF /* Baas.h */,
 				AFA32C22166C8A7A0076AEEC /* Baasio+Private.h */,
 				AFB9E3E1165A2BDC0021AA4C /* Baasio.h */,
 				AFB9E3E2165A2BDC0021AA4C /* Baasio.m */,
@@ -226,8 +244,8 @@
 				27F2EE6A9471C3869236C589 /* BaasioPush.m */,
 				27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */,
 				27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */,
-				27F2E04671874480B3D59873 /* BaasioResponse.m */,
 				27F2E2C9DCA5E3A2FD760F2F /* BaasioResponse.h */,
+				27F2E04671874480B3D59873 /* BaasioResponse.m */,
 				AFD93F0D165A2B0E00FC9ED0 /* Supporting Files */,
 			);
 			path = "baas.io-ios-sdk";

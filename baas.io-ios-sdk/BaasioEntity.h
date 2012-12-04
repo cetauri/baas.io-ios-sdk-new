@@ -12,19 +12,19 @@
 @interface BaasioEntity : NSObject
 
 @property(strong) NSString *entityName;
-@property(strong) NSString *metadata;
-@property(strong) NSString *entitytId;
-@property(strong) NSDate *updated;
-@property(strong) NSString *type;
-@property(strong) NSString *name;
-@property(strong) NSDate *created;
+@property(strong) NSString *uuid;
+@property(readonly, strong, getter = created) NSDate *created;
+@property(readonly, strong, getter = modified) NSDate *modified;
+@property(readonly, strong, getter = type) NSString *type;
+
+-(void)setEntity:(NSDictionary *)entity;
 
 + (BaasioEntity *)entitytWithName:(NSString *)string;
 
 
 //- (void)save;
 
-- (void)saveInBackground:(void (^)(NSDictionary *response))successBlock
+- (void)saveInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock;
 
 
@@ -56,4 +56,7 @@
 
 + (NSArray *)findEntities:(BaasioQuery *)query;
 + (NSArray *)findEntitiesInBackground:(BaasioQuery *)query;
+
+#pragma mark - super
+- (NSString *)description;
 @end

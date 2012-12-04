@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface Baasio : NSObject
 @property(nonatomic, strong) NSString *apiURL;
 @property(nonatomic, strong) NSString *applicationName;

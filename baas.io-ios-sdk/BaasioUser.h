@@ -5,22 +5,18 @@
 //
 
 
-#import <Foundation/Foundation.h>
+#import "BaasioEntity.h"
+@interface BaasioUser : BaasioEntity
 
-
-@interface BaasioUser : NSObject
 
 @property(strong) NSString *username;
 @property(strong) NSString *email;
 @property(strong) NSString *password;
 @property(strong) NSString *name;
 
-
 + (BaasioUser *)user;
-
-//+ (BaasioUser *)currtuser;
-
-//+ (BaasioUser *)signOut;
++ (BaasioUser *)currtuser;
++ (void)signOut;
 
 
 //- (void)signIn;
