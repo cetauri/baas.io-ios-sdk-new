@@ -7,12 +7,30 @@
 
 #import "BaasioResponse.h"
 
-@interface BaasioFile : NSObject
-- (void)information:(NSString *)string successBlock:(void (^)(NSDictionary *))block failureBlock:(void (^)(NSError *))block1;
+@interface BaasioFile : BaasioEntity
 
-- (void)delete:(NSString *)string successBlock:(void (^)(BaasioResponse *))block failureBlock:(void (^)(NSError *))block1;
+- (void)informationInBackground:(NSString *)uuid
+                   successBlock:(void (^)(void))successBlock
+                   failureBlock:(void (^)(NSError *))failureBlock;
 
-- (void)download:(NSString *)string successBlock:(void (^)(BaasioResponse *))block failureBlock:(void (^)(NSError *))block1;
+- (void)deleteInBackground:(NSString *)uuid
+              successBlock:(void (^)(void))successBlock
+              failureBlock:(void (^)(NSError *))failureBlock;
 
-- (void)upload:(NSData *)data successBlock:(void (^)(BaasioResponse *))block failureBlock:(void (^)(NSError *))block1;
+- (void)downloadInBackground:(NSString *)uuid
+                successBlock:(void (^)(void))successBlock
+                failureBlock:(void (^)(NSError *))failureBlock
+               progressBlock:(void (^)(float progress))progressBlock;
+
+- (void)uploadInBackground:(NSData *)data successBlock:(void (^)(void))successBlock
+              failureBlock:(void (^)(NSError *))failureBlock
+             progressBlock:(void (^)(float progress))progressBlock;
+
+
+
+//TODO : TBI
+//changeInBackground
+//updateInBackground
+
+
 @end

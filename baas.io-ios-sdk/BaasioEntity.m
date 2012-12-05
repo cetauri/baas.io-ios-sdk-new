@@ -172,10 +172,15 @@
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
     
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:success failure:failure];
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            NSDictionary *dictionary = JSON[@"entities"][0];
+                                                                                            [self setEntity:dictionary];
+                                                                                            successBlock();
+                                                                                        }
+
+                                                                                        failure:failure];
     [operation start];
 }
 
