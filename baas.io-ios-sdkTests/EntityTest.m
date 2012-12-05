@@ -42,49 +42,49 @@ static NSString *uuid;
                             }
                     failureBlock:^(NSError *error) {
                         NSLog(@"fail : %@", error.localizedDescription);
-                        STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                        STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
                         exitRunLoop = YES;
                     }];
     
     [self runTestLoop];
     uuid = entity.uuid;
 }
-//
-- (void)test_2_EntityInfo
+
+
+- (void)test_3_EntityUpdate
+{
+    BaasioEntity *entity = [BaasioEntity entitytWithName:@"GameScore"];
+    entity.uuid = uuid;
+    [entity setObject:@"30" forKey:@"duration"];
+
+    [entity updateInBackground:^(void) {
+                                    exitRunLoop = YES;
+                                }
+                  failureBlock:^(NSError *error) {
+                                    NSLog(@"fail : %@", error.localizedDescription);
+                                    STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                                    exitRunLoop = YES;
+                                }];
+    [self runTestLoop];
+}
+
+- (void)test_4_EntityInfo
 {
     NSLog(@"_entity : %@", uuid);
-//    BaasioQuery *query = [BaasioQuery queryWithEntityName:@"GameScore"];
-//    BaasioEntity *entity = [query entitytWithID:@"bd397ea1-a71c-3249-8a4c-62fd53c78ce7type"];
-//
-////    BaasioEntity *entity = [BaasioEntity entitytWithID:@"bd397ea1-a71c-3249-8a4c-62fd53c78ce7type" with:query];
-//
-//
-//    NSString *entitytId = entity.entitytId;
-//    NSDate *updated = entity.updated;
-//    NSDate *created = entity.created;
-//    NSString *type = entity.type;
-//    NSString *name = entity.name;
-//    NSString *metadata = entity.metadata;
-//    NSString *playerName = entity[@"playerName"];
-//
-//    [entity refresh];
+    BaasioEntity *entity = [BaasioEntity entitytWithName:@"GameScore"];
+    [entity getEntityInBackground:uuid
+                     successBlock:^(void) {
+                        exitRunLoop = YES;
+                    }
+                    failureBlock:^(NSError *error) {
+                        NSLog(@"fail : %@", error.localizedDescription);
+                        STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                        exitRunLoop = YES;
+                    }];
+
+    [self runTestLoop];
+    NSLog(@"%@", entity.description);
 }
-//
-//- (void)testEntityUpdate
-//{
-//    BaasioQuery *query = [BaasioQuery queryWithEntityName:@"GameScore"];
-//    BaasioEntity *entity = [query entitytWithID:@"bd397ea1-a71c-3249-8a4c-62fd53c78ce7type"];
-//
-//    NSString *entitytId = entity.entitytId;
-//    NSDate *updated = entity.updated;
-//    NSDate *created = entity.created;
-//    NSString *type = entity.type;
-//    NSString *name = entity.name;
-//    NSString *metadata = entity.metadata;
-//
-//    [entity update];
-//}
-//
 - (void)test_5_EntityDelete
 {
     BaasioEntity *entity = [BaasioEntity entitytWithName:@"GameScore"];
@@ -94,7 +94,7 @@ static NSString *uuid;
                                 }
                   failureBlock:^(NSError *error) {
                                   NSLog(@"fail : %@", error.localizedDescription);
-                                  STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                                  STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
                                   exitRunLoop = YES;
                               }];
     

@@ -197,8 +197,6 @@
 		AFD93EFC165A2B0E00FC9ED0 = {
 			isa = PBXGroup;
 			children = (
-				AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */,
-				AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */,
 				AFD93F0C165A2B0E00FC9ED0 /* baas.io-ios-sdk */,
 				AFD93F21165A2B0E00FC9ED0 /* baas.io-ios-sdkTests */,
 				AFD93F09165A2B0E00FC9ED0 /* Frameworks */,
@@ -220,6 +218,8 @@
 			children = (
 				AFB9E3F9165A2D610021AA4C /* AFNetworking */,
 				AFB9E3F7165A2D550021AA4C /* JSONKit */,
+				AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */,
+				AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */,
 				AF429CCA165B4B0E001C78B5 /* UIKit.framework */,
 				AFD93F0A165A2B0E00FC9ED0 /* Foundation.framework */,
 				AFD93F19165A2B0E00FC9ED0 /* SenTestingKit.framework */,

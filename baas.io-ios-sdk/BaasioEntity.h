@@ -48,8 +48,12 @@
 //- (void)setValue:(id)value forKey:(NSString *)key;
 
 #pragma mark - Query
-+ (BaasioEntity *)getEntity:(NSString *)uuid;
-+ (BaasioEntity *)getEntityInBackground:(NSString *)uuid;
+//- (BaasioEntity *)getEntity:(NSString *)uuid;
+//TODO Query
+- (void)getEntityInBackground:(NSString *)uuid
+                           successBlock:(void (^)(void))successBlock
+                           failureBlock:(void (^)(NSError *error))failureBlock;
+
 
 + (BaasioEntity *)findEntity:(BaasioQuery *)query;
 + (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query;

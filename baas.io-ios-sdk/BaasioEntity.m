@@ -106,6 +106,27 @@
 - (void)updateInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock{
 
+    NSURL *url = [[Baasio sharedInstance] getAPIURL];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"PUT" path:path parameters:nil];
+    request = [[Baasio sharedInstance] setAuthorization:request];
+
+    NSError *error;
+    NSData *data = [_entity JSONDataWithOptions:JKSerializeOptionNone error:&error];
+    if (error != nil) {
+        failureBlock(error);
+        return;
+    }
+    request.HTTPBody = data;
+
+    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:success failure:failure];
+
+    [operation start];
 }
 
 - (void)refresh {
@@ -136,7 +157,7 @@
 
 
 #pragma mark - Query
-+ (BaasioEntity *)getEntity:(NSString *)uuid {
+- (BaasioEntity *)getEntity:(NSString *)uuid {
     return nil;
 }
 
@@ -148,8 +169,31 @@
     return nil;
 }
 
-+ (BaasioEntity *)getEntityInBackground:(NSString *)uuid {
-    return nil;
+//XXX : AFJSONRequestOperation GET METHOD ERROR
+- (void)getEntityInBackground:(NSString *)uuid
+                           successBlock:(void (^)(void))successBlock
+                           failureBlock:(void (^)(NSError *error))failureBlock;
+{
+    self.uuid = uuid;
+    
+    NSURL *url = [[Baasio sharedInstance] getAPIURL];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    NSString *path = [_entityName stringByAppendingFormat:@"/%@", self.uuid];
+
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
+
+    [httpClient getPath:path
+         parameters:nil
+            success:^(AFHTTPRequestOperation *operation, id responseObject){
+                NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+                dictionary = dictionary[@"entities"][0];
+                [self setEntity:dictionary];
+                successBlock();
+
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error){
+                failure(operation.request, operation.response, error, nil);
+            }];
 }
 
 
