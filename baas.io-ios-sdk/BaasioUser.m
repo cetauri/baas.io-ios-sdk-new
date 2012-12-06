@@ -27,7 +27,7 @@
 - (void)unsubscribeInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock
 {
-    NSString *path = [@"users/" stringByAppendingString:@"cetauri"];
+    NSString *path = [@"users/" stringByAppendingString:self.username];
     AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];

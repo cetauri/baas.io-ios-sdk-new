@@ -6,12 +6,22 @@
 
 
 #import <Foundation/Foundation.h>
-
+#import "BaasioPushConfig.h"
 
 @interface BaasioPush : NSObject
-- (void)sendPush:(id)config;
+- (void)sendPushInBackground:(BaasioPushConfig *)config
+                successBlock:(void (^)(void))successBlock
+                failureBlock:(void (^)(NSError *error))failureBlock;
 
-- (void)unregisterDevice:(NSString *)deviceID;
+- (void)unregisterInBackground:(NSString *)uuid
+                  successBlock:(void (^)(void))successBlock
+                  failureBlock:(void (^)(NSError *error))failureBlock;
 
-- (void)registerDevice:(NSString *)uuid;
+- (void)registerInBackground:(NSString *)deviceID
+                            tags:(NSArray *)tags
+                successBlock:(void (^)(void))successBlock
+                failureBlock:(void (^)(NSError *error))failureBlock;
+
+//TODO :
+//updateInBackground
 @end

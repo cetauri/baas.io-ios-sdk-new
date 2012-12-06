@@ -75,7 +75,7 @@
 - (void)test_9_unsubscribe
 {
     BaasioUser *user = [BaasioUser user];
-
+    user.username = @"cetauri";
     [user unsubscribeInBackground:^(void) {
         NSLog(@"success");
         exitRunLoop = YES;
