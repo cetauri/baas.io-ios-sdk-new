@@ -1,5 +1,5 @@
 //
-//  BaasioPushConfig.h
+//  BaasioMessage.h
 //  baas.io-ios-sdk
 //
 //  Created by cetauri on 12. 12. 6..
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BaasioPushConfig : NSObject
+@interface BaasioMessage : NSObject
 
 @property(nonatomic, assign) NSString *target;
 @property(nonatomic, assign) int badge;
@@ -18,6 +18,8 @@
 
 @property(nonatomic, assign) NSString *platform;
 @property(nonatomic, assign) NSString *memo;
+@property(strong) NSDateComponents *reserve;
+@property(nonatomic, assign) NSMutableArray *to;
 
 - (void)addPayload:(NSString*)value forKey:(NSString*)key;
 - (NSDictionary *)dictionary;

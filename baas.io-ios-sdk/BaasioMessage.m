@@ -1,15 +1,15 @@
 //
-//  BaasioPushConfig.m
+//  BaasioMessage.m
 //  baas.io-ios-sdk
 //
 //  Created by cetauri on 12. 12. 6..
 //  Copyright (c) 2012년 kth. All rights reserved.
 //
 
-#import "BaasioPushConfig.h"
+#import "BaasioMessage.h"
 
 
-@implementation BaasioPushConfig{
+@implementation BaasioMessage {
     NSMutableDictionary *_payload;
 }
 

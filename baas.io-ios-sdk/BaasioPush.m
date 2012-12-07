@@ -4,19 +4,18 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
-
 #import "BaasioPush.h"
 
 @implementation BaasioPush {
 
 }
 
-- (void)sendPushInBackground:(BaasioPushConfig *)config
+- (void)sendPushInBackground:(BaasioMessage *)config
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSDictionary *params = [config dictionary];
-    NSLog(@"params : %@", params.description);
+
     AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"pushes" parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
@@ -39,15 +38,15 @@
 }
 
 
-- (void)unregisterInBackground:(NSString *)uuid
-                  successBlock:(void (^)(void))successBlock
+- (void)unregisterInBackground:(void (^)(void))successBlock
                   failureBlock:(void (^)(NSError *error))failureBlock
 {
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
+
     NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
     AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
-    
     
     void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
@@ -83,9 +82,15 @@
     
     void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
-    
+
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:success
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            NSDictionary *entity = JSON[@"entities"][0];
+                                                                                            NSString *uuid = [entity objectForKey:@"uuid"];
+                                                                                            NSLog(@"uuid : %@", uuid);
+                                                                                            [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:PUSH_DEVICE_ID];
+                                                                                            success(request, response, JSON);
+                                                                                        }
                                                                                         failure:failure];
     [operation start];
 

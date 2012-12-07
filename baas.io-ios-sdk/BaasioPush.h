@@ -4,17 +4,16 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
-
+#define PUSH_DEVICE_ID @"PUSH_DEVICE_ID"
 #import <Foundation/Foundation.h>
-#import "BaasioPushConfig.h"
+#import "BaasioMessage.h"
 
 @interface BaasioPush : NSObject
-- (void)sendPushInBackground:(BaasioPushConfig *)config
+- (void)sendPushInBackground:(BaasioMessage *)config
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock;
 
-- (void)unregisterInBackground:(NSString *)uuid
-                  successBlock:(void (^)(void))successBlock
+- (void)unregisterInBackground:(void (^)(void))successBlock
                   failureBlock:(void (^)(NSError *error))failureBlock;
 
 - (void)registerInBackground:(NSString *)deviceID

@@ -17,7 +17,7 @@
 		27F2EC15535C57DE1BB54EC2 /* PushTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E9910E5CEEFE958FAF32 /* PushTest.m */; };
 		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
 		AF26A27F166667F5006A7225 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E418165A2D850021AA4C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		AF515B5E16703F930005F743 /* BaasioPushConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = AF515B5D16703F930005F743 /* BaasioPushConfig.m */; };
+		AF515B5E16703F930005F743 /* BaasioMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AF515B5D16703F930005F743 /* BaasioMessage.m */; };
 		AFB9E3E9165A2BDC0021AA4C /* Baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E2165A2BDC0021AA4C /* Baasio.m */; };
 		AFB9E3EA165A2BDC0021AA4C /* BaasioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E4165A2BDC0021AA4C /* BaasioEntity.m */; };
 		AFB9E3EB165A2BDC0021AA4C /* BaasioQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E6165A2BDC0021AA4C /* BaasioQuery.m */; };
@@ -89,8 +89,8 @@
 		AF429CCA165B4B0E001C78B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		AF515B5C16703F930005F743 /* BaasioPushConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioPushConfig.h; sourceTree = "<group>"; };
-		AF515B5D16703F930005F743 /* BaasioPushConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioPushConfig.m; sourceTree = "<group>"; };
+		AF515B5C16703F930005F743 /* BaasioMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioMessage.h; sourceTree = "<group>"; };
+		AF515B5D16703F930005F743 /* BaasioMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioMessage.m; sourceTree = "<group>"; };
 		AFA32C22166C8A7A0076AEEC /* Baasio+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Baasio+Private.h"; sourceTree = "<group>"; };
 		AFB9E3E1165A2BDC0021AA4C /* Baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baasio.h; sourceTree = "<group>"; };
 		AFB9E3E2165A2BDC0021AA4C /* Baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baasio.m; sourceTree = "<group>"; };
@@ -245,8 +245,8 @@
 				AFB9E3E8165A2BDC0021AA4C /* BaasioUser.m */,
 				27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */,
 				27F2EE6A9471C3869236C589 /* BaasioPush.m */,
-				AF515B5C16703F930005F743 /* BaasioPushConfig.h */,
-				AF515B5D16703F930005F743 /* BaasioPushConfig.m */,
+				AF515B5C16703F930005F743 /* BaasioMessage.h */,
+				AF515B5D16703F930005F743 /* BaasioMessage.m */,
 				27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */,
 				27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */,
 				27F2E2C9DCA5E3A2FD760F2F /* BaasioResponse.h */,
@@ -271,10 +271,10 @@
 				AFB9E3EF165A2BE20021AA4C /* EntityTest.m */,
 				AFB9E3F0165A2BE20021AA4C /* UserTest.h */,
 				AFB9E3F1165A2BE20021AA4C /* UserTest.m */,
-				27F2E0CBDFE8F7046AE9CD5A /* QueryTest.m */,
 				27F2E5AE3D9F8C239E74D737 /* QueryTest.h */,
-				27F2E9910E5CEEFE958FAF32 /* PushTest.m */,
+				27F2E0CBDFE8F7046AE9CD5A /* QueryTest.m */,
 				27F2E94830BD93C460528B68 /* PushTest.h */,
+				27F2E9910E5CEEFE958FAF32 /* PushTest.m */,
 				27F2EDE6DD9FE4D30839706E /* FileTest.h */,
 				27F2E22B2FFF3122F1CDEA60 /* FileTest.m */,
 				AFD93F22165A2B0E00FC9ED0 /* Supporting Files */,
@@ -405,7 +405,7 @@
 				AFB9E419165A2D850021AA4C /* JSONKit.m in Sources */,
 				27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */,
 				27F2E0637105682525BF88B4 /* BaasioFile.m in Sources */,
-				AF515B5E16703F930005F743 /* BaasioPushConfig.m in Sources */,
+				AF515B5E16703F930005F743 /* BaasioMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

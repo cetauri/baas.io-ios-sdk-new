@@ -7,7 +7,6 @@
 
 #import "PushTest.h"
 #import "BaasioPush.h"
-#import "BaasioPushConfig.h"
 
 @implementation PushTest {
     BOOL exitRunLoop;
@@ -46,10 +45,19 @@
 
 - (void)test_2_sendPush{
     BaasioPush *push = [[BaasioPush alloc] init];
-    BaasioPushConfig *config = [[BaasioPushConfig alloc]init];
-    config.alert = @"alert";
-    config.badge = 10;
+    BaasioMessage *config = [[BaasioMessage alloc]init];
 
+    NSDateComponents *reserve = [[NSDateComponents alloc]init];
+    reserve.year = 2012;
+    reserve.month = 12;
+    reserve.day = 7;
+    reserve.hour = 4;
+    reserve.minute = 55;
+    
+    config.alert = @"dea28251-4041-11e2-a05c-02003a570010";
+    config.badge = 2;
+    config.reserve = reserve;
+    config.to = [NSMutableArray arrayWithObject:@"dea28251-4041-11e2-a05c-02003a570010"];
     
     [push sendPushInBackground:config
                   successBlock:^(void) {
@@ -66,8 +74,7 @@
 - (void)test_3_UnregisterDevice{
 
     BaasioPush *push = [[BaasioPush alloc] init];
-    [push unregisterInBackground:@"b57b118dd15d63595e9d11ae6884766b32ee97d978d78320eb536a506911a40a"
-                  successBlock:^(void) {
+    [push unregisterInBackground:^(void) {
                       exitRunLoop = YES;
                   }
                   failureBlock:^(NSError *error) {
@@ -77,11 +84,6 @@
                   }];
     [self runTestLoop];
 }
-//- (void)testSendPush{
-//    NSObject *pushConfig = [[NSObject alloc] init];
-//    BaasioPush *push = [[BaasioPush alloc] init];
-//    [push sendPush:pushConfig];
-//}
 
 - (void)runTestLoop{
     while (!exitRunLoop){
