@@ -18,12 +18,6 @@
 }
 
 
-- (void)signIn:(NSError **)error {
-       //에러 응답은?
-}
-
-
-
 - (void)unsubscribeInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock
 {
@@ -85,10 +79,48 @@
     [[Baasio sharedInstance] setToken:nil];
 }
 
-//- (void)signUp {
-//
-//}
-//
+
+- (BaasioResponse *)signIn {
+
+    BaasioResponse *_response = [[BaasioResponse alloc]init];
+    NSDictionary *params = @{
+        @"name":[self objectForKey:@"name"],
+        @"password":self.password,
+        @"username":self.username,
+        @"email":self.email
+    };
+    
+    NSURL *url = [[Baasio sharedInstance] getAPIURL];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"users" parameters:nil];
+    NSError *error;
+    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
+    if (error != nil) {
+        _response.error = error;
+        return _response;
+    }
+    request.HTTPBody = data;
+    
+    __block BOOL isFinish = false;
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            isFinish = true;
+                                                                                        }
+                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+                                                                                            _response.error = error;
+                                                                                            isFinish = true;
+                                                                                        }];
+    [operation start];
+    
+#ifndef UNIT_TEST
+    while(!isFinish){
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+    }
+#endif
+    return _response;
+}
 
 
 - (void)signUpInBackground:(void (^)(void))successBlock

@@ -6,6 +6,7 @@
 
 
 #import "BaasioEntity.h"
+#import "BaasioResponse.h"
 @interface BaasioUser : BaasioEntity
 
 
@@ -19,7 +20,7 @@
 + (void)signOut;
 
 
-//- (void)signIn;
+- (BaasioResponse *)signIn;
 - (void)signInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock;
 //- (void)signUp:(void (^)(void))successBlock
