@@ -18,10 +18,7 @@
     [super setUp];
     exitRunLoop = NO;
 
-//    [Baasio setApplicationInfo:@"https://api.usergrid.com/" baasioID:@"c3e0fa60-0162-11e2-bf27-12313b0c5ebb" applicationName:@"sandbox"];
     [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
-    
-//    [Baasio setApplicationInfo:@"http://localhost:8080/" baasioID:@"test.push" applicationName:@"sandbox"];
 }
 
 - (void)tearDown
@@ -75,9 +72,9 @@
               }
               failureBlock:^(NSError *error) {
                     NSLog(@"fail : %@", error.localizedDescription);
+                    STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
 
                     exitRunLoop = YES;
-                    STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
               }];
     [self runTestLoop];
 }
@@ -88,15 +85,15 @@
     BaasioUser *user = [BaasioUser user];
     user.username = @"cetauri";
     [user unsubscribeInBackground:^(void) {
-        NSLog(@"success");
-        exitRunLoop = YES;
-    }
-              failureBlock:^(NSError *error) {
-                  NSLog(@"fail : %@", error.localizedDescription);
-                  
-                  exitRunLoop = YES;
-                  STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-              }];
+                            NSLog(@"success");
+                            exitRunLoop = YES;
+                        }
+                      failureBlock:^(NSError *error) {
+                          NSLog(@"fail : %@", error.localizedDescription);
+                          STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                          
+                          exitRunLoop = YES;
+                      }];
     [self runTestLoop];
 }
 

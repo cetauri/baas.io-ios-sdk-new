@@ -10,7 +10,7 @@
 @interface BaasioFile : BaasioEntity
 
 - (void)informationInBackground:(NSString *)uuid
-                   successBlock:(void (^)(void))successBlock
+                   successBlock:(void (^)(BaasioFile *file))successBlock
                    failureBlock:(void (^)(NSError *))failureBlock;
 
 - (void)deleteInBackground:(NSString *)uuid
@@ -18,11 +18,13 @@
               failureBlock:(void (^)(NSError *))failureBlock;
 
 - (void)downloadInBackground:(NSString *)uuid
-                successBlock:(void (^)(void))successBlock
+                    savePath:(NSString *)savePath
+                successBlock:(void (^)(NSString *))successBlock
                 failureBlock:(void (^)(NSError *))failureBlock
                progressBlock:(void (^)(float progress))progressBlock;
 
-- (void)uploadInBackground:(NSData *)data successBlock:(void (^)(void))successBlock
+- (void)uploadInBackground:(NSData *)data
+              successBlock:(void (^)(BaasioFile *file))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock;
 

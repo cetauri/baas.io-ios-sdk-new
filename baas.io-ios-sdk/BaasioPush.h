@@ -21,6 +21,4 @@
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock;
 
-//TODO :
-//updateInBackground
 @end

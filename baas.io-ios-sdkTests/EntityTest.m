@@ -38,8 +38,8 @@ static NSString *uuid;
     [entity setObject:@"Sean Plott" forKey:@"playerName"];
     [entity setObject:[NSNumber numberWithBool:NO] forKey:@"cheatMode"];
     [entity saveInBackground:^(void) {
-                                exitRunLoop = YES;
-                            }
+                        exitRunLoop = YES;
+                    }
                     failureBlock:^(NSError *error) {
                         NSLog(@"fail : %@", error.localizedDescription);
                         STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
