@@ -14,9 +14,6 @@
     NSMutableDictionary *_entity;
 }
 
-//@synthesize entity = _entity;
-
-
 -(id) init
 {
     self = [super init];
@@ -133,33 +130,19 @@
 
 - (void)setObject:(id)value forKey:(NSString *)key {
     if ([value isMemberOfClass:[BaasioFile class]]){
-//        STFail(@"check this", nil);
-        exit(0);
+        [_entity setObject:((BaasioFile*) value).dictionary forKey:key];
     } else if ([value isMemberOfClass:[BaasioUser class]]){
-//        STFail(@"check this", nil);
-        exit(0);
+        [_entity setObject:((BaasioUser*) value).dictionary forKey:key];
     } else{
         [_entity setObject:value forKey:key];
     }
 }
-
-//- (void)setValue:(id)value forKey:(NSString *)key {
-//    [_dictionary setValue:value forKey:key];
-//}
-
 
 #pragma mark - Query
 - (BaasioEntity *)getEntity:(NSString *)uuid {
     return nil;
 }
 
-+ (BaasioEntity *)findEntity:(BaasioQuery *)query {
-    return nil;
-}
-
-+ (NSArray *)findEntities:(BaasioQuery *)query {
-    return nil;
-}
 
 - (void)getEntityInBackground:(NSString *)uuid
                            successBlock:(void (^)(void))successBlock
@@ -183,15 +166,22 @@
                                                                                         failure:failure];
     [operation start];
 }
+//+ (BaasioEntity *)findEntity:(BaasioQuery *)query {
+//    return nil;
+//}
+//
+//+ (NSArray *)findEntities:(BaasioQuery *)query {
+//    return nil;
+//}
 
 
-+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query {
-    return nil;
-}
-
-+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)query {
-    return nil;
-}
+//+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query {
+//    return nil;
+//}
+//
+//+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)query {
+//    return nil;
+//}
 
 #pragma mark - super
 - (NSString *)description{
@@ -199,6 +189,10 @@
 }
 
 #pragma mark - etc
+- (NSDictionary *)dictionary{
+    return _entity;
+}
+
 -(NSString*)created{
     return _entity[@"created"];
 }

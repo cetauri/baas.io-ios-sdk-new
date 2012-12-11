@@ -9,23 +9,21 @@
 #import "BaasioFileOptions.h"
 @interface BaasioFile : BaasioEntity
 
-- (void)informationInBackground:(NSString *)uuid
-                   successBlock:(void (^)(BaasioFile *file))successBlock
+@property(strong) NSString *downloadPath;
+@property(strong) NSData *data;
+@property(strong) BaasioFileOptions *options;
+
+- (void)informationInBackground:(void (^)(BaasioFile *file))successBlock
                    failureBlock:(void (^)(NSError *))failureBlock;
 
-- (void)deleteInBackground:(NSString *)uuid
-              successBlock:(void (^)(void))successBlock
+- (void)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *))failureBlock;
 
-- (void)downloadInBackground:(NSString *)uuid
-                    savePath:(NSString *)savePath
-                successBlock:(void (^)(NSString *))successBlock
+- (void)downloadInBackground:(void (^)(NSString *))successBlock
                 failureBlock:(void (^)(NSError *))failureBlock
                progressBlock:(void (^)(float progress))progressBlock;
 
-- (void)uploadInBackground:(NSData *)data
-                   options:(BaasioFileOptions *)options
-              successBlock:(void (^)(BaasioFile *file))successBlock
+- (void)uploadInBackground:(void (^)(BaasioFile *file))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock;
 

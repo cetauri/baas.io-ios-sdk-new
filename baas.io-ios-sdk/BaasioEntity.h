@@ -48,19 +48,23 @@
 //- (void)setValue:(id)value forKey:(NSString *)key;
 
 #pragma mark - Query
-//- (BaasioEntity *)getEntity:(NSString *)uuid;
-//TODO Query
+- (BaasioEntity *)getEntity:(NSString *)uuid;
+
 - (void)getEntityInBackground:(NSString *)uuid
                            successBlock:(void (^)(void))successBlock
                            failureBlock:(void (^)(NSError *error))failureBlock;
 
+//TODO Query
+//+ (BaasioEntity *)findEntity:(BaasioQuery *)query;
+//+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query;
 
-+ (BaasioEntity *)findEntity:(BaasioQuery *)query;
-+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query;
-
-+ (NSArray *)findEntities:(BaasioQuery *)query;
-+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)query;
+//+ (NSArray *)findEntities:(BaasioQuery *)query;
+//+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)query;
 
 #pragma mark - super
 - (NSString *)description;
+
+
+#pragma mark - etc
+- (NSDictionary *)dictionary;
 @end

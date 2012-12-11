@@ -20,14 +20,23 @@
     return self;
 }
 
-- (void)informationInBackground:(NSString *)uuid
-                   successBlock:(void (^)(BaasioFile *file))successBlock
+//- (void)deleteInBackground:(void (^)(void))successBlock
+//              failureBlock:(void (^)(NSError *))failureBlock;
+//
+//- (void)downloadInBackground:(void (^)(NSString *))successBlock
+//                failureBlock:(void (^)(NSError *))failureBlock
+//               progressBlock:(void (^)(float progress))progressBlock;
+//
+//- (void)uploadInBackground:(void (^)(BaasioFile *file))successBlock
+//              failureBlock:(void (^)(NSError *))failureBlock
+//             progressBlock:(void (^)(float progress))progressBlock;
+- (void)informationInBackground:(void (^)(BaasioFile *file))successBlock
                    failureBlock:(void (^)(NSError *))failureBlock
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
-    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", uuid];
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
     
@@ -46,14 +55,13 @@
     [operation start];
 }
 
-- (void)deleteInBackground:(NSString *)uuid
-              successBlock:(void (^)(void))successBlock
+- (void)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
-    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", uuid];
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
     
@@ -66,16 +74,14 @@
     [operation start];
 }
 
-- (void)downloadInBackground:(NSString *)uuid
-                    savePath:(NSString *)savePath
-                successBlock:(void (^)(NSString *))successBlock
+- (void)downloadInBackground:(void (^)(NSString *))successBlock
                 failureBlock:(void (^)(NSError *))failureBlock
                progressBlock:(void (^)(float progress))progressBlock
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
-    NSString *path = [self.entityName stringByAppendingFormat:@"/%@/download", uuid];
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@/download", self.uuid];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
     
@@ -83,10 +89,10 @@
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            successBlock(savePath);
+                                                                                            successBlock(self.downloadPath);
                                                                                         }
                                                                                         failure:failure];
-    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:savePath append:NO];
+    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:self.downloadPath append:NO];
     [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead){
         float progress = (float)totalBytesRead / totalBytesExpectedToRead;
         progressBlock(progress); 
@@ -94,9 +100,7 @@
     [operation start];
 }
 
-- (void)uploadInBackground:(NSData *)data
-                   options:(BaasioFileOptions *)options
-              successBlock:(void (^)(BaasioFile *file))successBlock
+- (void)uploadInBackground:(void (^)(BaasioFile *file))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock
 {
@@ -108,8 +112,8 @@
     
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     
-    [request setAllHTTPHeaderFields:options.dictionary];
-    [request setHTTPBody:data];
+    [request setAllHTTPHeaderFields:self.options.dictionary];
+    [request setHTTPBody:self.data];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
@@ -137,14 +141,23 @@
     [formatter setDateFormat:@"yyyyMMdd"];
     NSString *yyyymmdd = [formatter stringFromDate:[NSDate date]];
     
-    [formatter setDateFormat:@"HHmmssSSS"];
-    NSString *HHmmssSSS = [formatter stringFromDate:[NSDate date]];
+    [formatter setDateFormat:@"HH"];
+    NSString *HH = [formatter stringFromDate:[NSDate date]];
+    
+    [formatter setDateFormat:@"mm"];
+    NSString *mm = [formatter stringFromDate:[NSDate date]];
+    
+    [formatter setDateFormat:@"ss"];
+    NSString *ss = [formatter stringFromDate:[NSDate date]];
+    
+    [formatter setDateFormat:@"SSS"];
+    NSString *SSS = [formatter stringFromDate:[NSDate date]];
     
     
     CFUUIDRef uuidRef = CFUUIDCreate(NULL);
     CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
     CFRelease(uuidRef);
-    NSString *path = [NSString stringWithFormat:@"%@/%@/%@", yyyymmdd, HHmmssSSS, (__bridge NSString *)(uuidStringRef)];
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@", yyyymmdd, HH, mm, ss, SSS, (__bridge NSString *)(uuidStringRef)];
     
     return path;
 }

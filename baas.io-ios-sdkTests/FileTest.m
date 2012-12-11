@@ -28,9 +28,9 @@
 - (void)test_1_Upload{
     NSData *data = [@"Working at Parse is great!" dataUsingEncoding:NSUTF8StringEncoding];
     BaasioFile *file = [[BaasioFile alloc] init];
-    [file uploadInBackground:data
-                     options:nil
-                successBlock:^(BaasioFile *file) {
+    file.data = data;
+    file.options = nil;
+    [file uploadInBackground:^(BaasioFile *file) {
                     NSLog(@"success : %@", file.uuid);
 
                     [[NSUserDefaults standardUserDefaults]setObject:file.uuid forKey:@"file.uuid"];
@@ -55,8 +55,8 @@
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
     
     BaasioFile *file = [[BaasioFile alloc] init];
-    [file informationInBackground:uuid
-                     successBlock:^(BaasioFile *file) {
+    file.uuid = uuid;
+    [file informationInBackground:^(BaasioFile *file) {
                          NSLog(@"success : %@", file.description);
                          exitRunLoop = YES;
                      }
@@ -76,12 +76,12 @@
     
     NSString *path = [NSString stringWithFormat:@"%@/1.txt", NSTemporaryDirectory()];
     BaasioFile *file = [[BaasioFile alloc] init];
-    [file downloadInBackground:uuid
-                      savePath:path
-                  successBlock:^(NSString *savePath) {
-                      NSLog(@"success : %@", savePath);
+    file.uuid = uuid;
+    file.downloadPath = path;
+    [file downloadInBackground:^(NSString *downloadPath) {
+                      NSLog(@"success : %@", downloadPath);
                       // 파일 읽기.
-                      NSString *entireFileInString = [NSString stringWithContentsOfFile:savePath encoding:NSStringEncodingConversionAllowLossy error:nil];
+                      NSString *entireFileInString = [NSString stringWithContentsOfFile:downloadPath encoding:NSStringEncodingConversionAllowLossy error:nil];
                       // 라인별로 읽기.
                       NSArray *lines = [entireFileInString componentsSeparatedByString:@"\n"];
                       // 테스트.
@@ -108,8 +108,8 @@
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
     
     BaasioFile *file = [[BaasioFile alloc] init];
-    [file deleteInBackground:uuid
-                successBlock:^(void) {
+    file.uuid = uuid;
+    [file deleteInBackground:^(void) {
                     NSLog(@"Delete success.");
                     exitRunLoop = YES;
                 }
