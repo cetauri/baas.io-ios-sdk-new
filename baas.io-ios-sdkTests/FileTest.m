@@ -29,6 +29,7 @@
     NSData *data = [@"Working at Parse is great!" dataUsingEncoding:NSUTF8StringEncoding];
     BaasioFile *file = [[BaasioFile alloc] init];
     [file uploadInBackground:data
+                     options:nil
                 successBlock:^(BaasioFile *file) {
                     NSLog(@"success : %@", file.uuid);
 
@@ -45,8 +46,8 @@
                     NSLog(@"progress : %f", progress);
                 }
      ];
+    
     [self runTestLoop];
-
 }
 
 - (void)test_2_Info{

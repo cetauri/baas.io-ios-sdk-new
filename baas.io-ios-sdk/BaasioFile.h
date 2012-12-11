@@ -6,7 +6,7 @@
 
 
 #import "BaasioResponse.h"
-
+#import "BaasioFileOptions.h"
 @interface BaasioFile : BaasioEntity
 
 - (void)informationInBackground:(NSString *)uuid
@@ -24,6 +24,7 @@
                progressBlock:(void (^)(float progress))progressBlock;
 
 - (void)uploadInBackground:(NSData *)data
+                   options:(BaasioFileOptions *)options
               successBlock:(void (^)(BaasioFile *file))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock;

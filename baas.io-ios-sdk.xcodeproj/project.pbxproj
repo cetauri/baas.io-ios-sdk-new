@@ -18,6 +18,7 @@
 		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
 		AF26A27F166667F5006A7225 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E418165A2D850021AA4C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AF515B5E16703F930005F743 /* BaasioMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AF515B5D16703F930005F743 /* BaasioMessage.m */; };
+		AFA3616D1676BB31009D852F /* BaasioFileOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA3616C1676BB31009D852F /* BaasioFileOptions.m */; };
 		AFB9E3E9165A2BDC0021AA4C /* Baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E2165A2BDC0021AA4C /* Baasio.m */; };
 		AFB9E3EA165A2BDC0021AA4C /* BaasioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E4165A2BDC0021AA4C /* BaasioEntity.m */; };
 		AFB9E3EB165A2BDC0021AA4C /* BaasioQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E6165A2BDC0021AA4C /* BaasioQuery.m */; };
@@ -92,6 +93,8 @@
 		AF515B5C16703F930005F743 /* BaasioMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioMessage.h; sourceTree = "<group>"; };
 		AF515B5D16703F930005F743 /* BaasioMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioMessage.m; sourceTree = "<group>"; };
 		AFA32C22166C8A7A0076AEEC /* Baasio+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Baasio+Private.h"; sourceTree = "<group>"; };
+		AFA3616B1676BB31009D852F /* BaasioFileOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioFileOptions.h; sourceTree = "<group>"; };
+		AFA3616C1676BB31009D852F /* BaasioFileOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioFileOptions.m; sourceTree = "<group>"; };
 		AFB9E3E1165A2BDC0021AA4C /* Baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baasio.h; sourceTree = "<group>"; };
 		AFB9E3E2165A2BDC0021AA4C /* Baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baasio.m; sourceTree = "<group>"; };
 		AFB9E3E3165A2BDC0021AA4C /* BaasioEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioEntity.h; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 				AF515B5D16703F930005F743 /* BaasioMessage.m */,
 				27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */,
 				27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */,
+				AFA3616B1676BB31009D852F /* BaasioFileOptions.h */,
+				AFA3616C1676BB31009D852F /* BaasioFileOptions.m */,
 				27F2E2C9DCA5E3A2FD760F2F /* BaasioResponse.h */,
 				27F2E04671874480B3D59873 /* BaasioResponse.m */,
 				AFD93F0D165A2B0E00FC9ED0 /* Supporting Files */,
@@ -406,6 +411,7 @@
 				27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */,
 				27F2E0637105682525BF88B4 /* BaasioFile.m in Sources */,
 				AF515B5E16703F930005F743 /* BaasioMessage.m in Sources */,
+				AFA3616D1676BB31009D852F /* BaasioFileOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

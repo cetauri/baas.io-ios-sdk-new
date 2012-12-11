@@ -8,7 +8,6 @@
 #import "BaasioFile.h"
 #import "BaasioResponse.h"
 
-
 @implementation BaasioFile {
 
 }
@@ -95,8 +94,8 @@
     [operation start];
 }
 
-
 - (void)uploadInBackground:(NSData *)data
+                   options:(BaasioFileOptions *)options
               successBlock:(void (^)(BaasioFile *file))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock
@@ -104,16 +103,13 @@
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
-    NSString *path = [self.entityName stringByAppendingFormat:@"/public/%@", @"1.txt"];
+    NSString *path = [self.entityName stringByAppendingFormat:@"/public/%@", [self createRandomPath]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:path parameters:nil];
     
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     
-    
-//    [request setAllHTTPHeaderFields:header];
-//    [request setHTTPMethod:@"POST"];
+    [request setAllHTTPHeaderFields:options.dictionary];
     [request setHTTPBody:data];
-    
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
@@ -131,6 +127,41 @@
     }];
     
     [operation start];
+}
+
+
+
+#pragma mark - etc
+-(NSString *)createRandomPath{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMdd"];
+    NSString *yyyymmdd = [formatter stringFromDate:[NSDate date]];
+    
+    [formatter setDateFormat:@"HHmmssSSS"];
+    NSString *HHmmssSSS = [formatter stringFromDate:[NSDate date]];
+    
+    
+    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+    CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
+    CFRelease(uuidRef);
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@", yyyymmdd, HHmmssSSS, (__bridge NSString *)(uuidStringRef)];
+    
+    return path;
+}
+
+- (NSString*) mimeTypeForFileAtPath: (NSString *) path {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        return nil;
+    }
+    // Borrowed from http://stackoverflow.com/questions/5996797/determine-mime-type-of-nsdata-loaded-from-a-file
+    // itself, derived from  http://stackoverflow.com/questions/2439020/wheres-the-iphone-mime-type-database
+    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
+    CFStringRef mimeType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
+    CFRelease(UTI);
+    if (!mimeType) {
+        return @"application/octet-stream";
+    }
+    return (NSString *)CFBridgingRelease(mimeType);
 }
 
 @end
