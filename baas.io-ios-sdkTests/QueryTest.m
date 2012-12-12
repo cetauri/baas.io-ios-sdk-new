@@ -30,7 +30,7 @@
 }
 - (void)test_1_QueryBuild{
     BaasioQuery *query = [BaasioQuery queryWithCollectionName:@"tests"];
-    [query setNextCursor:@"cursor"];
+    [query setCursor:@"cursor"];
     [query setLimit:11];
     [query setProjections:@"name, title"];
     [query setOrderBy:@"name" order:BaasioQuerySortOrderASC];
@@ -40,7 +40,7 @@
 }
 - (void)test_1_QueryTest{
     BaasioQuery *query = [BaasioQuery queryWithCollectionName:@"tests"];
-    [query setNextCursor:@"cursor"];
+    [query setCursor:@"cursor"];
     [query setLimit:3];
     [query queryInBackground:^(NSArray *array) {
         NSLog(@"array : %i", array.count);

@@ -146,7 +146,7 @@
 
 
 - (void)getEntityInBackground:(NSString *)uuid
-                           successBlock:(void (^)(void))successBlock
+                           successBlock:(void (^)(BaasioEntity *entity))successBlock
                            failureBlock:(void (^)(NSError *error))failureBlock;
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
@@ -159,9 +159,14 @@
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            NSDictionary *dictionary = JSON[@"entities"][0];
-                                                                                            [self setEntity:dictionary];
-                                                                                            successBlock();
+
+                                                                                            NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:JSON[@"entities"][0]];
+                                                                                            NSString *type = JSON[@"type"];
+                                                                                            
+                                                                                            BaasioEntity *entity = [BaasioEntity entitytWithName:type];
+                                                                                            [entity setEntity:dictionary];
+                                                                                            
+                                                                                            successBlock(entity);
                                                                                         }
 
                                                                                         failure:failure];

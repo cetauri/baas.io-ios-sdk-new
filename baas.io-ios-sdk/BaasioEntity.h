@@ -6,8 +6,7 @@
 
 
 #import <Foundation/Foundation.h>
-
-#import "BaasioQuery.h"
+#import "BaasioResponse.h"
 
 @interface BaasioEntity : NSObject
 
@@ -47,19 +46,12 @@
 - (void)setObject:(id)value forKey:(NSString *)key;
 //- (void)setValue:(id)value forKey:(NSString *)key;
 
-#pragma mark - Query
-- (BaasioEntity *)getEntity:(NSString *)uuid;
+#pragma mark - Entity
+- (BaasioResponse *)getEntity:(NSString *)uuid;
 
 - (void)getEntityInBackground:(NSString *)uuid
-                           successBlock:(void (^)(void))successBlock
+                           successBlock:(void (^)(BaasioEntity *entity))successBlock
                            failureBlock:(void (^)(NSError *error))failureBlock;
-
-//TODO Query
-//+ (BaasioEntity *)findEntity:(BaasioQuery *)description;
-//+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)description;
-
-//+ (NSArray *)findEntities:(BaasioQuery *)description;
-//+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)description;
 
 #pragma mark - super
 - (NSString *)description;

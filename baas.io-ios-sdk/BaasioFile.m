@@ -20,16 +20,6 @@
     return self;
 }
 
-//- (void)deleteInBackground:(void (^)(void))successBlock
-//              failureBlock:(void (^)(NSError *))failureBlock;
-//
-//- (void)downloadInBackground:(void (^)(NSString *))successBlock
-//                failureBlock:(void (^)(NSError *))failureBlock
-//               progressBlock:(void (^)(float progress))progressBlock;
-//
-//- (void)uploadInBackground:(void (^)(BaasioFile *file))successBlock
-//              failureBlock:(void (^)(NSError *))failureBlock
-//             progressBlock:(void (^)(float progress))progressBlock;
 - (void)informationInBackground:(void (^)(BaasioFile *file))successBlock
                    failureBlock:(void (^)(NSError *))failureBlock
 {

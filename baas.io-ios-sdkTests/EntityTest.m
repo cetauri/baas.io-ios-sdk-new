@@ -72,9 +72,9 @@ static NSString *uuid;
 {
     NSLog(@"_entity : %@", uuid);
     BaasioEntity *entity = [BaasioEntity entitytWithName:@"GameScore"];
-    entity.uuid = uuid;
     [entity getEntityInBackground:uuid
-                     successBlock:^(void) {
+                     successBlock:^(BaasioEntity *entity) {
+                         NSLog(@"entity : %@", entity.description);
                         exitRunLoop = YES;
                     }
                     failureBlock:^(NSError *error) {
