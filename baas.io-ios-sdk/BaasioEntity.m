@@ -85,7 +85,7 @@
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
     
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
+    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] success:successBlock];
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:success failure:failure];
