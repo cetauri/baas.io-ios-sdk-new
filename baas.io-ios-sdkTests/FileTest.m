@@ -7,7 +7,6 @@
 
 #import "FileTest.h"
 #import "BaasioFile.h"
-#import "BaasioResponse.h"
 @implementation FileTest {
     BOOL exitRunLoop;
 }
@@ -24,6 +23,7 @@
     // Tear-down code here.
     [super tearDown];
 }
+static NSString *uuid;
 
 - (void)test_1_Upload{
     NSData *data = [@"Working at Parse is great!" dataUsingEncoding:NSUTF8StringEncoding];
@@ -32,8 +32,8 @@
     file.options = nil;
     [file uploadInBackground:^(BaasioFile *file) {
                     NSLog(@"success : %@", file.uuid);
-
-                    [[NSUserDefaults standardUserDefaults]setObject:file.uuid forKey:@"file.uuid"];
+                    uuid = file.uuid;
+//                    [[NSUserDefaults standardUserDefaults]setObject:file.uuid forKey:@"file.uuid"];
                     exitRunLoop = YES;
                  }
                 failureBlock:^(NSError *error) {
@@ -52,7 +52,7 @@
 
 - (void)test_2_Info{
     
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
+//    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
     
     BaasioFile *file = [[BaasioFile alloc] init];
     file.uuid = uuid;
@@ -72,7 +72,7 @@
 
 - (void)test_3_Download{
     
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
+//    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
     
     NSString *path = [NSString stringWithFormat:@"%@/1.txt", NSTemporaryDirectory()];
     BaasioFile *file = [[BaasioFile alloc] init];
@@ -105,7 +105,7 @@
 
 - (void)test_4_Delete{
     
-    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
+//    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
     
     BaasioFile *file = [[BaasioFile alloc] init];
     file.uuid = uuid;

@@ -58,33 +58,6 @@
     return request;
 }
 
-#pragma mark - API response method
-- (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock {
-
-    void (^failure)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-        if (JSON == nil){
-            failureBlock(error);
-            return;
-        }
-        NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:JSON[@"error_description"] forKey:NSLocalizedDescriptionKey];
-
-        NSString *domain = JSON[@"error"];
-        NSError *e = [NSError errorWithDomain:domain code:error.code userInfo:details];
-
-        failureBlock(e);
-    };
-    return failure;
-}
-
-- (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(void))successBlock {
-    void (^success)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-        NSLog(@"json : :%@", JSON);
-        successBlock();
-    };
-    return success;
-}
-
 - (BaasioUser*)currentUser{
     return _currentUser;
 }

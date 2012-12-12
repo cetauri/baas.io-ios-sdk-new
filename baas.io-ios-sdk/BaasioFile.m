@@ -6,6 +6,8 @@
 
 
 #import "BaasioFile.h"
+#import "AFNetworking.h"
+#import "JSONKit.h"
 
 @implementation BaasioFile {
 
@@ -22,47 +24,35 @@
 - (BaasioRequest*)informationInBackground:(void (^)(BaasioFile *file))successBlock
                    failureBlock:(void (^)(NSError *))failureBlock
 {
-    NSURL *url = [[Baasio sharedInstance] getAPIURL];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:path parameters:nil];
-    request = [[Baasio sharedInstance] setAuthorization:request];
-    
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            NSDictionary *dictionary = JSON[@"entities"][0];
-                                                                                            
-                                                                                            BaasioFile *_file = [[BaasioFile alloc]init];
-                                                                                            [_file setEntity:dictionary];
-                                                                                            successBlock(_file);
-                                                                                        }
 
-                                                                                        failure:failure];
-    [operation start];
-    return (BaasioRequest*)operation;
+    return [NetworkManager connectWithHTTP:path
+                                withMethod:@"GET"
+                                    params:nil
+                                   success:^(id result){
+                                       NSDictionary *response = (NSDictionary *)result;
+                                       NSDictionary *dictionary = response[@"entities"][0];
+                                       
+                                       BaasioFile *_file = [[BaasioFile alloc]init];
+                                       [_file setEntity:dictionary];
+                                       successBlock(_file);
+                                   }
+                                   failure:failureBlock];
 }
 
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
 {
-    NSURL *url = [[Baasio sharedInstance] getAPIURL];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
-    request = [[Baasio sharedInstance] setAuthorization:request];
-    
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] success:successBlock];
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:success
-                                                                                        failure:failure];
-    [operation start];
-    return (BaasioRequest*)operation;
+
+    return [NetworkManager connectWithHTTP:path
+                                withMethod:@"DELETE"
+                                    params:nil
+                                   success:^(id result){
+                                       successBlock();
+                                   }
+                                   failure:failureBlock];
+
 }
 
 - (BaasioRequest*)downloadInBackground:(void (^)(NSString *))successBlock
@@ -76,7 +66,7 @@
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
     
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[BaasioNetworkManager sharedInstance] failure:failureBlock];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
@@ -102,7 +92,7 @@
     NSString *path = [self.entityName stringByAppendingFormat:@"/public/%@", [self createRandomPath]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:path parameters:nil];
     
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[BaasioNetworkManager sharedInstance] failure:failureBlock];
     
     [request setAllHTTPHeaderFields:self.options.dictionary];
     [request setHTTPBody:self.data];

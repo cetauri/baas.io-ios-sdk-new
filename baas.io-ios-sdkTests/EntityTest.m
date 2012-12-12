@@ -26,9 +26,9 @@
 - (void)tearDown
 {
     // Tear-down code here.
-
     [super tearDown];
 }
+
 static NSString *uuid;
 
 - (void)test_1_EntitySave
@@ -37,7 +37,8 @@ static NSString *uuid;
     [entity setObject:[NSNumber numberWithInt:1337] forKey:@"score"];
     [entity setObject:@"Sean Plott" forKey:@"playerName"];
     [entity setObject:[NSNumber numberWithBool:NO] forKey:@"cheatMode"];
-    [entity saveInBackground:^(void) {
+    [entity saveInBackground:^(BaasioEntity *entity) {
+                    uuid = entity.uuid;
                     exitRunLoop = YES;
                 }
                 failureBlock:^(NSError *error) {
@@ -47,17 +48,17 @@ static NSString *uuid;
                 }];
     
     [self runTestLoop];
-    uuid = entity.uuid;
 }
 
 
 - (void)test_3_EntityUpdate
 {
+    
     BaasioEntity *entity = [BaasioEntity entitytWithName:@"GameScore"];
     entity.uuid = uuid;
     [entity setObject:@"30" forKey:@"duration"];
 
-    [entity updateInBackground:^(void) {
+    [entity updateInBackground:^(BaasioEntity *entity) {
                                     exitRunLoop = YES;
                                 }
                   failureBlock:^(NSError *error) {
@@ -111,7 +112,7 @@ static NSString *uuid;
         [entity setObject:@"Sean Plott" forKey:@"playerName"];
         [entity setObject:[NSNumber numberWithBool:NO] forKey:@"cheatMode"];
         [entity setObject:file forKey:@"file"];
-        [entity saveInBackground:^(void) {
+        [entity saveInBackground:^(BaasioEntity *entity) {
             
             uuid = entity.uuid;
             exitRunLoop = YES;

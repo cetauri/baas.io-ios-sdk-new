@@ -15,27 +15,14 @@
                 failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSDictionary *params = [config dictionary];
-
-    AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"pushes" parameters:nil];
-    request = [[Baasio sharedInstance] setAuthorization:request];
     
-    NSError *error;
-    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
-    if (error != nil) {
-        failureBlock(error);
-        return nil;
-    }
-    request.HTTPBody = data;
-    
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] success:successBlock];
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:success
-                                                                                        failure:failure];
-    [operation start];
-    return (BaasioRequest*)operation;
+    return [NetworkManager connectWithHTTP:@"pushes"
+                                withMethod:@"POST"
+                                    params:params
+                                   success:^(id result){
+                                       successBlock();
+                                   }
+                                   failure:failureBlock];
 }
 
 
@@ -43,20 +30,15 @@
                   failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
-
     NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
-    AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE" path:path parameters:nil];
-    request = [[Baasio sharedInstance] setAuthorization:request];
     
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] success:successBlock];
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:success
-                                                                                        failure:failure];
-    [operation start];
-    return (BaasioRequest*)operation;
+    return [NetworkManager connectWithHTTP:path
+                                withMethod:@"DELETE"
+                                    params:nil
+                                   success:^(id result){
+                                       successBlock();
+                                   }
+                                   failure:failureBlock];
 }
 
 - (BaasioRequest*)registerInBackground:(NSString *)deviceID
@@ -70,31 +52,19 @@
                                 @"tags" : tags
                             };
     NSString *path = @"pushes/devices";
-    AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:path parameters:nil];
-    request = [[Baasio sharedInstance] setAuthorization:request];
-    
-    NSError *error;
-    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
-    if (error != nil) {
-        failureBlock(error);
-        return nil;
-    }
-    request.HTTPBody = data;
-    
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
-
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            NSDictionary *entity = JSON[@"entities"][0];
-                                                                                            NSString *uuid = [entity objectForKey:@"uuid"];
-//                                                                                            NSLog(@"uuid : %@", uuid);
-                                                                                            [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:PUSH_DEVICE_ID];
-                                                                                            successBlock();
-                                                                                        }
-                                                                                        failure:failure];
-    [operation start];
-    return (BaasioRequest*)operation;
+    return [NetworkManager connectWithHTTP:path
+                                withMethod:@"POST"
+                                    params:params
+                                   success:^(id result){
+                                       NSDictionary *response = (NSDictionary *)result;
+                                       
+                                       NSDictionary *entity = response[@"entities"][0];
+                                       NSString *uuid = [entity objectForKey:@"uuid"];
+                                       //                                                                                            NSLog(@"uuid : %@", uuid);
+                                       [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:PUSH_DEVICE_ID];
+                                       successBlock();
+                                   }
+                                   failure:failureBlock];
 
 }
 

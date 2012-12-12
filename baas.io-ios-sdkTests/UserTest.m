@@ -28,18 +28,6 @@
     [super tearDown];
 }
 
-- (void)test_1_SignUp
-{
-    BaasioUser *user = [BaasioUser user];
-    user.username = @"cetauri";
-    user.email = @"cetauri@gmail.com";
-    user.name = @"권오상";
-    user.password = @"cetauri";
-
-
-    BaasioResponse *responsse = [user signIn];
-    NSLog(@"response : ---------------------- %@", nil );
-}
 //- (void)test_1_SignUp
 //{
 //    BaasioUser *user = [BaasioUser user];
@@ -48,17 +36,29 @@
 //    user.name = @"권오상";
 //    user.password = @"cetauri";
 //
-//    [user signUpInBackground:^(void) {
-//            NSLog(@"success");
-//            exitRunLoop = YES;
-//          }
-//          failureBlock:^(NSError *error) {
-//              NSLog(@"fail : %@", error.localizedDescription);
-//              STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-//              exitRunLoop = YES;
-//          }];
-//        [self runTestLoop];
+//
+//    BaasioResponse *responsse = [user signIn];
+//    NSLog(@"response : ---------------------- %@", nil );
 //}
+- (void)test_1_SignUp
+{
+    BaasioUser *user = [BaasioUser user];
+    user.username = @"cetauri";
+    user.email = @"cetauri@gmail.com";
+    user.name = @"권오상";
+    user.password = @"cetauri";
+
+    [user signUpInBackground:^(void) {
+            NSLog(@"success");
+            exitRunLoop = YES;
+          }
+          failureBlock:^(NSError *error) {
+              NSLog(@"fail : %@", error.localizedDescription);
+              STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+              exitRunLoop = YES;
+          }];
+        [self runTestLoop];
+}
 
 - (void)test_2_SignIn
 {

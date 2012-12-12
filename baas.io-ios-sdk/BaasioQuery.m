@@ -100,27 +100,23 @@
     return _sql;
 }
 
--(void)queryInBackground:(void (^)(NSArray *objects))successBlock
+-(BaasioRequest *)queryInBackground:(void (^)(NSArray *objects))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock{
 
-    AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:[[Baasio sharedInstance] getAPIURL]];
     NSString *path = [_collectionName stringByAppendingString:self.description];
 
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:path parameters:nil];
-    request = [[Baasio sharedInstance] setAuthorization:request];
-
-
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
-
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                                NSArray *objects = [NSArray arrayWithArray:JSON[@"entities"]];
-                                                                                                successBlock(objects);
-                                                                                                
-                                                                                                _cursor = JSON[@"cursor"];
-                                                                                            }
-                                                                                            failure:failure];
-    [operation start];
+    return [NetworkManager connectWithHTTP:path
+                                withMethod:@"GET"
+                                    params:nil
+                                   success:^(id result){
+                                       NSDictionary *response = (NSDictionary *)result;
+                                       
+                                       NSArray *objects = [NSArray arrayWithArray:response[@"entities"]];
+                                       successBlock(objects);
+                                       
+                                       _cursor = response[@"cursor"];
+                                   }
+                                   failure:failureBlock];
 }
 
 @end

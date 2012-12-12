@@ -9,7 +9,6 @@ typedef enum {
     BaasioQuerySortOrderDESC
 } BaasioQuerySortOrder;
 
-#import <Foundation/Foundation.h>
 #import "BaasioGroup.h"
 @interface BaasioQuery : NSObject
 
@@ -30,7 +29,7 @@ typedef enum {
 -(NSString *)description;
 
 
--(void)queryInBackground:(void (^)(NSArray *objects))successBlock
+-(BaasioRequest *)queryInBackground:(void (^)(NSArray *objects))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock;
 
 @end
