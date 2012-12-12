@@ -80,7 +80,8 @@
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, id))success:(void (^)(NSDictionary *response))successBlock {
     void (^success)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
         NSLog(@"json : :%@", JSON);
-        successBlock(JSON);
+        NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:JSON];
+        successBlock(dictionary);
     };
     return success;
 }

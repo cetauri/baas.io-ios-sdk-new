@@ -55,11 +55,11 @@
                            failureBlock:(void (^)(NSError *error))failureBlock;
 
 //TODO Query
-//+ (BaasioEntity *)findEntity:(BaasioQuery *)query;
-//+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query;
+//+ (BaasioEntity *)findEntity:(BaasioQuery *)description;
+//+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)description;
 
-//+ (NSArray *)findEntities:(BaasioQuery *)query;
-//+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)query;
+//+ (NSArray *)findEntities:(BaasioQuery *)description;
+//+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)description;
 
 #pragma mark - super
 - (NSString *)description;

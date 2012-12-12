@@ -10,14 +10,17 @@
 
 #import "BaasioEntity.h"
 @implementation QueryTest {
-
+    BOOL exitRunLoop;
 }
 - (void)setUp
 {
     [super setUp];
+    exitRunLoop = NO;
 
-    // Set-up code here.
+    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+
 }
+
 
 - (void)tearDown
 {
@@ -25,18 +28,57 @@
 
     [super tearDown];
 }
+- (void)test_1_QueryBuild{
+    BaasioQuery *query = [BaasioQuery queryWithCollectionName:@"tests"];
+    [query setNextCursor:@"cursor"];
+    [query setLimit:11];
+    [query setProjections:@"name, title"];
+    [query setOrderBy:@"name" order:BaasioQuerySortOrderASC];
+    [query setWheres:@"name = 1"];
 
-- (void)testQueryEntites{
-//    BaasioQuery *query = [BaasioQuery createWithEntityName:@"sandbox"];
-//    query = [query query:@"select order by modified desc"];
+    NSLog(@"description : %@", query.description);
+}
+- (void)test_1_QueryTest{
+    BaasioQuery *query = [BaasioQuery queryWithCollectionName:@"tests"];
+    [query setNextCursor:@"cursor"];
+    [query setLimit:3];
+    [query queryInBackground:^(NSArray *array) {
+        NSLog(@"array : %i", array.count);
+                            STAssertTrue(array.count == 3, @"count is not equals.", nil);
+                            exitRunLoop = YES;
+                        }
+                        failureBlock:^(NSError *error) {
+                            NSLog(@"fail : %@", error.localizedDescription);
+                            STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                            exitRunLoop = YES;
+                        }];
 
-//    NSArray *entities = [BaasioEntity findEntities:query];
+
+    [self runTestLoop];
+    [query queryInBackground:^(NSArray *array) {
+        STAssertEquals(array.count, 3, @"count is not equals.", nil);
+        exitRunLoop = YES;
+    }
+    failureBlock:^(NSError *error) {
+        NSLog(@"fail : %@", error.localizedDescription);
+        STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+        exitRunLoop = YES;
+    }];
+
+    
+    [self runTestLoop];
 }
 
 - (void)testQueryEntity{
-//    BaasioQuery *query = [BaasioQuery createWithEntityName:@"sandbox"];
-//    query = [query query:@"xxxxxx"];
+//    BaasioQuery *description = [BaasioQuery createWithEntityName:@"sandbox"];
+//    query = [query description:@"xxxxxx"];
 
-//    BaasioEntity *entity = [BaasioEntity getEntity:query];
+//    BaasioEntity *entity = [BaasioEntity getEntity:description];
+}
+
+- (void)runTestLoop{
+    while (!exitRunLoop){
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+    }
 }
 @end

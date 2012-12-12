@@ -128,6 +128,7 @@
     return _entity[key];
 }
 
+// XXX relation??
 - (void)setObject:(id)value forKey:(NSString *)key {
     if ([value isMemberOfClass:[BaasioFile class]]){
         [_entity setObject:((BaasioFile*) value).dictionary forKey:key];
@@ -166,20 +167,20 @@
                                                                                         failure:failure];
     [operation start];
 }
-//+ (BaasioEntity *)findEntity:(BaasioQuery *)query {
+//+ (BaasioEntity *)findEntity:(BaasioQuery *)description {
 //    return nil;
 //}
 //
-//+ (NSArray *)findEntities:(BaasioQuery *)query {
+//+ (NSArray *)findEntities:(BaasioQuery *)description {
 //    return nil;
 //}
 
 
-//+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)query {
+//+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)description {
 //    return nil;
 //}
 //
-//+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)query {
+//+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)description {
 //    return nil;
 //}
 
