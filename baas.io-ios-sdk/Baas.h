@@ -8,5 +8,4 @@
 #import "BaasioFile.h"
 #import "BaasioPush.h"
 #import "BaasioUser.h"
-#import "BaasioResponse.h"
 #import "BaasioEntity.h"

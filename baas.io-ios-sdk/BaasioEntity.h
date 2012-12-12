@@ -6,7 +6,6 @@
 
 
 #import <Foundation/Foundation.h>
-#import "BaasioResponse.h"
 
 @interface BaasioEntity : NSObject
 
@@ -21,37 +20,34 @@
 + (BaasioEntity *)entitytWithName:(NSString *)string;
 
 
-//- (void)save;
+//- (BaasioEntity *)save:(NSError **)error;
 
-- (void)saveInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)saveInBackground:(void (^)(BaasioEntity *entity))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock;
 
 
-//- (void)update;
+//- (BaasioEntity *)update:(NSError **)error;
 
-- (void)updateInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)updateInBackground:(void (^)(BaasioEntity *entity))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
 
-//- (void)delete;
-- (void)deleteInBackground:(void (^)(void))successBlock
+//- (void)delete:(NSError **)error;
+- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
-
-
-- (void)refresh;
 
 
 #pragma mark - Data
 - (NSString *)objectForKey:(NSString *)string;
 - (void)setObject:(id)value forKey:(NSString *)key;
-//- (void)setValue:(id)value forKey:(NSString *)key;
 
 #pragma mark - Entity
-- (BaasioResponse *)getEntity:(NSString *)uuid;
++ (BaasioEntity *)getEntity:(NSString *)uuid error:(NSError **)error;
 
-- (void)getEntityInBackground:(NSString *)uuid
-                           successBlock:(void (^)(BaasioEntity *entity))successBlock
-                           failureBlock:(void (^)(NSError *error))failureBlock;
++ (BaasioRequest*)getEntityInBackground:(NSString*)entityName
+                         uuid:(NSString *)uuid
+                 successBlock:(void (^)(BaasioEntity *entity))successBlock
+                 failureBlock:(void (^)(NSError *error))failureBlock;
 
 #pragma mark - super
 - (NSString *)description;

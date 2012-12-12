@@ -6,7 +6,6 @@
 
 
 #import "BaasioFile.h"
-#import "BaasioResponse.h"
 
 @implementation BaasioFile {
 
@@ -20,7 +19,7 @@
     return self;
 }
 
-- (void)informationInBackground:(void (^)(BaasioFile *file))successBlock
+- (BaasioRequest*)informationInBackground:(void (^)(BaasioFile *file))successBlock
                    failureBlock:(void (^)(NSError *))failureBlock
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
@@ -43,9 +42,10 @@
 
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
-- (void)deleteInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
@@ -62,9 +62,10 @@
                                                                                         success:success
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
-- (void)downloadInBackground:(void (^)(NSString *))successBlock
+- (BaasioRequest*)downloadInBackground:(void (^)(NSString *))successBlock
                 failureBlock:(void (^)(NSError *))failureBlock
                progressBlock:(void (^)(float progress))progressBlock
 {
@@ -88,9 +89,10 @@
         progressBlock(progress); 
     }];
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
-- (void)uploadInBackground:(void (^)(BaasioFile *file))successBlock
+- (BaasioRequest*)uploadInBackground:(void (^)(BaasioFile *file))successBlock
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock
 {
@@ -121,6 +123,7 @@
     }];
     
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
 

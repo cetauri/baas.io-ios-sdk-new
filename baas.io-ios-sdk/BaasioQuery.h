@@ -19,7 +19,7 @@ typedef enum {
 //-(void)setGroup:(BaasioGroup*)group;
 -(void)setProjections:(NSString *)projections;
 -(void)setWheres:(NSString *)wheres;
--(void)setOrderBy:(NSString *)key order:(BaasioQuerySortOrder)order;///order
+-(void)setOrderBy:(NSString *)key order:(BaasioQuerySortOrder)order;
 -(void)setLimit: (int)limit;
 
 -(NSString *)cursor;

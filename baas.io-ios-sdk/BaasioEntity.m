@@ -38,7 +38,7 @@
 
 }
 
-- (void)saveInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)saveInBackground:(void (^)(BaasioEntity *entity))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock{
     
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
@@ -51,27 +51,31 @@
     NSData *data = [_entity JSONDataWithOptions:JKSerializeOptionNone error:&error];
     if (error != nil) {
         failureBlock(error);
-        return;
+        return nil;
     }
     request.HTTPBody = data;
     
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            NSDictionary *entity = JSON[@"entities"][0];
-                                                                                            [self setEntity:entity];
-                                                                                            success(request, response, JSON);
+                                                                                            NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:JSON[@"entities"][0]];
+                                                                                            NSString *type = JSON[@"type"];
+                                                                                            
+                                                                                            BaasioEntity *entity = [BaasioEntity entitytWithName:type];
+                                                                                            [entity setEntity:dictionary];
+                                                                                            
+                                                                                            successBlock(entity);
                                                                                         }
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
 - (void)delete {
 
 }
 
-- (void)deleteInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock{
     
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
@@ -87,12 +91,13 @@
                                                                                         success:success failure:failure];
     
     [operation start];
+    return (BaasioRequest*)operation;
 
 }
 - (void)update {
 
 }
-- (void)updateInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)updateInBackground:(void (^)(BaasioEntity *entity))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock{
 
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
@@ -106,20 +111,25 @@
     NSData *data = [_entity JSONDataWithOptions:JKSerializeOptionNone error:&error];
     if (error != nil) {
         failureBlock(error);
-        return;
+        return nil;
     }
     request.HTTPBody = data;
 
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:success failure:failure];
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:JSON[@"entities"][0]];
+                                                                                            NSString *type = JSON[@"type"];
+                                                                                            
+                                                                                            BaasioEntity *entity = [BaasioEntity entitytWithName:type];
+                                                                                            [entity setEntity:dictionary];
+                                                                                            
+                                                                                            successBlock(entity);
+                                                                                        }
+                                                                                        failure:failure];
 
     [operation start];
-}
-
-- (void)refresh {
-
+    return (BaasioRequest*)operation;
 }
 
 
@@ -139,20 +149,20 @@
     }
 }
 
-#pragma mark - Query
-- (BaasioEntity *)getEntity:(NSString *)uuid {
+#pragma mark - Entity
++ (BaasioEntity *)getEntity:(NSString *)uuid error:(NSError **)error{
     return nil;
 }
 
-
-- (void)getEntityInBackground:(NSString *)uuid
++ (BaasioRequest*)getEntityInBackground:(NSString*)entityName
+                         uuid:(NSString *)uuid
                            successBlock:(void (^)(BaasioEntity *entity))successBlock
                            failureBlock:(void (^)(NSError *error))failureBlock;
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 
-    NSString *path = [_entityName stringByAppendingFormat:@"/%@", uuid];
+    NSString *path = [entityName stringByAppendingFormat:@"/%@", uuid];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
     
@@ -171,23 +181,8 @@
 
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 }
-//+ (BaasioEntity *)findEntity:(BaasioQuery *)description {
-//    return nil;
-//}
-//
-//+ (NSArray *)findEntities:(BaasioQuery *)description {
-//    return nil;
-//}
-
-
-//+ (BaasioEntity *)findEntityInBackground:(BaasioQuery *)description {
-//    return nil;
-//}
-//
-//+ (NSArray *)findEntitiesInBackground:(BaasioQuery *)description {
-//    return nil;
-//}
 
 #pragma mark - super
 - (NSString *)description{

@@ -10,7 +10,7 @@
 
 }
 
-- (void)sendPushInBackground:(BaasioMessage *)config
+- (BaasioRequest*)sendPushInBackground:(BaasioMessage *)config
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock
 {
@@ -24,7 +24,7 @@
     NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
     if (error != nil) {
         failureBlock(error);
-        return;
+        return nil;
     }
     request.HTTPBody = data;
     
@@ -35,10 +35,11 @@
                                                                                         success:success
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
 
-- (void)unregisterInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)unregisterInBackground:(void (^)(void))successBlock
                   failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
@@ -55,9 +56,10 @@
                                                                                         success:success
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
-- (void)registerInBackground:(NSString *)deviceID
+- (BaasioRequest*)registerInBackground:(NSString *)deviceID
                         tags:(NSArray *)tags
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock
@@ -76,23 +78,23 @@
     NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
     if (error != nil) {
         failureBlock(error);
-        return;
+        return nil;
     }
     request.HTTPBody = data;
     
-    void (^success)(NSURLRequest *, NSHTTPURLResponse *, id) = [[Baasio sharedInstance] successWithVoid:successBlock];
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[Baasio sharedInstance] failure:failureBlock];
 
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
                                                                                             NSDictionary *entity = JSON[@"entities"][0];
                                                                                             NSString *uuid = [entity objectForKey:@"uuid"];
-                                                                                            NSLog(@"uuid : %@", uuid);
+//                                                                                            NSLog(@"uuid : %@", uuid);
                                                                                             [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:PUSH_DEVICE_ID];
-                                                                                            success(request, response, JSON);
+                                                                                            successBlock();
                                                                                         }
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 
 }
 

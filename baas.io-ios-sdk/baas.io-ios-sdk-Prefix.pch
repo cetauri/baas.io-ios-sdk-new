@@ -11,7 +11,7 @@
 #import "JSONKit.h"
 #import "AFNetworking.h"
 #import "Baasio.h"
-
+#import "BaasioRequest.h"
 #import "Baasio+Private.h"
 
 #define NSLog( s, ... ) NSLog( @"<%@:(%d)> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )

@@ -71,8 +71,8 @@ static NSString *uuid;
 - (void)test_4_EntityInfo
 {
     NSLog(@"_entity : %@", uuid);
-    BaasioEntity *entity = [BaasioEntity entitytWithName:@"GameScore"];
-    [entity getEntityInBackground:uuid
+    [BaasioEntity getEntityInBackground:@"GameScore"
+                             uuid:uuid
                      successBlock:^(BaasioEntity *entity) {
                          NSLog(@"entity : %@", entity.description);
                         exitRunLoop = YES;
@@ -84,7 +84,6 @@ static NSString *uuid;
                     }];
 
     [self runTestLoop];
-    NSLog(@"%@", entity.description);
 }
 - (void)test_5_EntityDelete
 {
@@ -139,6 +138,7 @@ static NSString *uuid;
 - (void)test_7_EntityDelete{
     [self test_5_EntityDelete];
 }
+
 - (void)runTestLoop{
     while (!exitRunLoop){
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];

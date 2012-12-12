@@ -18,7 +18,7 @@
 }
 
 
-- (void)unsubscribeInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)unsubscribeInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSString *path = [@"users/" stringByAppendingString:self.username];
@@ -34,10 +34,11 @@
                                                                                         success:success
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
 
-- (void)signInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)signInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSDictionary *params = @{
@@ -66,6 +67,7 @@
                                                                                         }
                                                                                         failure:failure];
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
 + (BaasioUser *)currtuser{
@@ -80,9 +82,8 @@
 }
 
 
-- (BaasioResponse *)signIn {
+- (void)signIn:(NSError**)error {
 
-    BaasioResponse *_response = [[BaasioResponse alloc]init];
     NSDictionary *params = @{
         @"name":[self objectForKey:@"name"],
         @"password":self.password,
@@ -94,11 +95,9 @@
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"users" parameters:nil];
-    NSError *error;
-    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
+    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:error];
     if (error != nil) {
-        _response.error = error;
-        return _response;
+        return;
     }
     request.HTTPBody = data;
     
@@ -108,8 +107,8 @@
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
                                                                                             isFinish = true;
                                                                                         }
-                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-                                                                                            _response.error = error;
+                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *_error, id JSON){
+                                                                                            *error = _error;
                                                                                             isFinish = true;
                                                                                         }];
     [operation start];
@@ -119,11 +118,11 @@
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
     }
 #endif
-    return _response;
+    return;
 }
 
 
-- (void)signUpInBackground:(void (^)(void))successBlock
+- (BaasioRequest*)signUpInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSDictionary *params = @{
@@ -142,7 +141,7 @@
     NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
     if (error != nil) {
         failureBlock(error);
-        return;
+        return nil;
     }
     request.HTTPBody = data;
 
@@ -152,6 +151,7 @@
                                                                                         success:success failure:failure];
 
     [operation start];
+    return (BaasioRequest*)operation;
 }
 
 #pragma mark - etc
