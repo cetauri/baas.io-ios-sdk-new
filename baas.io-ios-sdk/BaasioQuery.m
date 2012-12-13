@@ -127,8 +127,13 @@
                                    success:^(id result){
                                        NSDictionary *response = (NSDictionary *)result;
 
-                                       _cursors[++_pos] = response[@"cursor"];
-                                       NSLog(@"%i == %@", _pos, _cursors[_pos]);
+                                       NSString *cursor = response[@"cursor"];
+                                       if (cursor != nil) {
+                                           _cursors[++_pos] = response[@"cursor"];
+                                           NSLog(@"%i == %@", _pos, _cursors[_pos]);
+                                       }else{
+                                           NSLog(@"---");
+                                       }
                                        
                                        NSArray *objects = [NSArray arrayWithArray:response[@"entities"]];
                                        successBlock(objects);
@@ -141,7 +146,14 @@
                       failureBlock:(void (^)(NSError *error))failureBlock
 {
     if(![self hasMoreEntities]){
-        [NSException raise:@"NSObjectNotAvailableException" format:@"Next entities isn't exist."];
+        NSMutableDictionary* details = [NSMutableDictionary dictionary];
+        [details setValue:@"Next entities isn't exist." forKey:NSLocalizedDescriptionKey];
+        
+        NSString *domain = @"NSObjectNotAvailableException";
+        NSError *e = [NSError errorWithDomain:domain code:-1 userInfo:details];
+        
+        failureBlock(e);
+        return nil;
     }
     return [self queryInBackground:successBlock failureBlock:failureBlock];
 }
@@ -149,7 +161,17 @@
 -(BaasioRequest *)prevInBackground:(void (^)(NSArray *objects))successBlock
                       failureBlock:(void (^)(NSError *error))failureBlock
 {
-    _pos -=2 ;
+    _pos -= 2;
+    if(_pos < 0 ){
+        NSMutableDictionary* details = [NSMutableDictionary dictionary];
+        [details setValue:@"Prev entities isn't exist." forKey:NSLocalizedDescriptionKey];
+
+        NSString *domain = @"NSObjectNotAvailableException";
+        NSError *e = [NSError errorWithDomain:domain code:-1 userInfo:details];
+        
+        failureBlock(e);
+        return nil;
+    }
     return [self queryInBackground:successBlock failureBlock:failureBlock];
 }
 
