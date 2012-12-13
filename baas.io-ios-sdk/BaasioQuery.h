@@ -28,6 +28,11 @@ typedef enum {
 
 -(NSString *)description;
 
+-(BaasioRequest *)nextInBackground:(void (^)(NSArray *objects))successBlock
+                       failureBlock:(void (^)(NSError *error))failureBlock;
+
+-(BaasioRequest *)prevInBackground:(void (^)(NSArray *objects))successBlock
+                       failureBlock:(void (^)(NSError *error))failureBlock;
 
 -(BaasioRequest *)queryInBackground:(void (^)(NSArray *objects))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock;

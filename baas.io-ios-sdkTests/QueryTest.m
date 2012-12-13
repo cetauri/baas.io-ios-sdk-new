@@ -18,16 +18,14 @@
     exitRunLoop = NO;
 
     [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
-
 }
-
 
 - (void)tearDown
 {
     // Tear-down code here.
-
     [super tearDown];
 }
+
 - (void)test_1_QueryBuild{
     BaasioQuery *query = [BaasioQuery queryWithCollectionName:@"tests"];
     [query setCursor:@"cursor"];
@@ -38,42 +36,111 @@
 
     NSLog(@"description : %@", query.description);
 }
-- (void)test_1_QueryTest{
+- (void)test_2_QueryPreNextTest{
+    
+
     BaasioQuery *query = [BaasioQuery queryWithCollectionName:@"tests"];
     [query setCursor:@"cursor"];
     [query setLimit:3];
+    
     [query queryInBackground:^(NSArray *array) {
-        NSLog(@"array : %i", array.count);
-                            STAssertTrue(array.count == 3, @"count is not equals.", nil);
-                            exitRunLoop = YES;
-                        }
-                        failureBlock:^(NSError *error) {
-                            NSLog(@"fail : %@", error.localizedDescription);
-                            STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                            exitRunLoop = YES;
-                        }];
+                STAssertTrue(array.count == 3, @"count is not equals.", nil);
+        
+                STAssertTrue([[array objectAtIndex:0][@"count"] intValue] == 0, @"wrong.", nil);
+                NSLog(@"array : %@", array.description);
+
+                [query nextInBackground:^(NSArray *array) {
+                    STAssertTrue(array.count == 3, @"count is not equals.", nil);
+                    
+                    STAssertTrue([[array objectAtIndex:0][@"count"] intValue] == 3, @"wrong.", nil);
+                    NSLog(@"array : %@", array.description);
+
+                    [query nextInBackground:^(NSArray *array) {
+                        STAssertTrue(array.count == 3, @"count is not equals.", nil);
+                        STAssertTrue([[array objectAtIndex:0][@"count"] intValue] == 6, @"wrong.", nil);
+                        NSLog(@"array : %@", array.description);
+                        [query nextInBackground:^(NSArray *array) {
+                                STAssertTrue(array.count == 3, @"count is not equals.", nil);
+                            
+                            STAssertTrue([[array objectAtIndex:0][@"count"] intValue] == 9, @"wrong.", nil);
+                                NSLog(@"array : %@", array.description);
+                                [query prevInBackground:^(NSArray *array) {
+                                    STAssertTrue(array.count == 3, @"count is not equals.", nil);
+                                    STAssertTrue([[array objectAtIndex:0][@"count"] intValue] == 6, @"wrong.", nil);
+                                    NSLog(@"array : %@", array.description);
+                                    [query prevInBackground:^(NSArray *array) {
+                                        STAssertTrue(array.count == 3, @"count is not equals.", nil);
+                                        STAssertTrue([[array objectAtIndex:0][@"count"] intValue] == 3, @"wrong.", nil);
+                                        NSLog(@"array : %@", array.description);
+                                        [query prevInBackground:^(NSArray *array) {
+                                            STAssertTrue(array.count == 3, @"count is not equals.", nil);
+                                            STAssertTrue([[array objectAtIndex:0][@"count"] intValue] == 0, @"wrong.", nil);
+                                            NSLog(@"array : %@", array.description);
+                                            [query prevInBackground:^(NSArray *array) {
+                                                STAssertTrue(array.count == 3, @"count is not equals.", nil);
+                                                STAssertTrue([[array objectAtIndex:0][@"count"] intValue] == 0, @"wrong.", nil);
+                                                NSLog(@"array : %@", array.description);
+                                                exitRunLoop = YES;
+
+                                            }
+                                           failureBlock:^(NSError *error) {
+                                               NSLog(@"fail : %@", error.localizedDescription);
+                                               STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                                               exitRunLoop = YES;
+                                           }];
+
+                                        }
+                                       failureBlock:^(NSError *error) {
+                                           NSLog(@"fail : %@", error.localizedDescription);
+                                           STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                                           exitRunLoop = YES;
+                                       }];
+                                        
+                                    }
+                                   failureBlock:^(NSError *error) {
+                                       NSLog(@"fail : %@", error.localizedDescription);
+                                       STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                                       exitRunLoop = YES;
+                                   }];
+                                    
+                                }
+                                   failureBlock:^(NSError *error) {
+                                       NSLog(@"fail : %@", error.localizedDescription);
+                                       STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                                       exitRunLoop = YES;
+                                   }];
+
+                            }
+                           failureBlock:^(NSError *error) {
+                               NSLog(@"fail : %@", error.localizedDescription);
+                               STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                               exitRunLoop = YES;
+                           }];
+
+                    }
+                   failureBlock:^(NSError *error) {
+                       NSLog(@"fail : %@", error.localizedDescription);
+                       STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                       exitRunLoop = YES;
+                   }];
 
 
-    [self runTestLoop];
-    [query queryInBackground:^(NSArray *array) {
-        STAssertEquals(array.count, 3, @"count is not equals.", nil);
-        exitRunLoop = YES;
-    }
-    failureBlock:^(NSError *error) {
-        NSLog(@"fail : %@", error.localizedDescription);
-        STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-        exitRunLoop = YES;
-    }];
-
+                }
+                   failureBlock:^(NSError *error) {
+                       NSLog(@"fail : %@", error.localizedDescription);
+                       STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                       exitRunLoop = YES;
+                   }];
+                 }
+               failureBlock:^(NSError *error) {
+                   NSLog(@"fail : %@", error.localizedDescription);
+                   STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                   exitRunLoop = YES;
+               }];
+    
     
     [self runTestLoop];
-}
 
-- (void)testQueryEntity{
-//    BaasioQuery *description = [BaasioQuery createWithEntityName:@"sandbox"];
-//    query = [query description:@"xxxxxx"];
-
-//    BaasioEntity *entity = [BaasioEntity getEntity:description];
 }
 
 - (void)runTestLoop{

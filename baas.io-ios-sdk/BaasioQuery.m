@@ -5,14 +5,16 @@
 //
 
 #import "BaasioQuery.h"
-
+#import <objc/runtime.h>
 @implementation BaasioQuery {
 
     NSString *_collectionName;
     NSString *_projections;
     NSString *_wheres;
     NSString *_orderKey;
-    NSString *_cursor;
+    
+    NSMutableArray *_cursors;
+    int _pos;
 
     BaasioQuerySortOrder _order;
 //    BaasioGroup* _group;
@@ -29,6 +31,8 @@
     self = [super init];
     if (self){
         _collectionName = collectionName;
+        _cursors = [NSMutableArray array];
+        _pos = -1;
     }
     return self;
 }
@@ -55,18 +59,29 @@
 };
 
 -(NSString *)cursor{
-    return _cursor;
+    if (_pos == -1) {
+        return @"";
+    }
+    return _cursors[_pos];
 }
 -(void)setCursor:(NSString *)cursor{
-    _cursor = cursor;
+    _pos = 0;
+    _cursors[_pos] = cursor;
 }
 
 -(void)setResetCursor{
-    _cursor = nil;
+    _pos = -1;
+    _cursors = [NSMutableArray array];
 }
 
 -(BOOL)hasMoreEntities{
-    return (_cursor != nil);
+    
+    if (_pos == -1){
+        return false;
+    } else if (_cursors[_pos] == nil){
+        return false;
+    }
+    return true;
 }
 
 
@@ -93,10 +108,11 @@
         _sql = [_sql stringByAppendingFormat:@"&limit=%i", _limit];
     }
 
-    if (_cursor != nil){
-        _sql = [_sql stringByAppendingFormat:@"&cursor=%@", _cursor ];
+//    if (_cursors[_pos] != nil){
+    if (_pos != -1){
+        _sql = [_sql stringByAppendingFormat:@"&cursor=%@", _cursors[_pos] ];
     }
-
+    NSLog(@"_sql : %@, %i, %i", _sql, _pos, _cursors.count);
     return _sql;
 }
 
@@ -110,13 +126,33 @@
                                     params:nil
                                    success:^(id result){
                                        NSDictionary *response = (NSDictionary *)result;
+
+                                       _cursors[++_pos] = response[@"cursor"];
+                                       NSLog(@"%i == %@", _pos, _cursors[_pos]);
                                        
                                        NSArray *objects = [NSArray arrayWithArray:response[@"entities"]];
                                        successBlock(objects);
                                        
-                                       _cursor = response[@"cursor"];
                                    }
                                    failure:failureBlock];
 }
+
+-(BaasioRequest *)nextInBackground:(void (^)(NSArray *objects))successBlock
+                      failureBlock:(void (^)(NSError *error))failureBlock
+{
+    if(![self hasMoreEntities]){
+        [NSException raise:@"NSObjectNotAvailableException" format:@"Next entities isn't exist."];
+    }
+    return [self queryInBackground:successBlock failureBlock:failureBlock];
+}
+
+-(BaasioRequest *)prevInBackground:(void (^)(NSArray *objects))successBlock
+                      failureBlock:(void (^)(NSError *error))failureBlock
+{
+    _pos -=2 ;
+    return [self queryInBackground:successBlock failureBlock:failureBlock];
+}
+
+
 
 @end
