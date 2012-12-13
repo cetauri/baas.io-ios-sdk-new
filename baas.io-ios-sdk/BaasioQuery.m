@@ -12,18 +12,24 @@
     NSString *_projections;
     NSString *_wheres;
     NSString *_orderKey;
+    NSString* _group;
     
     NSMutableArray *_cursors;
-    int _pos;
 
     BaasioQuerySortOrder _order;
-//    BaasioGroup* _group;
     
     int _limit;
+    int _pos;
 }
+
 + (BaasioQuery *)queryWithCollectionName:(NSString *)collectionName
 {
     return [[BaasioQuery alloc] initWithCollectionName:collectionName];
+}
+
++ (BaasioQuery *)queryWithGroupName:(NSString *)group
+{
+    return [[BaasioQuery alloc] initWitGroupName:group];
 }
 
 -(id) initWithCollectionName:(NSString *)collectionName
@@ -33,15 +39,25 @@
         _collectionName = collectionName;
         _cursors = [NSMutableArray array];
         _pos = -1;
+        
+    }
+    return self;
+}
+
+-(id) initWitGroupName:(NSString *)group
+{
+    self = [super init];
+    if (self){
+        _group = group;
+        _cursors = [NSMutableArray array];
+        _pos = -1;
     }
     return self;
 }
 
 //-(void)setRelation:(BaasioRelation*)relation;
 
-//-(void)setGroup:(BaasioGroup*)group{
-//    _group = group;
-//}
+
 -(void)setProjections:(NSString *)projections{
     _projections = projections;
 }
@@ -104,7 +120,7 @@
     }
 
     NSString *_sql = [NSString stringWithFormat:@"?ql=%@", [ql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    if (_limit != 10){
+    if (_limit != 0 ||_limit != 10){
         _sql = [_sql stringByAppendingFormat:@"&limit=%i", _limit];
     }
 
@@ -112,14 +128,19 @@
     if (_pos != -1){
         _sql = [_sql stringByAppendingFormat:@"&cursor=%@", _cursors[_pos] ];
     }
-    NSLog(@"_sql : %@, %i, %i", _sql, _pos, _cursors.count);
+
     return _sql;
 }
 
 -(BaasioRequest *)queryInBackground:(void (^)(NSArray *objects))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock{
-
-    NSString *path = [_collectionName stringByAppendingString:self.description];
+    
+    NSString *prefixPath = _collectionName;
+    if (_group != nil) {
+        prefixPath = [NSString stringWithFormat:@"groups/%@/users", _group];
+    }
+    
+    NSString *path = [prefixPath stringByAppendingString:self.description];
 
     return [NetworkManager connectWithHTTP:path
                                 withMethod:@"GET"

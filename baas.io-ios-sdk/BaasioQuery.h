@@ -13,9 +13,10 @@ typedef enum {
 @interface BaasioQuery : NSObject
 
 + (BaasioQuery *)queryWithCollectionName:(NSString *)collectionName;
++ (BaasioQuery *)queryWithGroupName:(NSString *)group;
+
 //-(void)setRelation:(BaasioRelation*)relation;
 
-//-(void)setGroup:(BaasioGroup*)group;
 -(void)setProjections:(NSString *)projections;
 -(void)setWheres:(NSString *)wheres;
 -(void)setOrderBy:(NSString *)key order:(BaasioQuerySortOrder)order;
