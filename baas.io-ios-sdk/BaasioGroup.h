@@ -8,6 +8,34 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BaasioGroup : NSObject
+@interface BaasioGroup : BaasioEntity
+//
+//@property(strong) NSString *name;
+//@property(strong) NSString *path;
 
+- (void)setGroupName:(NSString*)group;
+- (void)setUserName:(NSString*)user;
+//- (BaasioEntity *)save:(NSError **)error;
+
+- (BaasioRequest*)createInBackground:(void (^)(BaasioGroup *group))successBlock
+                      failureBlock:(void (^)(NSError *error))failureBlock;
+
+
+//- (BaasioEntity *)update:(NSError **)error;
+
+- (BaasioRequest*)updateInBackground:(void (^)(BaasioGroup *group))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock;
+
+
+//- (void)delete:(NSError **)error;
+- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock;
+
+//XXX : join, withdraw
+//- (void)add:(NSError **)error;
+- (BaasioRequest*)addInBackground:(void (^)(BaasioGroup *group))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock;
+//- (void)remove:(NSError **)error;
+- (BaasioRequest*)removeInBackground:(void (^)(void))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock;
 @end
