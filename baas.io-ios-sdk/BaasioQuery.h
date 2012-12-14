@@ -38,4 +38,7 @@ typedef enum {
 -(BaasioRequest *)queryInBackground:(void (^)(NSArray *objects))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock;
 
+
+- (BaasioUser *)following;
+- (BaasioUser *)followers;
 @end

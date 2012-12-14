@@ -36,6 +36,14 @@
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
+- (BaasioRequest*)connectInBackground:(BaasioEntity *entity)
+                         relationship:(NSString*)relationship
+                         successBlock:(void (^)(void))successBlock
+                         failureBlock:(void (^)(NSError *error))failureBlock;
+
+- (BaasioRequest*)disconnectInBackground:(BaasioEntity *entity)
+                            successBlock:(void (^)(void))successBlock
+                            failureBlock:(void (^)(NSError *error))failureBlock;
 
 #pragma mark - Data
 - (NSString *)objectForKey:(NSString *)string;
