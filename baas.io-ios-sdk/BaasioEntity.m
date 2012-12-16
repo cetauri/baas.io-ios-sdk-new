@@ -34,7 +34,38 @@
     return entity ;
 }
 
-- (void)save {
+
+- (BaasioEntity *)save:(NSError **)error {
+    
+//    __block BOOL isFinish = false;
+    __block BaasioEntity *entity = nil;
+    BaasioRequest *request = [NetworkManager connectWithHTTP:self.entityName
+                            withMethod:@"POST"
+                                params:_entity
+                               success:^(id result){
+                                   NSDictionary *response = (NSDictionary *)result;
+
+                                   NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:response[@"entities"][0]];
+                                   NSString *type = response[@"type"];
+
+                                   entity = [BaasioEntity entitytWithName:type];
+                                   [entity setEntity:dictionary];
+
+//                                   isFinish = true;
+                               }
+                               failure:^(NSError *e){
+                                   *error = e;
+//                                   isFinish = true;
+                               }];
+    [request waitUntilFinished];
+    
+    return entity;
+//#ifndef UNIT_TEST
+//    while(!isFinish){
+//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+//    }
+//#endif
+//    return nil;
 
 }
 
@@ -58,8 +89,29 @@
                                    failure:failureBlock];
 }
 
-- (void)delete {
-
+- (void)delete:(NSError **)error{
+//    __block BOOL isFinish = false;
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+    
+    BaasioRequest *request = [NetworkManager connectWithHTTP:path
+                                                  withMethod:@"DELETE"
+                                                      params:nil
+                                                     success:^(id result){
+//                                                         isFinish = true;
+                                                     }
+                                                     failure:^(NSError *e){
+                                                         *error = e;
+//                                                         isFinish = true;
+                                                     }];
+    [request waitUntilFinished];
+    
+    return;
+//#ifndef UNIT_TEST
+//    while(!isFinish){
+//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+//    }
+//#endif
+//    return nil;
 }
 
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
@@ -76,9 +128,40 @@
                                    failure:failureBlock];
 
 }
-- (void)update {
-
+- (BaasioEntity *)update:(NSError **)error{
+//    __block BOOL isFinish = false;
+    __block BaasioEntity *entity = nil;
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+    
+    BaasioRequest *request = [NetworkManager connectWithHTTP:path
+                                withMethod:@"PUT"
+                                    params:_entity
+                                   success:^(id result){
+                                         NSDictionary *response = (NSDictionary *)result;
+                                         
+                                         NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:response[@"entities"][0]];
+                                         NSString *type = response[@"type"];
+                                         
+                                         entity = [BaasioEntity entitytWithName:type];
+                                         [entity setEntity:dictionary];
+                                         
+//                                         isFinish = true;
+                                     }
+                                     failure:^(NSError *e){
+                                         *error = e;
+//                                         isFinish = true;
+                                     }];
+    [request waitUntilFinished];
+    
+    return entity;
+//#ifndef UNIT_TEST
+//    while(!isFinish){
+//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+//    }
+//#endif
+//    return nil;
 }
+
 - (BaasioRequest*)updateInBackground:(void (^)(BaasioEntity *entity))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock{
 
@@ -155,8 +238,38 @@
 }
 
 #pragma mark - Entity
-+ (BaasioEntity *)getEntity:(NSString *)uuid error:(NSError **)error{
-    return nil;
++ (BaasioEntity *)getEntity:(NSString*)entityName uuid:(NSString *)uuid error:(NSError **)error{
+//    __block BOOL isFinish = false;
+    __block BaasioEntity *entity = nil;
+    NSString *path = [entityName stringByAppendingFormat:@"/%@", uuid];
+    
+    BaasioRequest *request = [NetworkManager connectWithHTTP:path
+                                                  withMethod:@"GET"
+                                                      params:nil
+                                                     success:^(id result){
+                                                         NSDictionary *response = (NSDictionary *)result;
+                                                         
+                                                         NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:response[@"entities"][0]];
+                                                         NSString *type = response[@"type"];
+                                                         
+                                                         BaasioEntity *entity = [BaasioEntity entitytWithName:type];
+                                                         [entity setEntity:dictionary];
+                                                         
+//                                                       isFinish = true;
+                                                     }
+                                                     failure:^(NSError *e){
+                                                         *error = e;
+//                                                       isFinish = true;
+                                                     }];
+    [request waitUntilFinished];
+    
+    return entity;
+//#ifndef UNIT_TEST
+//    while(!isFinish){
+//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+//    }
+//#endif
+//    return nil;
 }
 
 + (BaasioRequest*)getEntityInBackground:(NSString*)entityName

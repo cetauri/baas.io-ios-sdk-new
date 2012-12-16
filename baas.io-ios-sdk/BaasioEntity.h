@@ -20,19 +20,19 @@
 + (BaasioEntity *)entitytWithName:(NSString *)entityName;
 
 
-//- (BaasioEntity *)save:(NSError **)error;
+- (BaasioEntity *)save:(NSError **)error;
 
 - (BaasioRequest*)saveInBackground:(void (^)(BaasioEntity *entity))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock;
 
 
-//- (BaasioEntity *)update:(NSError **)error;
+- (BaasioEntity *)update:(NSError **)error;
 
 - (BaasioRequest*)updateInBackground:(void (^)(BaasioEntity *entity))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
 
-//- (void)delete:(NSError **)error;
+- (void)delete:(NSError **)error;
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
@@ -51,7 +51,8 @@
 - (void)setObject:(id)value forKey:(NSString *)key;
 
 #pragma mark - Entity
-+ (BaasioEntity *)getEntity:(NSString *)uuid error:(NSError **)error;
+
++ (BaasioEntity *)getEntity:(NSString*)entityName uuid:(NSString *)uuid error:(NSError **)error;
 
 + (BaasioRequest*)getEntityInBackground:(NSString*)entityName
                          uuid:(NSString *)uuid

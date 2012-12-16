@@ -39,6 +39,6 @@ typedef enum {
                 failureBlock:(void (^)(NSError *error))failureBlock;
 
 
-- (BaasioUser *)following;
-- (BaasioUser *)followers;
+//- (BaasioUser *)following;
+//- (BaasioUser *)followers;
 @end
