@@ -124,7 +124,7 @@ static NSString *uuid;
 }
 
 - (void)test_5_queryGroup{
-    BaasioQuery *query = [BaasioQuery queryWithGroupName:groupName];
+    BaasioQuery *query = [BaasioQuery queryWithGroup:groupName];
     [query queryInBackground:^(NSArray *array) {
                     NSLog(@"array : %@", array.description);
                     STAssertTrue(array.count == 1, @"count is mismatch.");

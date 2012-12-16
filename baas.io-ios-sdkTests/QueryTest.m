@@ -27,7 +27,7 @@
 }
 
 - (void)test_1_QueryBuild{
-    BaasioQuery *query = [BaasioQuery queryWithCollectionName:@"tests"];
+    BaasioQuery *query = [BaasioQuery queryWithCollection:@"tests"];
     [query setCursor:@"cursor"];
     [query setLimit:10];
     [query setProjections:@"name, title"];
@@ -39,7 +39,7 @@
 - (void)test_2_QueryPreNextTest{
     
 
-    BaasioQuery *query = [BaasioQuery queryWithCollectionName:@"tests"];
+    BaasioQuery *query = [BaasioQuery queryWithCollection:@"tests"];
 //    [query setCursor:@"cursor"];
     [query setLimit:3];
     

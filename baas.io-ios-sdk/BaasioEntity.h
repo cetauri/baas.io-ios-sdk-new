@@ -17,7 +17,7 @@
 
 -(void)setEntity:(NSDictionary *)entity;
 
-+ (BaasioEntity *)entitytWithName:(NSString *)string;
++ (BaasioEntity *)entitytWithName:(NSString *)entityName;
 
 
 //- (BaasioEntity *)save:(NSError **)error;
@@ -36,12 +36,13 @@
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
-- (BaasioRequest*)connectInBackground:(BaasioEntity *entity)
+- (BaasioRequest*)connectInBackground:(BaasioEntity *)entity
                          relationship:(NSString*)relationship
                          successBlock:(void (^)(void))successBlock
                          failureBlock:(void (^)(NSError *error))failureBlock;
 
-- (BaasioRequest*)disconnectInBackground:(BaasioEntity *entity)
+- (BaasioRequest*)disconnectInBackground:(BaasioEntity *)entity
+                            relationship:(NSString*)relationship
                             successBlock:(void (^)(void))successBlock
                             failureBlock:(void (^)(NSError *error))failureBlock;
 

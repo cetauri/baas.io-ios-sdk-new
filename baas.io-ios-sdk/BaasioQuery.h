@@ -12,10 +12,10 @@ typedef enum {
 #import "BaasioGroup.h"
 @interface BaasioQuery : NSObject
 
-+ (BaasioQuery *)queryWithCollectionName:(NSString *)collectionName;
-+ (BaasioQuery *)queryWithGroupName:(NSString *)group;
++ (BaasioQuery *)queryWithCollection:(NSString *)name;
++ (BaasioQuery *)queryWithGroup:(NSString *)name;
++ (BaasioQuery *)queryWithRelationship:(NSString *)name;
 
-//-(void)setRelation:(BaasioRelation*)relation;
 
 -(void)setProjections:(NSString *)projections;
 -(void)setWheres:(NSString *)wheres;

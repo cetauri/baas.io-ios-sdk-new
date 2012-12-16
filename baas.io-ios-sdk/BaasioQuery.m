@@ -22,14 +22,19 @@
     int _pos;
 }
 
-+ (BaasioQuery *)queryWithCollectionName:(NSString *)collectionName
++ (BaasioQuery *)queryWithCollection:(NSString *)name
 {
-    return [[BaasioQuery alloc] initWithCollectionName:collectionName];
+    return [[BaasioQuery alloc] initWithCollectionName:name];
 }
 
-+ (BaasioQuery *)queryWithGroupName:(NSString *)group
++ (BaasioQuery *)queryWithGroup:(NSString *)name
 {
-    return [[BaasioQuery alloc] initWitGroupName:group];
+    return [[BaasioQuery alloc] initWitGroupName:name];
+}
+
++ (BaasioQuery *)queryWithRelationship:(NSString *)name
+{
+    return [[BaasioQuery alloc] initWitGroupName:name];
 }
 
 -(id) initWithCollectionName:(NSString *)collectionName

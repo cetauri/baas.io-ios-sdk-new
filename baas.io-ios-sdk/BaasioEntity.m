@@ -102,6 +102,42 @@
 }
 
 
+- (BaasioRequest*)connectInBackground:(BaasioEntity *)entity
+                         relationship:(NSString*)relationship
+                         successBlock:(void (^)(void))successBlock
+                         failureBlock:(void (^)(NSError *error))failureBlock
+{
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@/%@/%@/%@", self.uuid, relationship, entity.entityName, entity.uuid];
+    
+    return [NetworkManager connectWithHTTP:path
+                                withMethod:@"POST"
+                                    params:_entity
+                                   success:^(id result){
+//                                       NSDictionary *response = (NSDictionary *)result;
+//                                       NSLog(@"response : %@", response.description);
+                                       successBlock();
+                                   }
+                                   failure:failureBlock];
+}
+
+- (BaasioRequest*)disconnectInBackground:(BaasioEntity *)entity
+                            relationship:(NSString*)relationship
+                            successBlock:(void (^)(void))successBlock
+                            failureBlock:(void (^)(NSError *error))failureBlock
+{
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@/%@/%@/%@", self.uuid, relationship, entity.entityName, entity.uuid];
+    
+    return [NetworkManager connectWithHTTP:path
+                                withMethod:@"DELETE"
+                                    params:_entity
+                                   success:^(id result){
+//                                       NSDictionary *response = (NSDictionary *)result;
+//                                       NSLog(@"response : %@", response.description);
+                                       successBlock();
+                                   }
+                                   failure:failureBlock];
+}
+
 #pragma mark - Data
 - (id)objectForKey:(NSString *)key {
     return _entity[key];
