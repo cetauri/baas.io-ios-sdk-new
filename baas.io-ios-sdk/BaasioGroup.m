@@ -8,6 +8,7 @@
 
 #import "BaasioGroup.h"
 #import "BaasioNetworkManager.h"
+#import "Baasio+Private.h"
 
 @implementation BaasioGroup{
     //XXX User객체?

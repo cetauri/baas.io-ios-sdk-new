@@ -9,6 +9,7 @@
 #import "AFNetworking.h"
 #import "JSONKit.h"
 #import "BaasioNetworkManager.h"
+#import "Baasio+Private.h"
 
 @implementation BaasioFile {
 

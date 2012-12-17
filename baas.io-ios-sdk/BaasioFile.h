@@ -6,7 +6,6 @@
 
 
 #import "BaasioFileOptions.h"
-#import "Baasio+Private.h"
 #import "BaasioEntity.h"
 #import "BaasioRequest.h"
 
