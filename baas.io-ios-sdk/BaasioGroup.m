@@ -7,6 +7,7 @@
 //
 
 #import "BaasioGroup.h"
+#import "BaasioNetworkManager.h"
 
 @implementation BaasioGroup{
     //XXX User객체?
@@ -72,7 +73,7 @@
                      failureBlock:(void (^)(NSError *error))failureBlock{
 
     NSString *path = [NSString stringWithFormat:@"groups/%@/users/%@", _group, _user];
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"POST"
                                     params:nil
                                    success:^(id result){
@@ -90,7 +91,7 @@
                         failureBlock:(void (^)(NSError *error))failureBlock{
 
     NSString *path = [NSString stringWithFormat:@"groups/%@/users/%@", _group, _user];
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"DELETE"
                                     params:nil
                                    success:^(id result){

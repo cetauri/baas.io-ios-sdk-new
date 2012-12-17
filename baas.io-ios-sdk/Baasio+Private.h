@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "BaasioUser.h"
+#import "Baasio.h"
+
 @interface Baasio(Private)
 - (BaasioUser*)currentUser;
 - (void)setCurrentUser:(BaasioUser*)currentUser;

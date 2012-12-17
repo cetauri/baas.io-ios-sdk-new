@@ -5,7 +5,8 @@
 //
 
 #import "BaasioQuery.h"
-#import <objc/runtime.h>
+#import "BaasioNetworkManager.h"
+
 @implementation BaasioQuery {
 
     NSString *_collectionName;
@@ -147,7 +148,7 @@
     
     NSString *path = [prefixPath stringByAppendingString:self.description];
 
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"GET"
                                     params:nil
                                    success:^(id result){

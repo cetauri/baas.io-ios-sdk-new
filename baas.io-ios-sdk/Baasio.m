@@ -6,7 +6,7 @@
 
 
 #import "Baasio.h"
-
+#import "Baasio+Private.h"
 @implementation Baasio {
     NSString *_token;
     BaasioUser *_currentUser;

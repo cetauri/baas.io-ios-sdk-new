@@ -8,6 +8,7 @@
 #import "BaasioFile.h"
 #import "AFNetworking.h"
 #import "JSONKit.h"
+#import "BaasioNetworkManager.h"
 
 @implementation BaasioFile {
 
@@ -26,7 +27,7 @@
 {
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
 
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"GET"
                                     params:nil
                                    success:^(id result){
@@ -45,7 +46,7 @@
 {
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
 
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"DELETE"
                                     params:nil
                                    success:^(id result){

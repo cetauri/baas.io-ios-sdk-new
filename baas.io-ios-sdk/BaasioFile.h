@@ -6,6 +6,10 @@
 
 
 #import "BaasioFileOptions.h"
+#import "Baasio+Private.h"
+#import "BaasioEntity.h"
+#import "BaasioRequest.h"
+
 @interface BaasioFile : BaasioEntity
 
 @property(strong) NSString *downloadPath;

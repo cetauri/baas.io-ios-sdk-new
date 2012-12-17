@@ -7,8 +7,8 @@
 
 #import "BaasioEntity.h"
 #import "BaasioFile.h"
-
-
+#import "BaasioNetworkManager.h"
+#import "Baasio+Private.h"
 
 @implementation BaasioEntity {
     NSMutableDictionary *_entity;
@@ -39,7 +39,7 @@
     
 //    __block BOOL isFinish = false;
     __block BaasioEntity *entity = nil;
-    BaasioRequest *request = [NetworkManager connectWithHTTP:self.entityName
+    BaasioRequest *request = [[BaasioNetworkManager sharedInstance] connectWithHTTP:self.entityName
                             withMethod:@"POST"
                                 params:_entity
                                success:^(id result){
@@ -72,7 +72,7 @@
 - (BaasioRequest*)saveInBackground:(void (^)(BaasioEntity *entity))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock{
 
-    return [NetworkManager connectWithHTTP:self.entityName
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:self.entityName
                                 withMethod:@"POST"
                                     params:_entity
                                    success:^(id result){
@@ -93,7 +93,7 @@
 //    __block BOOL isFinish = false;
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
     
-    BaasioRequest *request = [NetworkManager connectWithHTTP:path
+    BaasioRequest *request = [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                                   withMethod:@"DELETE"
                                                       params:nil
                                                      success:^(id result){
@@ -119,7 +119,7 @@
     
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
   
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"DELETE"
                                     params:nil
                                    success:^(id result){
@@ -133,7 +133,7 @@
     __block BaasioEntity *entity = nil;
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
     
-    BaasioRequest *request = [NetworkManager connectWithHTTP:path
+    BaasioRequest *request = [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"PUT"
                                     params:_entity
                                    success:^(id result){
@@ -167,7 +167,7 @@
 
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
 
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"PUT"
                                     params:_entity
                                    success:^(id result){
@@ -192,7 +192,7 @@
 {
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@/%@/%@/%@", self.uuid, relationship, entity.entityName, entity.uuid];
     
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"POST"
                                     params:_entity
                                    success:^(id result){
@@ -210,7 +210,7 @@
 {
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@/%@/%@/%@", self.uuid, relationship, entity.entityName, entity.uuid];
     
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"DELETE"
                                     params:_entity
                                    success:^(id result){
@@ -243,7 +243,7 @@
     __block BaasioEntity *entity = nil;
     NSString *path = [entityName stringByAppendingFormat:@"/%@", uuid];
     
-    BaasioRequest *request = [NetworkManager connectWithHTTP:path
+    BaasioRequest *request = [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                                   withMethod:@"GET"
                                                       params:nil
                                                      success:^(id result){
@@ -279,7 +279,7 @@
 {
     NSString *path = [entityName stringByAppendingFormat:@"/%@", uuid];
 
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"GET"
                                     params:nil
                                    success:^(id result){

@@ -6,6 +6,8 @@
 
 
 #import "BaasioEntity.h"
+#import "BaasioRequest.h"
+
 @interface BaasioUser : BaasioEntity
 
 

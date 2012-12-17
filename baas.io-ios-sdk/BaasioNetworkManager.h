@@ -6,6 +6,7 @@
 //  Copyright (c) 2012년 kth. All rights reserved.
 //
 
+#import "BaasioRequest.h"
 
 @interface BaasioNetworkManager : NSObject
 + (BaasioNetworkManager *)sharedInstance;

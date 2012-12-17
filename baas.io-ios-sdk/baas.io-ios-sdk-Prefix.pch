@@ -8,10 +8,4 @@
     #import <MobileCoreServices/MobileCoreServices.h> // or #import <CoreServices/CoreServices.h> for Mac OS X
 #endif
 
-#import "Baasio.h"
-#import "BaasioRequest.h"
-#import "Baasio+Private.h"
-#import "BaasioNetworkManager.h"
 #define NSLog( s, ... ) NSLog( @"<%@:(%d)> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
-
-#define NetworkManager  [BaasioNetworkManager sharedInstance]

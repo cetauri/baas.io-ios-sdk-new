@@ -5,6 +5,7 @@
 //
 
 #import "BaasioPush.h"
+#import "BaasioNetworkManager.h"
 
 @implementation BaasioPush {
 
@@ -16,7 +17,7 @@
 {
     NSDictionary *params = [config dictionary];
     
-    return [NetworkManager connectWithHTTP:@"pushes"
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:@"pushes"
                                 withMethod:@"POST"
                                     params:params
                                    success:^(id result){
@@ -32,7 +33,7 @@
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
     NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
     
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"DELETE"
                                     params:nil
                                    success:^(id result){
@@ -52,7 +53,7 @@
                                 @"tags" : tags
                             };
     NSString *path = @"pushes/devices";
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                 withMethod:@"POST"
                                     params:params
                                    success:^(id result){

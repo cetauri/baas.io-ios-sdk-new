@@ -8,6 +8,8 @@
 #import "BaasioUser.h"
 #import "Baasio.h"
 #import "Baasio+Private.h"
+#import "BaasioNetworkManager.h"
+
 @implementation BaasioUser 
 
 + (BaasioUser *)user
@@ -20,7 +22,7 @@
                              failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSString *path = [@"users/" stringByAppendingString:self.username];
-    return [NetworkManager connectWithHTTP:path
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                                     withMethod:@"DELETE"
                                                         params:nil
                                                        success:^(id result){
@@ -38,7 +40,7 @@
                                 @"username" : self.username,
                                 @"password" : self.password
                             };
-    return [NetworkManager connectWithHTTP:@"token"
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:@"token"
                                                     withMethod:@"GET"
                                                         params:params
                                                        success:^(id result){
@@ -119,7 +121,7 @@
                                 @"email":self.email
                             };
 
-    return [NetworkManager connectWithHTTP:@"users"
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:@"users"
                                                     withMethod:@"POST"
                                                         params:params
                                                        success:^(id result){

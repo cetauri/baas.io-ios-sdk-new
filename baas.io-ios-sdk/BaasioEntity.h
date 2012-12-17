@@ -6,6 +6,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import "BaasioRequest.h"
 
 @interface BaasioEntity : NSObject
 

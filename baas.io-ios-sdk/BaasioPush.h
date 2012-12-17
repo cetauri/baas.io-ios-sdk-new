@@ -7,6 +7,7 @@
 #define PUSH_DEVICE_ID @"PUSH_DEVICE_ID_BAASIO_SDK"
 #import <Foundation/Foundation.h>
 #import "BaasioMessage.h"
+#import "BaasioRequest.h"
 
 @interface BaasioPush : NSObject
 //- (void)sendPush:(NSError**)error;

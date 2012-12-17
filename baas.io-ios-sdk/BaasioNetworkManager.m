@@ -9,6 +9,7 @@
 #import "BaasioNetworkManager.h"
 #import "AFNetworking.h"
 #import "JSONKit.h"
+#import "Baasio+Private.h"
 @implementation BaasioNetworkManager
 
 +(BaasioNetworkManager *)sharedInstance
