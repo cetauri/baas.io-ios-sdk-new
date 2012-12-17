@@ -6,6 +6,21 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		AF9EF364167EC19100FDFDDF /* baas.io */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = AF9EF367167EC19100FDFDDF /* Build configuration list for PBXAggregateTarget "baas.io" */;
+			buildPhases = (
+				AF9EF369167EC1B800FDFDDF /* ShellScript */,
+				AF9EF36A167EC20A00FDFDDF /* CopyFiles */,
+			);
+			dependencies = (
+			);
+			name = baas.io;
+			productName = "baas.io-ios-framework";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		27F2E0195C0A4CC3D57C60FD /* FileTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E22B2FFF3122F1CDEA60 /* FileTest.m */; };
 		27F2E0637105682525BF88B4 /* BaasioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E73FD4A3C015370DF7A3 /* BaasioFile.m */; };
@@ -21,6 +36,25 @@
 		AF60118E167D9CA600E95B59 /* RelationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF60118D167D9CA600E95B59 /* RelationTest.m */; };
 		AF76584816788C1C0017C217 /* BaasioRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76584716788C1C0017C217 /* BaasioRequest.m */; };
 		AF76585E16789EC80017C217 /* BaasioNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76585D16789EC70017C217 /* BaasioNetworkManager.m */; };
+		AF9EF304167EBDE700FDFDDF /* Baasio.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E1165A2BDC0021AA4C /* Baasio.h */; };
+		AF9EF305167EBDE700FDFDDF /* BaasioRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF76584616788C1C0017C217 /* BaasioRequest.h */; };
+		AF9EF306167EBDE700FDFDDF /* BaasioEntity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E3165A2BDC0021AA4C /* BaasioEntity.h */; };
+		AF9EF307167EBDE700FDFDDF /* BaasioQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E5165A2BDC0021AA4C /* BaasioQuery.h */; };
+		AF9EF308167EBDE700FDFDDF /* BaasioUser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E7165A2BDC0021AA4C /* BaasioUser.h */; };
+		AF9EF309167EBDE700FDFDDF /* BaasioMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF515B5C16703F930005F743 /* BaasioMessage.h */; };
+		AF9EF30A167EBDE700FDFDDF /* BaasioFileOptions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFA3616B1676BB31009D852F /* BaasioFileOptions.h */; };
+		AF9EF30B167EBDE700FDFDDF /* BaasioGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF244A8E16772041009524B8 /* BaasioGroup.h */; };
+		AF9EF36B167EC22E00FDFDDF /* Baas.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2E2A118B72209D0AB96AF /* Baas.h */; };
+		AF9EF36C167EC22E00FDFDDF /* Baasio.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E1165A2BDC0021AA4C /* Baasio.h */; };
+		AF9EF36D167EC22E00FDFDDF /* BaasioRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF76584616788C1C0017C217 /* BaasioRequest.h */; };
+		AF9EF36E167EC22E00FDFDDF /* BaasioEntity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E3165A2BDC0021AA4C /* BaasioEntity.h */; };
+		AF9EF36F167EC22E00FDFDDF /* BaasioQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E5165A2BDC0021AA4C /* BaasioQuery.h */; };
+		AF9EF370167EC22E00FDFDDF /* BaasioUser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E7165A2BDC0021AA4C /* BaasioUser.h */; };
+		AF9EF371167EC22E00FDFDDF /* BaasioPush.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */; };
+		AF9EF372167EC22E00FDFDDF /* BaasioMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF515B5C16703F930005F743 /* BaasioMessage.h */; };
+		AF9EF373167EC22E00FDFDDF /* BaasioFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */; };
+		AF9EF374167EC22E00FDFDDF /* BaasioFileOptions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFA3616B1676BB31009D852F /* BaasioFileOptions.h */; };
+		AF9EF375167EC22E00FDFDDF /* BaasioGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF244A8E16772041009524B8 /* BaasioGroup.h */; };
 		AFA3616D1676BB31009D852F /* BaasioFileOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA3616C1676BB31009D852F /* BaasioFileOptions.m */; };
 		AFB9E3E9165A2BDC0021AA4C /* Baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E2165A2BDC0021AA4C /* Baasio.m */; };
 		AFB9E3EA165A2BDC0021AA4C /* BaasioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E3E4165A2BDC0021AA4C /* BaasioEntity.m */; };
@@ -63,12 +97,40 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		AF9EF36A167EC20A00FDFDDF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Versions/A/Headers/";
+			dstSubfolderSpec = 0;
+			files = (
+				AF9EF36B167EC22E00FDFDDF /* Baas.h in CopyFiles */,
+				AF9EF36C167EC22E00FDFDDF /* Baasio.h in CopyFiles */,
+				AF9EF36D167EC22E00FDFDDF /* BaasioRequest.h in CopyFiles */,
+				AF9EF36E167EC22E00FDFDDF /* BaasioEntity.h in CopyFiles */,
+				AF9EF36F167EC22E00FDFDDF /* BaasioQuery.h in CopyFiles */,
+				AF9EF370167EC22E00FDFDDF /* BaasioUser.h in CopyFiles */,
+				AF9EF371167EC22E00FDFDDF /* BaasioPush.h in CopyFiles */,
+				AF9EF372167EC22E00FDFDDF /* BaasioMessage.h in CopyFiles */,
+				AF9EF373167EC22E00FDFDDF /* BaasioFile.h in CopyFiles */,
+				AF9EF374167EC22E00FDFDDF /* BaasioFileOptions.h in CopyFiles */,
+				AF9EF375167EC22E00FDFDDF /* BaasioGroup.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AFD93F05165A2B0E00FC9ED0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
+			dstPath = header;
 			dstSubfolderSpec = 16;
 			files = (
+				AF9EF304167EBDE700FDFDDF /* Baasio.h in CopyFiles */,
+				AF9EF305167EBDE700FDFDDF /* BaasioRequest.h in CopyFiles */,
+				AF9EF306167EBDE700FDFDDF /* BaasioEntity.h in CopyFiles */,
+				AF9EF307167EBDE700FDFDDF /* BaasioQuery.h in CopyFiles */,
+				AF9EF308167EBDE700FDFDDF /* BaasioUser.h in CopyFiles */,
+				AF9EF309167EBDE700FDFDDF /* BaasioMessage.h in CopyFiles */,
+				AF9EF30A167EBDE700FDFDDF /* BaasioFileOptions.h in CopyFiles */,
+				AF9EF30B167EBDE700FDFDDF /* BaasioGroup.h in CopyFiles */,
 				27F2EBB68B17F0A0788E3393 /* BaasioPush.h in CopyFiles */,
 				27F2E8F0565C911B20E307BE /* BaasioFile.h in CopyFiles */,
 				27F2E88853FB7BECDC14F23C /* Baas.h in CopyFiles */,
@@ -378,6 +440,7 @@
 			targets = (
 				AFD93F06165A2B0E00FC9ED0 /* baas.io-ios-sdk */,
 				AFD93F17165A2B0E00FC9ED0 /* baas.io-ios-sdkTests */,
+				AF9EF364167EC19100FDFDDF /* baas.io */,
 			);
 		};
 /* End PBXProject section */
@@ -394,6 +457,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		AF9EF369167EC1B800FDFDDF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"BUILD DIRECTORY ${BUILD_DIR}\"\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\n\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos\n\n\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" &&\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n\n# Create framework directory structure.\nrm -rf \"${FRAMEWORK}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${FRAMEWORK}/Versions/A/Headers\" &&\nmkdir -p \"${FRAMEWORK}/Versions/A/Resources\" &&\n\n# Generate universal binary for the device and simulator.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\ncp \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}/Versions/A\" &&\nln -s \"A\" \"${FRAMEWORK}/Versions/Current\" &&\nln -s \"Versions/Current/Headers\" \"${FRAMEWORK}/Headers\" &&\nln -s \"Versions/Current/Resources\" \"${FRAMEWORK}/Resources\" &&\nln -s \"Versions/Current/${PRODUCT_NAME}\" \"${FRAMEWORK}/${PRODUCT_NAME}\"\n\n";
+		};
 		AFD93F16165A2B0E00FC9ED0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -475,6 +551,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AF9EF365167EC19100FDFDDF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AF9EF366167EC19100FDFDDF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		AFD93F2A165A2B0E00FC9ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -616,6 +706,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AF9EF367167EC19100FDFDDF /* Build configuration list for PBXAggregateTarget "baas.io" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF9EF365167EC19100FDFDDF /* Debug */,
+				AF9EF366167EC19100FDFDDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AFD93F01165A2B0E00FC9ED0 /* Build configuration list for PBXProject "baas.io-ios-sdk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
