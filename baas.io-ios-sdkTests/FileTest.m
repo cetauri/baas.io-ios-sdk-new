@@ -7,6 +7,7 @@
 
 #import "FileTest.h"
 #import "BaasioFile.h"
+#import "Baasio.h"
 @implementation FileTest {
     BOOL exitRunLoop;
 }

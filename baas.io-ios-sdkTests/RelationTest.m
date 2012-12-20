@@ -9,6 +9,7 @@
 #import "RelationTest.h"
 #import "BaasioEntity.h"
 #import "BaasioQuery.h"
+#import "Baasio.h"
 @implementation RelationTest{
     BOOL exitRunLoop;
     NSString *relationship;

@@ -15,6 +15,7 @@
 				AF9EF36A167EC20A00FDFDDF /* CopyFiles */,
 			);
 			dependencies = (
+				AF6036BB167F08CB0048B249 /* PBXTargetDependency */,
 			);
 			name = baas.io;
 			productName = "baas.io-ios-framework";
@@ -32,6 +33,7 @@
 		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
 		AF244A9016772041009524B8 /* BaasioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AF244A8F16772041009524B8 /* BaasioGroup.m */; };
 		AF26A27F166667F5006A7225 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E418165A2D850021AA4C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AF2E72221682E034003652F8 /* HelpDeskTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2E72211682E034003652F8 /* HelpDeskTest.m */; };
 		AF515B5E16703F930005F743 /* BaasioMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AF515B5D16703F930005F743 /* BaasioMessage.m */; };
 		AF60118E167D9CA600E95B59 /* RelationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF60118D167D9CA600E95B59 /* RelationTest.m */; };
 		AF76584816788C1C0017C217 /* BaasioRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76584716788C1C0017C217 /* BaasioRequest.m */; };
@@ -84,9 +86,17 @@
 		AFF46363166E2C7100866306 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */; };
 		AFF46364166E2C8700866306 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */; };
 		AFF46365166E2C8C00866306 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */; };
+		AFFFBBF81682B0FD006CAEF1 /* BaasioHelpdesk.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFFBBF71682B0FD006CAEF1 /* BaasioHelpdesk.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AF6036BA167F08CB0048B249 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFD93EFE165A2B0E00FC9ED0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AFD93F06165A2B0E00FC9ED0;
+			remoteInfo = "baas.io-ios-sdk";
+		};
 		AFD93F1E165A2B0E00FC9ED0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AFD93EFE165A2B0E00FC9ED0 /* Project object */;
@@ -153,6 +163,8 @@
 		27F2EE6A9471C3869236C589 /* BaasioPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioPush.m; sourceTree = "<group>"; };
 		AF244A8E16772041009524B8 /* BaasioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioGroup.h; sourceTree = "<group>"; };
 		AF244A8F16772041009524B8 /* BaasioGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioGroup.m; sourceTree = "<group>"; };
+		AF2E72201682E034003652F8 /* HelpDeskTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpDeskTest.h; sourceTree = "<group>"; };
+		AF2E72211682E034003652F8 /* HelpDeskTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpDeskTest.m; sourceTree = "<group>"; };
 		AF429CCA165B4B0E001C78B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AF4FDDA3166E28CF0048310C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AF4FDDA5166E28E80048310C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -209,6 +221,8 @@
 		AFD93F19165A2B0E00FC9ED0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AFD93F23165A2B0E00FC9ED0 /* baas.io-ios-sdkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "baas.io-ios-sdkTests-Info.plist"; sourceTree = "<group>"; };
 		AFD93F25165A2B0E00FC9ED0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFFFBBF61682B0FD006CAEF1 /* BaasioHelpdesk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioHelpdesk.h; sourceTree = "<group>"; };
+		AFFFBBF71682B0FD006CAEF1 /* BaasioHelpdesk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioHelpdesk.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +346,8 @@
 				AFA3616C1676BB31009D852F /* BaasioFileOptions.m */,
 				AF244A8E16772041009524B8 /* BaasioGroup.h */,
 				AF244A8F16772041009524B8 /* BaasioGroup.m */,
+				AFFFBBF61682B0FD006CAEF1 /* BaasioHelpdesk.h */,
+				AFFFBBF71682B0FD006CAEF1 /* BaasioHelpdesk.m */,
 				AF76585C16789EC70017C217 /* BaasioNetworkManager.h */,
 				AF76585D16789EC70017C217 /* BaasioNetworkManager.m */,
 				AFD93F0D165A2B0E00FC9ED0 /* Supporting Files */,
@@ -362,9 +378,11 @@
 				27F2E22B2FFF3122F1CDEA60 /* FileTest.m */,
 				AFBBA41216796BEA00137ADB /* GroupTest.h */,
 				AFBBA41316796BEA00137ADB /* GroupTest.m */,
-				AFD93F22165A2B0E00FC9ED0 /* Supporting Files */,
 				AF60118C167D9CA600E95B59 /* RelationTest.h */,
 				AF60118D167D9CA600E95B59 /* RelationTest.m */,
+				AF2E72201682E034003652F8 /* HelpDeskTest.h */,
+				AF2E72211682E034003652F8 /* HelpDeskTest.m */,
+				AFD93F22165A2B0E00FC9ED0 /* Supporting Files */,
 			);
 			path = "baas.io-ios-sdkTests";
 			sourceTree = "<group>";
@@ -511,6 +529,7 @@
 				AF244A9016772041009524B8 /* BaasioGroup.m in Sources */,
 				AF76584816788C1C0017C217 /* BaasioRequest.m in Sources */,
 				AF76585E16789EC80017C217 /* BaasioNetworkManager.m in Sources */,
+				AFFFBBF81682B0FD006CAEF1 /* BaasioHelpdesk.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,12 +545,18 @@
 				27F2E0195C0A4CC3D57C60FD /* FileTest.m in Sources */,
 				AFBBA41416796BEA00137ADB /* GroupTest.m in Sources */,
 				AF60118E167D9CA600E95B59 /* RelationTest.m in Sources */,
+				AF2E72221682E034003652F8 /* HelpDeskTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AF6036BB167F08CB0048B249 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AFD93F06165A2B0E00FC9ED0 /* baas.io-ios-sdk */;
+			targetProxy = AF6036BA167F08CB0048B249 /* PBXContainerItemProxy */;
+		};
 		AFD93F1F165A2B0E00FC9ED0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AFD93F06165A2B0E00FC9ED0 /* baas.io-ios-sdk */;

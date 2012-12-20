@@ -7,7 +7,7 @@
 
 #import "PushTest.h"
 #import "BaasioPush.h"
-
+#import "Baasio.h"
 @implementation PushTest {
     BOOL exitRunLoop;
 }

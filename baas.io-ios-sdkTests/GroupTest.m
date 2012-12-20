@@ -9,6 +9,7 @@
 #import "GroupTest.h"
 #import "BaasioGroup.h"
 #import "BaasioQuery.h"
+#import "Baasio.h"
 @implementation GroupTest {
     BOOL exitRunLoop;
     NSString *groupName;

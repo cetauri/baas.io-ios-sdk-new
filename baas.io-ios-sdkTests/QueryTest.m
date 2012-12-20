@@ -7,7 +7,7 @@
 
 #import "QueryTest.h"
 #import "BaasioQuery.h"
-
+#import "Baasio.h"
 #import "BaasioEntity.h"
 @implementation QueryTest {
     BOOL exitRunLoop;
