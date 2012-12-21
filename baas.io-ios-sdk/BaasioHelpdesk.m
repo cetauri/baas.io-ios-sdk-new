@@ -59,7 +59,7 @@
                     successBlock:(void (^)(NSArray *array))successBlock
                     failureBlock:(void (^)(NSError *error))failureBlock{
 
-    NSString *path = [@"answers/" stringByAppendingString:uuid];
+    NSString *path = [NSString stringWithFormat:@"help/questions/%@/answers", uuid];
     
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                                        withMethod:@"GET"
