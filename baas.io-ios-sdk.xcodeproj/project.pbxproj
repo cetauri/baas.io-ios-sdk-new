@@ -32,6 +32,8 @@
 		27F2EC15535C57DE1BB54EC2 /* PushTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E9910E5CEEFE958FAF32 /* PushTest.m */; };
 		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
 		AF244A9016772041009524B8 /* BaasioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AF244A8F16772041009524B8 /* BaasioGroup.m */; };
+		AF2575CC168A9E530037919C /* BaasioHelpdesk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFFFBBF61682B0FD006CAEF1 /* BaasioHelpdesk.h */; };
+		AF2575CE168A9F090037919C /* BaasioHelpdesk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFFFBBF61682B0FD006CAEF1 /* BaasioHelpdesk.h */; };
 		AF26A27F166667F5006A7225 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB9E418165A2D850021AA4C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AF2E72221682E034003652F8 /* HelpDeskTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2E72211682E034003652F8 /* HelpDeskTest.m */; };
 		AF515B5E16703F930005F743 /* BaasioMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AF515B5D16703F930005F743 /* BaasioMessage.m */; };
@@ -109,10 +111,11 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		AF9EF36A167EC20A00FDFDDF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Versions/A/Headers/";
+			buildActionMask = 12;
+			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Versions/A/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				AF2575CC168A9E530037919C /* BaasioHelpdesk.h in CopyFiles */,
 				AF9EF36B167EC22E00FDFDDF /* Baas.h in CopyFiles */,
 				AF9EF36C167EC22E00FDFDDF /* Baasio.h in CopyFiles */,
 				AF9EF36D167EC22E00FDFDDF /* BaasioRequest.h in CopyFiles */,
@@ -133,6 +136,7 @@
 			dstPath = header;
 			dstSubfolderSpec = 16;
 			files = (
+				AF2575CE168A9F090037919C /* BaasioHelpdesk.h in CopyFiles */,
 				AF9EF304167EBDE700FDFDDF /* Baasio.h in CopyFiles */,
 				AF9EF305167EBDE700FDFDDF /* BaasioRequest.h in CopyFiles */,
 				AF9EF306167EBDE700FDFDDF /* BaasioEntity.h in CopyFiles */,
@@ -477,7 +481,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		AF9EF369167EC1B800FDFDDF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
