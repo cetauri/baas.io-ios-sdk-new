@@ -9,7 +9,7 @@
 #import "BaasioFile.h"
 #import "BaasioNetworkManager.h"
 #import "Baasio+Private.h"
-#import "JSONKit.h"
+
 @implementation BaasioEntity {
     NSMutableDictionary *_entity;
 }
