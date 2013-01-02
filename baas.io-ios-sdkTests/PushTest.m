@@ -54,10 +54,10 @@
     reserve.hour = 4;
     reserve.minute = 55;
     
-    config.alert = @"dea28251-4041-11e2-a05c-02003a570010";
+    config.alert = @"권오상 dea28251-4041-11e2-a05c-02003a570010";
     config.badge = 2;
-    config.reserve = reserve;
-    config.to = [NSMutableArray arrayWithObject:@"dea28251-4041-11e2-a05c-02003a570010"];
+//    config.reserve = reserve;
+    config.to = [NSMutableArray arrayWithObject:@"f5df22f9-547e-11e2-b5a4-06ebb80000ba"];
     
     [push sendPushInBackground:config
                   successBlock:^(void) {
