@@ -62,9 +62,19 @@
     
     void (^failure)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
         if (JSON == nil){
+            NSString *debugDescription = error.userInfo[@"NSDebugDescription"];
+            if (debugDescription != nil) {
+                NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                [details setValue:debugDescription forKey:NSLocalizedDescriptionKey];
+                
+                NSError *e = [NSError errorWithDomain:error.domain code:error.code userInfo:details];
+                failureBlock(e);
+                return;
+            }
             failureBlock(error);
             return;
         }
+        
         NSMutableDictionary* details = [NSMutableDictionary dictionary];
         [details setValue:JSON[@"error_description"] forKey:NSLocalizedDescriptionKey];
         
