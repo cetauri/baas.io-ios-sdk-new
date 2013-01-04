@@ -13,9 +13,8 @@
 
 
 //도움말 보기
-- (BaasioRequest*)getHelpList:(NSString *)query
-                 successBlock:(void (^)(NSArray *array))successBlock
-                 failureBlock:(void (^)(NSError *error))failureBlock;
+- (BaasioRequest*)getHelps:(void (^)(NSArray *array))successBlock
+              failureBlock:(void (^)(NSError *error))failureBlock;
 
 
 //도움말 상세보기
@@ -23,15 +22,19 @@
                    successBlock:(void (^)(NSDictionary *dictionary))successBlock
                    failureBlock:(void (^)(NSError *error))failureBlock;
 
+//도움말 검색
+- (BaasioRequest*)searchHelps:(NSString *)keyword
+              successBlock:(void (^)(NSArray *array))successBlock
+              failureBlock:(void (^)(NSError *error))failureBlock;
 
 //문의 리스트보기
-- (BaasioRequest*)getMyQuestions:(void (^)(NSArray *array))successBlock
-                            failureBlock:(void (^)(NSError *error))failureBlock;
+- (BaasioRequest*)getQuestions:(void (^)(NSArray *array))successBlock
+                  failureBlock:(void (^)(NSError *error))failureBlock;
 
 //문의 답변 보기
-- (BaasioRequest*)getAnswersList:(NSString *)uuid
-                    successBlock:(void (^)(NSArray *array))successBlock
-                    failureBlock:(void (^)(NSError *error))failureBlock;
+- (BaasioRequest*)getAnswers:(NSString *)uuid
+                successBlock:(void (^)(NSArray *array))successBlock
+                failureBlock:(void (^)(NSError *error))failureBlock;
 
 //문의 하기
 - (BaasioRequest*)sendQuestion:(NSDictionary *)param

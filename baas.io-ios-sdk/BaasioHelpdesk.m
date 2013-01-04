@@ -13,27 +13,31 @@
 
 
 
-- (BaasioRequest*)getHelpList:(NSString *)query
-                 successBlock:(void (^)(NSArray *array))successBlock
-                 failureBlock:(void (^)(NSError *error))failureBlock
+- (BaasioRequest*)getHelps:(void (^)(NSArray *array))successBlock
+              failureBlock:(void (^)(NSError *error))failureBlock
 {
-    
-    NSDictionary *param = nil;//@{
-//                            @"query" : query,
-//                            @"page" : [NSString stringWithFormat:@"%i", page]
-//                            };
+
+    return [self searchHelps:@"" successBlock:successBlock failureBlock:failureBlock];
+}
+
+- (BaasioRequest*)searchHelps:(NSString *)keyword
+              successBlock:(void (^)(NSArray *array))successBlock
+              failureBlock:(void (^)(NSError *error))failureBlock
+{
+
+    NSDictionary *param = @{@"keyword": keyword};
     
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:@"help/helps"
-                                                       withMethod:@"GET"
-                                                           params:param
-                                                          success:^(id result){
-                                                              NSDictionary *response = (NSDictionary *)result;
-                                                              NSLog(@"response : %@", response);
-                                                              NSArray *objects = [NSArray arrayWithArray:response[@"entities"]];
-                                                              successBlock(objects);
-                                                          }
-                                                          failure:failureBlock];
-    
+                                                           withMethod:@"GET"
+                                                               params:param
+                                                              success:^(id result){
+                                                                  NSDictionary *response = (NSDictionary *)result;
+                                                                  NSLog(@"response : %@", response);
+                                                                  NSArray *objects = [NSArray arrayWithArray:response[@"entities"]];
+                                                                  successBlock(objects);
+                                                              }
+                                                              failure:failureBlock];
+
 }
 
 - (BaasioRequest*)getHelpDetail:(NSString *)uuid
@@ -55,9 +59,9 @@
 }
 
 
-- (BaasioRequest*)getAnswersList:(NSString *)uuid
-                    successBlock:(void (^)(NSArray *array))successBlock
-                    failureBlock:(void (^)(NSError *error))failureBlock{
+- (BaasioRequest*)getAnswers:(NSString *)uuid
+                successBlock:(void (^)(NSArray *array))successBlock
+                failureBlock:(void (^)(NSError *error))failureBlock{
 
     NSString *path = [NSString stringWithFormat:@"help/questions/%@/answers", uuid];
     
@@ -74,8 +78,8 @@
 }
 
 //문의 리스트보기
-- (BaasioRequest*)getMyQuestions:(void (^)(NSArray *array))successBlock
-                    failureBlock:(void (^)(NSError *error))failureBlock
+- (BaasioRequest*)getQuestions:(void (^)(NSArray *array))successBlock
+                  failureBlock:(void (^)(NSError *error))failureBlock
 {
     
     NSString *path = @"help//questions/my_list";

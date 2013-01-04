@@ -31,17 +31,17 @@
 - (void)test_1_helpList
 {
     BaasioHelpdesk *helpdesk = [[BaasioHelpdesk alloc]init];
-    [helpdesk getHelpList:@""
-             successBlock:^(NSArray *array) {
-                 NSLog(@"array : %@", array.description);
-                 exitRunLoop = YES;
-                 
-             }
-             failureBlock:^(NSError *error) {
-                 NSLog(@"fail : %@", error.localizedDescription);
-                 STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                 exitRunLoop = YES;
-             }];
+    [helpdesk searchHelps:@""
+          successBlock:^(NSArray *array) {
+              NSLog(@"array : %@", array.description);
+              exitRunLoop = YES;
+
+          }
+          failureBlock:^(NSError *error) {
+              NSLog(@"fail : %@", error.localizedDescription);
+              STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+              exitRunLoop = YES;
+          }];
     
     [self runTestLoop];
 }
@@ -121,15 +121,15 @@
     [user signInBackground:^(void){
         
         BaasioHelpdesk *helpdesk = [[BaasioHelpdesk alloc]init];
-        [helpdesk getMyQuestions:^(NSArray *array) {
+        [helpdesk getQuestions:^(NSArray *array) {
             NSLog(@"array : %@", array.description);
             exitRunLoop = YES;
         }
-                    failureBlock:^(NSError *error) {
-                        NSLog(@"fail : %@", error.localizedDescription);
-                        STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                        exitRunLoop = YES;
-                    }];
+                  failureBlock:^(NSError *error) {
+                      NSLog(@"fail : %@", error.localizedDescription);
+                      STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                      exitRunLoop = YES;
+                  }];
         
     }
               failureBlock:^(NSError *error){
@@ -146,16 +146,16 @@
 
     
     BaasioHelpdesk *helpdesk = [[BaasioHelpdesk alloc] init];
-    [helpdesk getAnswersList:@"a1f993f7-5950-478c-88d5-39641ce90ea7"
-                successBlock:^(NSArray *array) {
-                    NSLog(@"array : %@", array.description);
-                    exitRunLoop = YES;
-                }
-                failureBlock:^(NSError *error) {
-                    NSLog(@"fail : %@", error.localizedDescription);
-                    STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                    exitRunLoop = YES;
-                }];
+    [helpdesk getAnswers:@"a1f993f7-5950-478c-88d5-39641ce90ea7"
+            successBlock:^(NSArray *array) {
+                NSLog(@"array : %@", array.description);
+                exitRunLoop = YES;
+            }
+            failureBlock:^(NSError *error) {
+                NSLog(@"fail : %@", error.localizedDescription);
+                STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                exitRunLoop = YES;
+            }];
 
     [self runTestLoop];
 }
