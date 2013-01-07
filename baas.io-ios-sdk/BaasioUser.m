@@ -41,7 +41,7 @@
                                 @"password" : self.password
                             };
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:@"token"
-                                                    withMethod:@"GET"
+                                                    withMethod:@"POST"
                                                         params:params
                                                        success:^(id result){
                                                            NSDictionary *response = (NSDictionary *)result;
