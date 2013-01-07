@@ -78,15 +78,15 @@
 }
 
 //문의 리스트보기
-- (BaasioRequest*)getQuestions:(void (^)(NSArray *array))successBlock
+- (BaasioRequest*)getQuestions:(NSDictionary *)param
+                  successBlock:(void (^)(NSArray *array))successBlock
                   failureBlock:(void (^)(NSError *error))failureBlock
 {
     
     NSString *path = @"help//questions/my_list";
-    
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                                        withMethod:@"GET"
-                                                           params:nil
+                                                           params:param
                                                           success:^(id result){
                                                               NSDictionary *response = (NSDictionary *)result;
                                                               NSLog(@"response : %@", response);

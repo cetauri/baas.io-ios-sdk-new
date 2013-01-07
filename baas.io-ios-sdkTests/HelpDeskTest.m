@@ -120,18 +120,21 @@
     
     [user signInBackground:^(void){
         
+        NSDictionary *param = @{@"page" : @"3"};
+        
         BaasioHelpdesk *helpdesk = [[BaasioHelpdesk alloc]init];
-        [helpdesk getQuestions:^(NSArray *array) {
-            NSLog(@"array : %@", array.description);
-            exitRunLoop = YES;
-        }
+        [helpdesk getQuestions:param
+                  successBlock: ^(NSArray *array) {
+                        NSLog(@"array : %@", array.description);
+                        exitRunLoop = YES;
+                    }
                   failureBlock:^(NSError *error) {
                       NSLog(@"fail : %@", error.localizedDescription);
                       STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
                       exitRunLoop = YES;
                   }];
         
-    }
+                }
               failureBlock:^(NSError *error){
                   NSLog(@"fail : %@", error.localizedDescription);
                   STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);

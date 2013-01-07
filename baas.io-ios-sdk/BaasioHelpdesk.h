@@ -28,7 +28,8 @@
               failureBlock:(void (^)(NSError *error))failureBlock;
 
 //문의 리스트보기
-- (BaasioRequest*)getQuestions:(void (^)(NSArray *array))successBlock
+- (BaasioRequest*)getQuestions:(NSDictionary *)param
+                  successBlock:(void (^)(NSArray *array))successBlock
                   failureBlock:(void (^)(NSError *error))failureBlock;
 
 //문의 답변 보기
