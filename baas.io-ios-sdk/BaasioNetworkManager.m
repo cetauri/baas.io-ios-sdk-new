@@ -10,6 +10,8 @@
 #import "AFNetworking.h"
 #import "JSONKit.h"
 #import "Baasio+Private.h"
+#import "NetworkActivityIndicatorManager.h"
+
 @implementation BaasioNetworkManager
 
 +(BaasioNetworkManager *)sharedInstance
@@ -27,6 +29,7 @@
                         params:(NSDictionary*)params
                          success:(void (^)(id result))successBlock
                          failure:(void (^)(NSError *error))failureBlock {
+    
     
     NSDictionary *parameters;
     if ([httpMethod isEqualToString:@"GET"] ||[httpMethod isEqualToString:@"DELETE"]) {
@@ -50,15 +53,19 @@
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            [[NetworkActivityIndicatorManager sharedInstance] hide];
                                                                                             successBlock(JSON);
                                                                                         }
                                                                                         failure:failure];
     [operation start];
+    [[NetworkActivityIndicatorManager sharedInstance] show];
     return (BaasioRequest*)operation;
 
 }
 #pragma mark - API response method
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock {
+    
+    [[NetworkActivityIndicatorManager sharedInstance] hide];
     
     void (^failure)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
         if (JSON == nil){

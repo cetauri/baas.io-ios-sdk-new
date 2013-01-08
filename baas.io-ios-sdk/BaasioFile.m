@@ -9,6 +9,7 @@
 #import "AFNetworking.h"
 #import "BaasioNetworkManager.h"
 #import "Baasio+Private.h"
+#import "NetworkActivityIndicatorManager.h"
 
 @implementation BaasioFile {
 
@@ -80,6 +81,7 @@
         progressBlock(progress); 
     }];
     [operation start];
+    [[NetworkActivityIndicatorManager sharedInstance]show];
     return (BaasioRequest*)operation;
 }
 
@@ -114,6 +116,7 @@
     }];
     
     [operation start];
+    [[NetworkActivityIndicatorManager sharedInstance]show];
     return (BaasioRequest*)operation;
 }
 
