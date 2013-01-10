@@ -9,7 +9,8 @@
 #import "Baasio.h"
 #import "Baasio+Private.h"
 #import "BaasioNetworkManager.h"
-
+#import "AFNetworking.h"
+#import "JSONKit.h"
 @implementation BaasioUser 
 
 + (BaasioUser *)user
@@ -71,44 +72,44 @@
 }
 
 
-//- (void)signIn:(NSError**)error {
-//
-//    NSDictionary *params = @{
-//        @"name":[self objectForKey:@"name"],
-//        @"password":self.password,
-//        @"username":self.username,
-//        @"email":self.email
-//    };
-//    
-//    NSURL *url = [[Baasio sharedInstance] getAPIURL];
-//    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-//    
-//    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"users" parameters:nil];
-//    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:error];
-//    if (error != nil) {
-//        return;
-//    }
-//    request.HTTPBody = data;
-//    
-//    __block BOOL isFinish = false;
-//    
-//    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-//                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-//                                                                                            isFinish = true;
-//                                                                                        }
-//                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *_error, id JSON){
-//                                                                                            *error = _error;
-//                                                                                            isFinish = true;
-//                                                                                        }];
+- (void)signIn:(NSError**)error {
+    NSDictionary *params = @{
+        @"name":[self objectForKey:@"name"],
+        @"password":self.password,
+        @"username":self.username,
+        @"email":self.email
+    };
+    
+    NSURL *url = [[Baasio sharedInstance] getAPIURL];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"users" parameters:nil];
+    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:error];
+    request.HTTPBody = data;
+    
+    __block BOOL isFinish = false;
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            isFinish = true;
+                                                                                        }
+                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *_error, id JSON){
+                                                                                            *error = _error;
+                                                                                            isFinish = true;
+                                                                                        }];
+    NSLog(@"waitUntilFinished");
 //    [operation start];
-//    
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [queue addOperation:operation];
+    [operation waitUntilFinished];
 //#ifndef UNIT_TEST
 //    while(!isFinish){
+//        NSLog(@"---");
 //        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
 //    }
 //#endif
-//    return;
-//}
+    return;
+}
 
 
 - (BaasioRequest*)signUpInBackground:(void (^)(void))successBlock
