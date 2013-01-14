@@ -41,6 +41,13 @@
     return [NSURL URLWithString:url];
 }
 
+- (BOOL)hasToken {
+    if (_token == nil || [_token isEqualToString:@""] ){
+        return false;
+    }
+    
+    return true;
+}
 @end
 
 @implementation Baasio(Private)

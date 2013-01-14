@@ -33,6 +33,8 @@
 
 /** getAPIURL */
 - (NSURL *)getAPIURL;
+
+- (BOOL)hasToken;
 @end
 
 
