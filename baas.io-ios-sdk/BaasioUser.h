@@ -17,7 +17,7 @@
 @property(strong) NSString *name;
 
 + (BaasioUser *)user;
-+ (BaasioUser *)currtuser;
++ (BaasioUser *)currentUser;
 + (void)signOut;
 
 
@@ -25,12 +25,11 @@
 - (BaasioRequest*)signInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock;
 
-//- (void)signUp:(NSError**)error;;
+- (void)signUp:(NSError**)error;
 - (BaasioRequest*)signUpInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
-//- (void)unsubscribe:(NSError**)error;;
-
+- (void)unsubscribe:(NSError**)error;
 - (BaasioRequest*)unsubscribeInBackground:(void (^)(void))successBlock
                    failureBlock:(void (^)(NSError *error))failureBlock;
 @end

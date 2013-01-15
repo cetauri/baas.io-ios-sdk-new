@@ -24,6 +24,39 @@
     return _manager;
 }
 
+- (id)connectWithHTTPSync:(NSString *)path
+               withMethod:(NSString *)method
+                   params:(NSDictionary *)params
+                    error:(NSError **)error
+
+ {
+     NSURL *url = [[Baasio sharedInstance] getAPIURL];
+     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+
+     NSMutableURLRequest *request = [httpClient requestWithMethod:method path:path parameters:nil];
+     NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:error];
+     request.HTTPBody = data;
+
+     id response = nil;
+     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                             response = JSON;
+                                                                                         }
+                                                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *_error, id JSON){
+                                                                                             *error = _error;
+                                                                                         }];
+     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+     [queue addOperation:operation];
+     [operation waitUntilFinished];
+ //#ifndef UNIT_TEST
+ //    while(!isFinish){
+ //        NSLog(@"---");
+ //        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+ //    }
+ //#endif
+     return response;
+ }
+
 - (BaasioRequest*) connectWithHTTP:(NSString*)path
                       withMethod:(NSString*)httpMethod
                         params:(NSDictionary*)params

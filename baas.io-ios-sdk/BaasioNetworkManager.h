@@ -11,6 +11,12 @@
 @interface BaasioNetworkManager : NSObject
 + (BaasioNetworkManager *)sharedInstance;
 
+
+- (id)connectWithHTTPSync:(NSString *)path
+               withMethod:(NSString *)method
+                   params:(NSDictionary *)params
+                    error:(NSError **)error;
+
 - (BaasioRequest*) connectWithHTTP:(NSString*)path
                         withMethod:(NSString*)httpMethod
                             params:(NSDictionary*)params

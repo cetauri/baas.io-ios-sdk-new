@@ -4,13 +4,10 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
-
 #import "BaasioUser.h"
 #import "Baasio.h"
 #import "Baasio+Private.h"
 #import "BaasioNetworkManager.h"
-#import "AFNetworking.h"
-#import "JSONKit.h"
 @implementation BaasioUser 
 
 + (BaasioUser *)user
@@ -18,6 +15,22 @@
     return [[BaasioUser alloc] init];
 }
 
++ (BaasioUser *)currentUser {
+    BaasioUser *user =  [[Baasio sharedInstance]currentUser];
+    return user;
+}
+
++ (void)signOut {
+    [[Baasio sharedInstance] setCurrentUser:nil];
+    [[Baasio sharedInstance] setToken:nil];
+}
+
+- (void)unsubscribe:(NSError**)error
+{
+    NSString *path = [@"users/" stringByAppendingString:self.username];
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path withMethod:@"DELETE" params:nil error:error];
+    return;
+}
 
 - (BaasioRequest*)unsubscribeInBackground:(void (^)(void))successBlock
                              failureBlock:(void (^)(NSError *error))failureBlock
@@ -32,6 +45,16 @@
                                                        failure:failureBlock];
 }
 
+- (void)signIn:(NSError**)error {
+    NSDictionary *params = @{
+                                @"grant_type" : @"password",
+                                @"username" : self.username,
+                                @"password" : self.password
+                            };
+
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"token" withMethod:@"POST" params:params error:error];
+    return;
+}
 
 - (BaasioRequest*)signInBackground:(void (^)(void))successBlock
             failureBlock:(void (^)(NSError *error))failureBlock
@@ -60,54 +83,16 @@
                                                        failure:failureBlock];
 }
 
-+ (BaasioUser *)currtuser{
-    BaasioUser *user =  [[Baasio sharedInstance]currentUser];
-    return user;
-}
-
-
-+ (void)signOut {
-    [[Baasio sharedInstance] setCurrentUser:nil];
-    [[Baasio sharedInstance] setToken:nil];
-}
-
-
-- (void)signIn:(NSError**)error {
+- (void)signUp:(NSError**)error
+{
     NSDictionary *params = @{
-        @"name":[self objectForKey:@"name"],
-        @"password":self.password,
-        @"username":self.username,
-        @"email":self.email
-    };
-    
-    NSURL *url = [[Baasio sharedInstance] getAPIURL];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"users" parameters:nil];
-    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:error];
-    request.HTTPBody = data;
-    
-    __block BOOL isFinish = false;
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            isFinish = true;
-                                                                                        }
-                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *_error, id JSON){
-                                                                                            *error = _error;
-                                                                                            isFinish = true;
-                                                                                        }];
-    NSLog(@"waitUntilFinished");
-//    [operation start];
-    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-    [queue addOperation:operation];
-    [operation waitUntilFinished];
-//#ifndef UNIT_TEST
-//    while(!isFinish){
-//        NSLog(@"---");
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-//    }
-//#endif
+                                @"name":[self objectForKey:@"name"],
+                                @"password":self.password,
+                                @"username":self.username,
+                                @"email":self.email
+                            };
+
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"users" withMethod:@"POST" params:params error:error];
     return;
 }
 
