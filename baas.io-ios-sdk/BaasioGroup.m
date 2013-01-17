@@ -11,7 +11,6 @@
 #import "Baasio+Private.h"
 
 @implementation BaasioGroup{
-    //XXX User객체?
     NSString *_user;
     NSString *_group;
 }
@@ -25,13 +24,17 @@
     return self;
 }
 
-
 - (void)setGroupName:(NSString*)group{
     _group = group;
     
 }
 - (void)setUserName:(NSString*)user{
     _user = user;
+}
+
+- (BaasioEntity *)create:(NSError **)error
+{
+    return [super save:error];
 }
 
 - (BaasioRequest*)createInBackground:(void (^)(BaasioGroup *group))successBlock
@@ -57,7 +60,11 @@
 }
 
 
-//- (void)delete:(NSError **)error;
+- (void)delete:(NSError **)error
+{
+    return; [super delete:error];
+}
+
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
                         failureBlock:(void (^)(NSError *error))failureBlock{
     {
@@ -69,7 +76,16 @@
 }
 
 
-//- (void)add:(NSError **)error;
+- (void)add:(NSError **)error
+{
+    NSString *path = [NSString stringWithFormat:@"groups/%@/users/%@", _group, _user];
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                    withMethod:@"POST"
+                                                        params:nil
+                                                         error:error];
+    return;
+}
+
 - (BaasioRequest*)addInBackground:(void (^)(BaasioGroup *group))successBlock
                      failureBlock:(void (^)(NSError *error))failureBlock{
 
@@ -87,7 +103,17 @@
                                    }
                                    failure:failureBlock];
 }
-//- (void)remove:(NSError **)error;
+
+- (void)remove:(NSError **)error
+{
+    NSString *path = [NSString stringWithFormat:@"groups/%@/users/%@", _group, _user];
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                    withMethod:@"DELETE"
+                                                        params:nil
+                                                         error:error];
+    return;
+}
+
 - (BaasioRequest*)removeInBackground:(void (^)(void))successBlock
                         failureBlock:(void (^)(NSError *error))failureBlock{
 

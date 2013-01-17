@@ -138,6 +138,21 @@
     return _sql;
 }
 
+
+-(NSArray *)query:(NSError**)error
+{
+    NSString *prefixPath = _collectionName;
+    if (_group != nil) {
+        prefixPath = [NSString stringWithFormat:@"groups/%@/users", _group];
+    }
+
+    NSString *path = [prefixPath stringByAppendingString:self.description];
+
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                           withMethod:@"GET"
+                                                               params:nil
+                                                                error:error];
+}
 -(BaasioRequest *)queryInBackground:(void (^)(NSArray *objects))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock{
     
@@ -169,6 +184,23 @@
                                    failure:failureBlock];
 }
 
+-(NSArray *)next:(NSError**)error
+
+{
+    if(![self hasMoreEntities]){
+        NSMutableDictionary* details = [NSMutableDictionary dictionary];
+        [details setValue:@"Next entities isn't exist." forKey:NSLocalizedDescriptionKey];
+
+        NSString *domain = @"NSObjectNotAvailableException";
+        NSError *e = [NSError errorWithDomain:domain code:-1 userInfo:details];
+
+        e = *error;
+        return nil;
+    }
+    return [self query:error];
+
+}
+
 -(BaasioRequest *)nextInBackground:(void (^)(NSArray *objects))successBlock
                       failureBlock:(void (^)(NSError *error))failureBlock
 {
@@ -183,6 +215,22 @@
         return nil;
     }
     return [self queryInBackground:successBlock failureBlock:failureBlock];
+}
+
+-(BaasioRequest *)prev:(NSError**)error
+{
+    _pos -= 2;
+    if(_pos < 0 ){
+        NSMutableDictionary* details = [NSMutableDictionary dictionary];
+        [details setValue:@"Prev entities isn't exist." forKey:NSLocalizedDescriptionKey];
+
+        NSString *domain = @"NSObjectNotAvailableException";
+        NSError *e = [NSError errorWithDomain:domain code:-1 userInfo:details];
+
+        e = *error;
+        return nil;
+    }
+    return [self query:error];
 }
 
 -(BaasioRequest *)prevInBackground:(void (^)(NSArray *objects))successBlock

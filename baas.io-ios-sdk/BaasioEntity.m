@@ -37,36 +37,10 @@
 
 - (BaasioEntity *)save:(NSError **)error {
     
-//    __block BOOL isFinish = false;
-    __block BaasioEntity *entity = nil;
-    BaasioRequest *request = [[BaasioNetworkManager sharedInstance] connectWithHTTP:self.entityName
-                            withMethod:@"POST"
-                                params:_entity
-                               success:^(id result){
-                                   NSDictionary *response = (NSDictionary *)result;
-
-                                   NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:response[@"entities"][0]];
-                                   NSString *type = response[@"type"];
-
-                                   entity = [BaasioEntity entitytWithName:type];
-                                   [entity setEntity:dictionary];
-
-//                                   isFinish = true;
-                               }
-                               failure:^(NSError *e){
-                                   *error = e;
-//                                   isFinish = true;
-                               }];
-    [request waitUntilFinished];
-    
-    return entity;
-//#ifndef UNIT_TEST
-//    while(!isFinish){
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-//    }
-//#endif
-//    return nil;
-
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:self.entityName
+                                                           withMethod:@"POST"
+                                                               params:_entity
+                                                                error:error];
 }
 
 - (BaasioRequest*)saveInBackground:(void (^)(BaasioEntity *entity))successBlock
@@ -90,28 +64,13 @@
 }
 
 - (void)delete:(NSError **)error{
-//    __block BOOL isFinish = false;
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
-    
-    BaasioRequest *request = [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                                  withMethod:@"DELETE"
-                                                      params:nil
-                                                     success:^(id result){
-//                                                         isFinish = true;
-                                                     }
-                                                     failure:^(NSError *e){
-                                                         *error = e;
-//                                                         isFinish = true;
-                                                     }];
-    [request waitUntilFinished];
-    
+
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                           withMethod:@"DELETE"
+                                                               params:nil
+                                                                error:error];
     return;
-//#ifndef UNIT_TEST
-//    while(!isFinish){
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-//    }
-//#endif
-//    return nil;
 }
 
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
@@ -126,40 +85,15 @@
                                        successBlock();
                                    }
                                    failure:failureBlock];
-
 }
+
 - (BaasioEntity *)update:(NSError **)error{
-//    __block BOOL isFinish = false;
-    __block BaasioEntity *entity = nil;
+
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
-    
-    BaasioRequest *request = [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                withMethod:@"PUT"
-                                    params:_entity
-                                   success:^(id result){
-                                         NSDictionary *response = (NSDictionary *)result;
-                                         
-                                         NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:response[@"entities"][0]];
-                                         NSString *type = response[@"type"];
-                                         
-                                         entity = [BaasioEntity entitytWithName:type];
-                                         [entity setEntity:dictionary];
-                                         
-//                                         isFinish = true;
-                                     }
-                                     failure:^(NSError *e){
-                                         *error = e;
-//                                         isFinish = true;
-                                     }];
-    [request waitUntilFinished];
-    
-    return entity;
-//#ifndef UNIT_TEST
-//    while(!isFinish){
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-//    }
-//#endif
-//    return nil;
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                           withMethod:@"PUT"
+                                                               params:_entity
+                                                                error:error];
 }
 
 - (BaasioRequest*)updateInBackground:(void (^)(BaasioEntity *entity))successBlock
@@ -184,7 +118,17 @@
                                    failure:failureBlock];
 }
 
+- (void) connect:(BaasioEntity *)entity
+    relationship:(NSString*)relationship
+           error:(NSError **)error{
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@/%@/%@/%@", self.uuid, relationship, entity.entityName, entity.uuid];
 
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                    withMethod:@"POST"
+                                                        params:_entity
+                                                         error:error];
+    return;
+}
 - (BaasioRequest*)connectInBackground:(BaasioEntity *)entity
                          relationship:(NSString*)relationship
                          successBlock:(void (^)(void))successBlock
@@ -196,13 +140,22 @@
                                 withMethod:@"POST"
                                     params:_entity
                                    success:^(id result){
-//                                       NSDictionary *response = (NSDictionary *)result;
-//                                       NSLog(@"response : %@", response.description);
                                        successBlock();
                                    }
                                    failure:failureBlock];
 }
 
+- (void) disconnect:(BaasioEntity *)entity
+    relationship:(NSString*)relationship
+           error:(NSError **)error{
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@/%@/%@/%@", self.uuid, relationship, entity.entityName, entity.uuid];
+
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                    withMethod:@"DELETE"
+                                                        params:_entity
+                                                         error:error];
+    return;
+}
 - (BaasioRequest*)disconnectInBackground:(BaasioEntity *)entity
                             relationship:(NSString*)relationship
                             successBlock:(void (^)(void))successBlock
@@ -214,8 +167,6 @@
                                 withMethod:@"DELETE"
                                     params:_entity
                                    success:^(id result){
-//                                       NSDictionary *response = (NSDictionary *)result;
-//                                       NSLog(@"response : %@", response.description);
                                        successBlock();
                                    }
                                    failure:failureBlock];
@@ -238,38 +189,16 @@
 }
 
 #pragma mark - Entity
-+ (BaasioEntity *)getEntity:(NSString*)entityName uuid:(NSString *)uuid error:(NSError **)error{
-//    __block BOOL isFinish = false;
-    __block BaasioEntity *entity = nil;
+
++ (BaasioEntity *)getEntity:(NSString*)entityName
+                       uuid:(NSString *)uuid
+                      error:(NSError **)error
+{
     NSString *path = [entityName stringByAppendingFormat:@"/%@", uuid];
-    
-    BaasioRequest *request = [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                                  withMethod:@"GET"
-                                                      params:nil
-                                                     success:^(id result){
-                                                         NSDictionary *response = (NSDictionary *)result;
-                                                         
-                                                         NSDictionary *dictionary = [NSDictionary dictionaryWithDictionary:response[@"entities"][0]];
-                                                         NSString *type = response[@"type"];
-                                                         
-                                                         BaasioEntity *entity = [BaasioEntity entitytWithName:type];
-                                                         [entity setEntity:dictionary];
-                                                         
-//                                                       isFinish = true;
-                                                     }
-                                                     failure:^(NSError *e){
-                                                         *error = e;
-//                                                       isFinish = true;
-                                                     }];
-    [request waitUntilFinished];
-    
-    return entity;
-//#ifndef UNIT_TEST
-//    while(!isFinish){
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-//    }
-//#endif
-//    return nil;
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                           withMethod:@"GET"
+                                                               params:nil
+                                                                error:error];
 }
 
 + (BaasioRequest*)getEntityInBackground:(NSString*)entityName

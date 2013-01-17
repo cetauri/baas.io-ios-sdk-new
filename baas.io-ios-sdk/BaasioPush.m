@@ -11,6 +11,17 @@
 
 }
 
+- (void)sendPush:(BaasioMessage *)config
+           error:(NSError**)error
+{
+    NSDictionary *params = [config dictionary];
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"pushes"
+                                                    withMethod:@"POST"
+                                                        params:params
+                                                         error:error];
+    return;
+}
+
 - (BaasioRequest*)sendPushInBackground:(BaasioMessage *)config
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock
@@ -27,6 +38,17 @@
 }
 
 
+- (void)unregister:(NSError**)error
+{
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
+    NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
+
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                    withMethod:@"DELETE"
+                                                        params:nil
+                                                         error:error];
+    return;
+}
 - (BaasioRequest*)unregisterInBackground:(void (^)(void))successBlock
                   failureBlock:(void (^)(NSError *error))failureBlock
 {
@@ -42,6 +64,23 @@
                                    failure:failureBlock];
 }
 
+- (void)register:(NSString *)deviceID
+            tags:(NSArray *)tags
+           error:(NSError**)error
+{
+    NSDictionary *params = @{
+                                @"platform" : @"I",
+                                @"token" : deviceID,
+                                @"tags" : tags
+                            };
+    NSString *path = @"pushes/devices";
+
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                    withMethod:@"POST"
+                                                        params:params
+                                                         error:error];
+    return;
+}
 - (BaasioRequest*)registerInBackground:(NSString *)deviceID
                         tags:(NSArray *)tags
                 successBlock:(void (^)(void))successBlock

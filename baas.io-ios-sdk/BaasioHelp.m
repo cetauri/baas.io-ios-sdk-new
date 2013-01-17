@@ -10,9 +10,6 @@
 #import "BaasioNetworkManager.h"
 @implementation BaasioHelp
 
-
-
-
 - (BaasioRequest*)getHelps:(void (^)(NSArray *array))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock
 {

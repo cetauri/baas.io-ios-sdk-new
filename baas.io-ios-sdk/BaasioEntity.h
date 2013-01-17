@@ -37,10 +37,20 @@
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
+
+#pragma mark - relation
+- (void) connect:(BaasioEntity *)entity
+    relationship:(NSString*)relationship
+           error:(NSError **)error;
+
 - (BaasioRequest*)connectInBackground:(BaasioEntity *)entity
                          relationship:(NSString*)relationship
                          successBlock:(void (^)(void))successBlock
                          failureBlock:(void (^)(NSError *error))failureBlock;
+
+- (void) disconnect:(BaasioEntity *)entity
+    relationship:(NSString*)relationship
+           error:(NSError **)error;
 
 - (BaasioRequest*)disconnectInBackground:(BaasioEntity *)entity
                             relationship:(NSString*)relationship
@@ -53,7 +63,9 @@
 
 #pragma mark - Entity
 
-+ (BaasioEntity *)getEntity:(NSString*)entityName uuid:(NSString *)uuid error:(NSError **)error;
++ (BaasioEntity *)getEntity:(NSString*)entityName
+                       uuid:(NSString *)uuid
+                      error:(NSError **)error;
 
 + (BaasioRequest*)getEntityInBackground:(NSString*)entityName
                          uuid:(NSString *)uuid

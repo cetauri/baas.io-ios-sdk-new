@@ -29,16 +29,15 @@ typedef enum {
 
 -(NSString *)description;
 
+-(NSArray *)next:(NSError**)error;
 -(BaasioRequest *)nextInBackground:(void (^)(NSArray *objects))successBlock
                        failureBlock:(void (^)(NSError *error))failureBlock;
 
+-(BaasioRequest *)prev:(NSError**)error
 -(BaasioRequest *)prevInBackground:(void (^)(NSArray *objects))successBlock
                        failureBlock:(void (^)(NSError *error))failureBlock;
 
+-(NSArray *)query:(NSError**)error;
 -(BaasioRequest *)queryInBackground:(void (^)(NSArray *objects))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock;
-
-
-//- (BaasioUser *)following;
-//- (BaasioUser *)followers;
 @end
