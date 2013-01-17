@@ -1,5 +1,5 @@
 //
-//  HelpDeskTest.h
+//  HelpCenterTest.h
 //  baas.io-ios-sdk
 //
 //  Created by cetauri on 12. 12. 20..
@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface HelpDeskTest : SenTestCase
+@interface HelpCenterTest : SenTestCase
 
 @end

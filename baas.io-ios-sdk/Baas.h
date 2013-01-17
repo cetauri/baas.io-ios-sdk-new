@@ -14,6 +14,6 @@
 #import "BaasioFile.h"
 #import "BaasioFileOptions.h"
 #import "BaasioGroup.h"
-#import "BaasioHelpdesk.h"
+#import "BaasioHelpCenter.h"
 
 
