@@ -1,14 +1,14 @@
 //
-//  BaasioHelpCenter.m
+//  BaasioHelp.m
 //  baas.io-ios-sdk
 //
 //  Created by cetauri on 12. 12. 20..
 //  Copyright (c) 2012년 kth. All rights reserved.
 //
 
-#import "BaasioHelpCenter.h"
+#import "BaasioHelp.h"
 #import "BaasioNetworkManager.h"
-@implementation BaasioHelpCenter
+@implementation BaasioHelp
 
 
 

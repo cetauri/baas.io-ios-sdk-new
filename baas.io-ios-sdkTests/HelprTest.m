@@ -1,15 +1,15 @@
 //
-//  HelpCenterTest.m
+//  HelprTest.m
 //  baas.io-ios-sdk
 //
 //  Created by cetauri on 12. 12. 20..
 //  Copyright (c) 2012년 kth. All rights reserved.
 //
 
-#import "HelpCenterTest.h"
-#import "BaasioHelpCenter.h"
+#import "HelprTest.h"
+#import "BaasioHelp.h"
 #import "BaasioUser.h"
-@implementation HelpCenterTest {
+@implementation HelprTest {
     BOOL exitRunLoop;
 }
 
@@ -30,7 +30,7 @@
 
 - (void)test_1_helpList
 {
-    BaasioHelpCenter *helpdesk = [[BaasioHelpCenter alloc]init];
+    BaasioHelp *helpdesk = [[BaasioHelp alloc]init];
     [helpdesk searchHelps:@""
           successBlock:^(NSArray *array) {
               NSLog(@"array : %@", array.description);
@@ -48,7 +48,7 @@
 
 - (void)test_2_helpDetail
 {
-    BaasioHelpCenter *helpdesk = [[BaasioHelpCenter alloc]init];
+    BaasioHelp *helpdesk = [[BaasioHelp alloc]init];
     [helpdesk getHelpDetail:@"cf334051-2dee-47ef-b787-2d7f5a889db0"
              successBlock:^(NSDictionary *dictionary) {
                  NSLog(@"dictionary : %@", dictionary);
@@ -73,7 +73,7 @@
 //    user.password = @"helpdesk";
 //    [user signInBackground:^(void){
 //
-//        BaasioHelpCenter *helpdesk = [[BaasioHelpCenter alloc]init];
+//        BaasioHelp *helpdesk = [[BaasioHelp alloc]init];
 //        NSDictionary *param = @{
 //            @"email" : @"email@email.com",
 //            @"content" : @"내용입니다 내용입니다.2",
@@ -122,7 +122,7 @@
         
         NSDictionary *param = @{@"page" : @"3"};
         
-        BaasioHelpCenter *helpdesk = [[BaasioHelpCenter alloc]init];
+        BaasioHelp *helpdesk = [[BaasioHelp alloc]init];
         [helpdesk getQuestions:param
                   successBlock: ^(NSArray *array) {
                         NSLog(@"array : %@", array.description);
@@ -148,7 +148,7 @@
 - (void)test_5_getAnswersList{
 
     
-    BaasioHelpCenter *helpdesk = [[BaasioHelpCenter alloc] init];
+    BaasioHelp *helpdesk = [[BaasioHelp alloc] init];
     [helpdesk getAnswers:@"a1f993f7-5950-478c-88d5-39641ce90ea7"
             successBlock:^(NSArray *array) {
                 NSLog(@"array : %@", array.description);

@@ -1,5 +1,5 @@
 //
-//  BaasioHelpCenter.h
+//  BaasioHelp.h
 //  baas.io-ios-sdk
 //
 //  Created by cetauri on 12. 12. 20..
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Baasio.h"
 #import "BaasioRequest.h"
-@interface BaasioHelpCenter : NSObject
+@interface BaasioHelp : NSObject
 
 
 //도움말 보기
