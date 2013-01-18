@@ -12,36 +12,117 @@ typedef enum {
 #import "BaasioGroup.h"
 
 /**
-    A bass.io Framework Query Object.
+ A bass.io Framework Query Object.
 */
 @interface BaasioQuery : NSObject
-
+/**
+ queryWithCollection
+ @param name name
+ */
 + (BaasioQuery *)queryWithCollection:(NSString *)name;
+
+/**
+ queryWithGroup
+ @param name name
+ */
 + (BaasioQuery *)queryWithGroup:(NSString *)name;
+
+/**
+ queryWithRelationship
+ @param name name
+ */
 + (BaasioQuery *)queryWithRelationship:(NSString *)name;
 
-
+/**
+ setProjections
+ @param projections projections
+ */
 -(void)setProjections:(NSString *)projections;
+
+/**
+ setWheres
+ @param wheres wheres
+ */
 -(void)setWheres:(NSString *)wheres;
+
+/**
+ setOrderBy
+ @param key key
+ @param order order
+ */
 -(void)setOrderBy:(NSString *)key order:(BaasioQuerySortOrder)order;
+
+/**
+ setLimit
+ @param limit limit
+ */
 -(void)setLimit: (int)limit;
 
+/**
+ cursor
+ */
 -(NSString *)cursor;
+
+/**
+ setCursor
+ @param cursor cursor
+ */
 -(void)setCursor:(NSString *)cursor;
+
+
+/**
+ setResetCursor
+ */
 -(void)setResetCursor;
+
+/**
+ hasMoreEntities
+ */
 -(BOOL)hasMoreEntities;
 
+/**
+ description
+ */
 -(NSString *)description;
 
+/**
+ next
+ @param error error
+ */
 -(NSArray *)next:(NSError**)error;
+
+/**
+ next asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
 -(BaasioRequest *)nextInBackground:(void (^)(NSArray *objects))successBlock
                        failureBlock:(void (^)(NSError *error))failureBlock;
-
+/**
+ prev
+ @param error error
+ */
 -(BaasioRequest *)prev:(NSError**)error;
+
+/**
+ prev asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
 -(BaasioRequest *)prevInBackground:(void (^)(NSArray *objects))successBlock
                        failureBlock:(void (^)(NSError *error))failureBlock;
 
+/**
+ query
+ @param error error
+ */
 -(NSArray *)query:(NSError**)error;
+
+/**
+ query asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
 -(BaasioRequest *)queryInBackground:(void (^)(NSArray *objects))successBlock
                 failureBlock:(void (^)(NSError *error))failureBlock;
 @end

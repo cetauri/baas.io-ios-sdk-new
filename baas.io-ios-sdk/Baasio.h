@@ -7,6 +7,10 @@
 
 #import <Foundation/Foundation.h>
 
+
+/**
+ A bass.io Framework File Object.
+ */
 @interface Baasio : NSObject
 @property(nonatomic, strong) NSString *apiURL;
 @property(nonatomic, strong) NSString *applicationName;
@@ -18,21 +22,26 @@
 + (id)sharedInstance;
 /**
  setApplicationInfo
- @param orgName orgName
+ @param baasioID baasioID
  @param applicationName applicationName
  */
 + (void)setApplicationInfo:(NSString *)baasioID applicationName:(NSString *)applicationName;
 /**
  setApplicationInfo
  @param apiURL apiURL
- @param orgName orgName
+ @param baasioID baasioID
  @param applicationName applicationName
  */
 + (void)setApplicationInfo:(NSString *)apiURL baasioID:(NSString *)baasioID applicationName:(NSString *)applicationName;
 
-/** getAPIURL */
+/**
+ getAPIURL
+ */
 - (NSURL *)getAPIURL;
 
+/**
+ hasToken
+ */
 - (BOOL)hasToken;
 @end
 

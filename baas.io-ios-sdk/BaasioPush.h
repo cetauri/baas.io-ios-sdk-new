@@ -10,22 +10,57 @@
 #import "BaasioRequest.h"
 
 /**
-    A bass.io Framework Push Object.
+ A bass.io Framework Push Object.
 */
 @interface BaasioPush : NSObject
+
+/**
+ sendPush
+ @param config config
+ @param error error
+ */
 - (void)sendPush:(BaasioMessage *)config
            error:(NSError**)error;
+
+/**
+ sendPush asynchronously
+ @param config config
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
 - (BaasioRequest*)sendPushInBackground:(BaasioMessage *)config
                           successBlock:(void (^)(void))successBlock
                           failureBlock:(void (^)(NSError *error))failureBlock;
-
+/**
+ unregister
+ @param error error
+ */
 - (void)unregister:(NSError**)error;
+
+/**
+ unregister asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
 - (BaasioRequest*)unregisterInBackground:(void (^)(void))successBlock
                             failureBlock:(void (^)(NSError *error))failureBlock;
 
+/**
+ register
+ @param deviceID deviceID
+ @param tags tags
+ @param error error
+ */
 - (void)register:(NSString *)deviceID
             tags:(NSArray *)tags
            error:(NSError**)error;
+/**
+ register asynchronously
+ @param deviceID deviceID
+ @param tags tags
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
 - (BaasioRequest*)registerInBackground:(NSString *)deviceID
                                   tags:(NSArray *)tags
                           successBlock:(void (^)(void))successBlock

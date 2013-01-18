@@ -10,7 +10,7 @@
 #import "BaasioRequest.h"
 
 /**
-    A bass.io Framework File Object.
+ A bass.io Framework File Object.
 */
 @interface BaasioFile : BaasioEntity
 
