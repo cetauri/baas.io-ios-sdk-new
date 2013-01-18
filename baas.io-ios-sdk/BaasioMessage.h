@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+    A bass.io Framework Message Object for Push.
+*/
 @interface BaasioMessage : NSObject
 
 @property(nonatomic, assign) NSString *target;

@@ -8,8 +8,10 @@
 #import "BaasioEntity.h"
 #import "BaasioRequest.h"
 
+/**
+    A bass.io Framework User Object.
+*/
 @interface BaasioUser : BaasioEntity
-
 
 @property(strong) NSString *username;
 @property(strong) NSString *email;

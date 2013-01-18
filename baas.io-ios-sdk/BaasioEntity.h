@@ -8,6 +8,9 @@
 #import <Foundation/Foundation.h>
 #import "BaasioRequest.h"
 
+/**
+    A bass.io Framework File Object.
+*/
 @interface BaasioEntity : NSObject
 
 @property(strong) NSString *entityName;
@@ -16,6 +19,9 @@
 @property(readonly, strong, getter = modified) NSDate *modified;
 @property(readonly, strong, getter = type) NSString *type;
 
+/**
+ setEntity
+ */
 -(void)setEntity:(NSDictionary *)entity;
 
 + (BaasioEntity *)entitytWithName:(NSString *)entityName;

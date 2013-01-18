@@ -9,6 +9,9 @@
 #import "BaasioEntity.h"
 #import "BaasioRequest.h"
 
+/**
+    A bass.io Framework File Object.
+*/
 @interface BaasioFile : BaasioEntity
 
 @property(strong) NSString *downloadPath;

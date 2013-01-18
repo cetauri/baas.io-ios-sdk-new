@@ -9,6 +9,9 @@
 #import "BaasioMessage.h"
 #import "BaasioRequest.h"
 
+/**
+    A bass.io Framework Push Object.
+*/
 @interface BaasioPush : NSObject
 - (void)sendPush:(BaasioMessage *)config
            error:(NSError**)error;

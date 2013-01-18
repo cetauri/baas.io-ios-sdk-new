@@ -10,6 +10,10 @@ typedef enum {
 } BaasioQuerySortOrder;
 
 #import "BaasioGroup.h"
+
+/**
+    A bass.io Framework Query Object.
+*/
 @interface BaasioQuery : NSObject
 
 + (BaasioQuery *)queryWithCollection:(NSString *)name;
@@ -33,7 +37,7 @@ typedef enum {
 -(BaasioRequest *)nextInBackground:(void (^)(NSArray *objects))successBlock
                        failureBlock:(void (^)(NSError *error))failureBlock;
 
--(BaasioRequest *)prev:(NSError**)error
+-(BaasioRequest *)prev:(NSError**)error;
 -(BaasioRequest *)prevInBackground:(void (^)(NSArray *objects))successBlock
                        failureBlock:(void (^)(NSError *error))failureBlock;
 
