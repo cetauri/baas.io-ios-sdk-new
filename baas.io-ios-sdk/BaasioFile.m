@@ -10,6 +10,7 @@
 #import "BaasioNetworkManager.h"
 #import "Baasio+Private.h"
 #import "NetworkActivityIndicatorManager.h"
+#import "JSONKit.h"
 
 @implementation BaasioFile {
 
@@ -23,8 +24,8 @@
     return self;
 }
 
-- (BaasioRequest*)informationInBackground:(void (^)(BaasioFile *file))successBlock
-                   failureBlock:(void (^)(NSError *))failureBlock
+- (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
+                     failureBlock:(void (^)(NSError *))failureBlock
 {
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
 
@@ -34,7 +35,7 @@
                                    success:^(id result){
                                        NSDictionary *response = (NSDictionary *)result;
                                        NSDictionary *dictionary = response[@"entities"][0];
-                                       
+
                                        BaasioFile *_file = [[BaasioFile alloc]init];
                                        [_file setEntity:dictionary];
                                        successBlock(_file);
@@ -57,28 +58,29 @@
 
 }
 
-- (BaasioRequest*)downloadInBackground:(void (^)(NSString *))successBlock
-                failureBlock:(void (^)(NSError *))failureBlock
-               progressBlock:(void (^)(float progress))progressBlock
+- (BaasioRequest*)downloadInBackground:(NSString *)downloadPath
+                          successBlock:(void (^)(NSString *))successBlock
+                          failureBlock:(void (^)(NSError *))failureBlock
+                         progressBlock:(void (^)(float progress))progressBlock
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
-    NSString *path = [self.entityName stringByAppendingFormat:@"/%@/download", self.uuid];
+
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@/data", self.uuid];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:path parameters:nil];
     request = [[Baasio sharedInstance] setAuthorization:request];
-    
+
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[BaasioNetworkManager sharedInstance] failure:failureBlock];
-    
+
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            successBlock(self.downloadPath);
+                                                                                            successBlock(downloadPath);
                                                                                         }
                                                                                         failure:failure];
-    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:self.downloadPath append:NO];
+    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:downloadPath append:NO];
     [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead){
         float progress = (float)totalBytesRead / totalBytesExpectedToRead;
-        progressBlock(progress); 
+        progressBlock(progress);
     }];
     [operation start];
     [[NetworkActivityIndicatorManager sharedInstance]show];
@@ -89,17 +91,35 @@
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock
 {
+    
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
-    NSString *path = [self.entityName stringByAppendingFormat:@"/public/%@", [self createRandomPath]];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:path parameters:nil];
+    NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST"
+                                                                         path:self.entityName
+                                                                   parameters:nil
+                                                    constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+
+                                                                        if (_contentType  == nil || [_contentType isEqualToString:@""]) {
+                                                                            _contentType = [self mimeTypeForFileAtPath:_fileName];
+                                                                        }
+                                                        
+                                                                        [formData appendPartWithFileData:_data
+                                                                                                    name:@"file"
+                                                                                                fileName:_fileName
+                                                                                                mimeType:_contentType];
+
+                                                                    }];
+    request = [[Baasio sharedInstance] setAuthorization:request];
+
+    NSError *error;
+    NSData *data = [self.dictionary JSONDataWithOptions:JKSerializeOptionNone error:&error];
+    if (error != nil) {
+        failureBlock(error);
+        return nil;
+    }
+    request.HTTPBody = data;
     
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[BaasioNetworkManager sharedInstance] failure:failureBlock];
-    
-    [request setAllHTTPHeaderFields:self.options.dictionary];
-    [request setHTTPBody:self.data];
-    
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
                                                                                             NSDictionary *dictionary = JSON[@"entities"][0];
@@ -120,39 +140,18 @@
     return (BaasioRequest*)operation;
 }
 
-
+//- (BaasioRequest*)updateFileInBackground:(void (^)(void))successBlock
+//                            failureBlock:(void (^)(NSError *))failureBlock
+//                           progressBlock:(void (^)(float progress))progressBlock{
+//    
+//    
+//    
+//}
 
 #pragma mark - etc
--(NSString *)createRandomPath{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyyMMdd"];
-    NSString *yyyymmdd = [formatter stringFromDate:[NSDate date]];
-    
-    [formatter setDateFormat:@"HH"];
-    NSString *HH = [formatter stringFromDate:[NSDate date]];
-    
-    [formatter setDateFormat:@"mm"];
-    NSString *mm = [formatter stringFromDate:[NSDate date]];
-    
-    [formatter setDateFormat:@"ss"];
-    NSString *ss = [formatter stringFromDate:[NSDate date]];
-    
-    [formatter setDateFormat:@"SSS"];
-    NSString *SSS = [formatter stringFromDate:[NSDate date]];
-    
-    
-    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
-    CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
-    CFRelease(uuidRef);
-    NSString *path = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@", yyyymmdd, HH, mm, ss, SSS, (__bridge NSString *)(uuidStringRef)];
-    
-    return path;
-}
 
 - (NSString*) mimeTypeForFileAtPath: (NSString *) path {
-    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        return nil;
-    }
+
     // Borrowed from http://stackoverflow.com/questions/5996797/determine-mime-type-of-nsdata-loaded-from-a-file
     // itself, derived from  http://stackoverflow.com/questions/2439020/wheres-the-iphone-mime-type-database
     CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
@@ -163,5 +162,6 @@
     }
     return (NSString *)CFBridgingRelease(mimeType);
 }
+
 
 @end

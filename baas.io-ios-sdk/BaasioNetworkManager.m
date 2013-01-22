@@ -122,6 +122,7 @@
     return (BaasioRequest*)operation;
 
 }
+
 #pragma mark - API response method
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock {
     
@@ -150,10 +151,14 @@
         return error;
     }
 
+    NSString *message = [NSString stringWithFormat:@"%@ (uuid : %@)", JSON[@"error_description"], JSON[@"error_uuid"]];
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
-    [details setValue:JSON[@"error_description"] forKey:NSLocalizedDescriptionKey];
+    [details setValue:message forKey:NSLocalizedDescriptionKey];
+    
+    int error_code = [JSON[@"error_code"] intValue];
+    
+    NSError *e = [NSError errorWithDomain:@"BassioError" code:error_code userInfo:details];
 
-    NSString *domain = JSON[@"error"];
-    return [NSError errorWithDomain:domain code:error.code userInfo:details];
+    return e;
 }
 @end

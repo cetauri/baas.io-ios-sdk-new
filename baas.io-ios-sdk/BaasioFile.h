@@ -5,7 +5,6 @@
 //
 
 
-#import "BaasioFileOptions.h"
 #import "BaasioEntity.h"
 #import "BaasioRequest.h"
 
@@ -14,17 +13,19 @@
 */
 @interface BaasioFile : BaasioEntity
 
-@property(strong) NSString *downloadPath;
+@property(strong) NSString *fileName;
+@property(assign) int *size;
+@property(strong) NSString *contentType;
 @property(strong) NSData *data;
-@property(strong) BaasioFileOptions *options;
 
-- (BaasioRequest*)informationInBackground:(void (^)(BaasioFile *file))successBlock
-                   failureBlock:(void (^)(NSError *))failureBlock;
+- (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
+                     failureBlock:(void (^)(NSError *))failureBlock;
 
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *))failureBlock;
 
-- (BaasioRequest*)downloadInBackground:(void (^)(NSString *))successBlock
+- (BaasioRequest*)downloadInBackground:(NSString *)downloadPath
+                          successBlock:(void (^)(NSString *))successBlock
                 failureBlock:(void (^)(NSError *))failureBlock
                progressBlock:(void (^)(float progress))progressBlock;
 
@@ -32,9 +33,10 @@
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock;
 
-//TODO : TBI
-//changeInBackground
-//updateInBackground
+- (BaasioRequest*)updateFileInBackground:(void (^)(void))successBlock
+                        failureBlock:(void (^)(NSError *))failureBlock
+                       progressBlock:(void (^)(float progress))progressBlock;
+
 
 
 @end

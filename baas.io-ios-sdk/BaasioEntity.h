@@ -56,7 +56,7 @@
  @param successBlock successBlock
  @param failureBlock failureBlock
  */
-- (BaasioRequest*)updateInBackground:(void (^)(BaasioEntity *entity))successBlock
+- (BaasioRequest*)updateInBackground:(void (^)(id entity))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**

@@ -96,7 +96,7 @@
                                                                 error:error];
 }
 
-- (BaasioRequest*)updateInBackground:(void (^)(BaasioEntity *entity))successBlock
+- (BaasioRequest*)updateInBackground:(void (^)(id entity))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock{
 
     NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
