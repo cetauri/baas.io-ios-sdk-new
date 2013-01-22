@@ -52,7 +52,22 @@
                                 @"password" : self.password
                             };
 
-    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"token" withMethod:@"POST" params:params error:error];
+    id result = [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"token"
+                                                                withMethod:@"POST"
+                                                                    params:params
+                                                                     error:error];
+    
+    NSDictionary *response = (NSDictionary *)result;
+    Baasio *baasio = [Baasio sharedInstance];
+    NSString *access_token = response[@"access_token"];
+    [baasio setToken:access_token];
+    
+    NSDictionary *userReponse = response[@"user"];
+    BaasioUser *loginUser = [BaasioUser user];
+    [loginUser setEntity:userReponse];
+    [baasio setCurrentUser:loginUser];
+    
+    
     return;
 }
 

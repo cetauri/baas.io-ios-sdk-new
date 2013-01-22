@@ -18,7 +18,8 @@
     [super setUp];
     exitRunLoop = NO;
 
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+//    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+    [Baasio setApplicationInfo:@"https://devapi.baas.io" baasioID:@"test-organization" applicationName:@"test-app"];
 }
 
 - (void)tearDown
@@ -28,18 +29,18 @@
     [super tearDown];
 }
 
-- (void)test_sync_1_SignUp
-{
-    BaasioUser *user = [BaasioUser user];
-    user.username = @"cetauri";
-    user.email = @"cetauri@gmail.com";
-    user.name = @"권오상";
-    user.password = @"cetauri";
-
-    NSError *error = nil;
-    [user signUp:&error];
-    NSLog(@"response : ---------------------- %@", error.localizedDescription );
-}
+//- (void)test_sync_1_SignUp
+//{
+//    BaasioUser *user = [BaasioUser user];
+//    user.username = @"cetauri";
+//    user.email = @"cetauri@gmail.com";
+//    user.name = @"권오상";
+//    user.password = @"cetauri";
+//
+//    NSError *error = nil;
+//    [user signUp:&error];
+//    NSLog(@"response : ---------------------- %@", error.localizedDescription );
+//}
 
 - (void)test_sync_2_SignIn
 {
@@ -51,6 +52,19 @@
     [user signIn:&error];
     NSLog(@"response : ---------------------- %@", error.localizedDescription );
 }
+
+- (void)test_sync_3_unsubscribe
+{
+    BaasioUser *user = [BaasioUser user];
+    user.username = @"cetauri";
+    
+    NSError *error = nil;
+    [user unsubscribe:&error];
+    NSLog(@"response : ---------------------- %@", error.localizedDescription );
+    
+    [self runTestLoop];
+}
+
 //- (void)test_1_SignUp
 //{
 //    BaasioUser *user = [BaasioUser user];

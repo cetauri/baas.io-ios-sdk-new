@@ -28,50 +28,25 @@
                withMethod:(NSString *)httpMethod
                    params:(NSDictionary *)params
                     error:(NSError **)error
-
- {
-     NSDictionary *parameters;
-     if ([httpMethod isEqualToString:@"GET"] ||[httpMethod isEqualToString:@"DELETE"]) {
-         parameters = params;
-     }
-     
-     NSURL *url = [[Baasio sharedInstance] getAPIURL];
-     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-
-     NSMutableURLRequest *request = [httpClient requestWithMethod:httpMethod path:path parameters:parameters];
-     request = [[Baasio sharedInstance] setAuthorization:request];
-     
-     if ([httpMethod isEqualToString:@"POST"] || [httpMethod isEqualToString:@"PUT"]) {
-         NSError *error;
-         NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
-         if (error != nil) {
-             return error;
-         }
-         request.HTTPBody = data;
-     }
-
-     __block BOOL isFinish = false;
-     __block NSError *blockError = nil;
-
-     id response = nil;
-     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                             response = JSON;
-                                                                                             isFinish = true;
-                                                                                             [[NetworkActivityIndicatorManager sharedInstance] hide];
-                                                                                         }
-                                                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *_error, id JSON){
-                                                                                             blockError = [self extractNormalError:_error JSON:JSON];
-                                                                                             isFinish = true;
-                                                                                             [[NetworkActivityIndicatorManager sharedInstance] hide];
-                                                                                         }];
-     
-     [[NetworkActivityIndicatorManager sharedInstance] show];
-
-     NSOperationQueue *queue = [[NSOperationQueue alloc]init];
-     [queue addOperation:operation];
-     [operation waitUntilFinished];
-
+{
+    __block id response = nil;
+    __block BOOL isFinish = false;
+    __block NSError *blockError = nil;
+    
+    BaasioRequest *request = [self connectWithHTTP:path
+               withMethod:httpMethod
+                   params:params
+                  success:^(id result){
+                      response = result;
+                      isFinish = true;
+                  }
+                  failure:^(NSError *error){
+                      blockError = error;
+                      isFinish = true;
+                  }];
+    
+    [request waitUntilFinished];
+    
 #ifndef UNIT_TEST
     while(!isFinish){
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
@@ -81,8 +56,8 @@
      if (error != nil) {
          *error = blockError;
      }
-     return response;
- }
+    return response;
+}
 
 - (BaasioRequest*) connectWithHTTP:(NSString*)path
                       withMethod:(NSString*)httpMethod
