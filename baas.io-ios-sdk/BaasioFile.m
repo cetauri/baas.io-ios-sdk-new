@@ -24,39 +24,58 @@
     return self;
 }
 
-//- (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
-//                     failureBlock:(void (^)(NSError *))failureBlock
-//{
-//    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
-//
-//    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-//                                withMethod:@"GET"
-//                                    params:nil
-//                                   success:^(id result){
-//                                       NSDictionary *response = (NSDictionary *)result;
-//                                       NSDictionary *dictionary = response[@"entities"][0];
-//
-//                                       BaasioFile *_file = [[BaasioFile alloc]init];
-//                                       [_file setEntity:dictionary];
-//                                       successBlock(_file);
-//                                   }
-//                                   failure:failureBlock];
-//}
+- (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
+                     failureBlock:(void (^)(NSError *))failureBlock
+{
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
 
-//- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
-//              failureBlock:(void (^)(NSError *))failureBlock
-//{
-//    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
-//
-//    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-//                                withMethod:@"DELETE"
-//                                    params:nil
-//                                   success:^(id result){
-//                                       successBlock();
-//                                   }
-//                                   failure:failureBlock];
-//
-//}
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
+                                withMethod:@"GET"
+                                    params:nil
+                                   success:^(id result){
+                                       NSDictionary *response = (NSDictionary *)result;
+                                       NSDictionary *dictionary = response[@"entities"][0];
+
+                                       BaasioFile *_file = [[BaasioFile alloc]init];
+                                       [_file setEntity:dictionary];
+                                       successBlock(_file);
+                                   }
+                                   failure:failureBlock];
+}
+
+- (BaasioRequest*)updateInBackground:(void (^)(id entity))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock
+{
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+    
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
+                                                       withMethod:@"PUT"
+                                                           params:self.dictionary
+                                                          success:^(id result){
+                                                              NSDictionary *response = (NSDictionary *)result;
+                                                              NSDictionary *dictionary = response[@"entities"][0];
+                                                              
+                                                              BaasioFile *_file = [[BaasioFile alloc]init];
+                                                              [_file setEntity:dictionary];
+                                                              successBlock(_file);
+                                                          }
+                                                          failure:failureBlock];
+}
+
+- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
+              failureBlock:(void (^)(NSError *))failureBlock
+{
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
+                                withMethod:@"DELETE"
+                                    params:nil
+                                   success:^(id result){
+                                       successBlock();
+                                   }
+                                   failure:failureBlock];
+
+}
 
 - (BaasioRequest*)fileDownloadInBackground:(NSString *)downloadPath
                               successBlock:(void (^)(NSString *))successBlock
@@ -104,6 +123,24 @@
                                                         progressBlock:progressBlock];
 }
 
+- (BaasioRequest*)fileUpdateInBackground:(void (^)(BaasioFile *file))successBlock
+                            failureBlock:(void (^)(NSError *))failureBlock
+                           progressBlock:(void (^)(float progress))progressBlock
+{
+    
+    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+    return [[BaasioNetworkManager sharedInstance] multipartFormRequest:path
+                                                            withMethod:@"PUT"
+                                                              withBody:_data
+                                                                params:self.dictionary
+                                                              filename:self.filename
+                                                           contentType:_contentType
+                                                          successBlock:^(BaasioFile *file) {
+                                                              successBlock(file);
+                                                          }
+                                                          failureBlock:failureBlock
+                                                         progressBlock:progressBlock];
+}
 
 #pragma mark - entity
 

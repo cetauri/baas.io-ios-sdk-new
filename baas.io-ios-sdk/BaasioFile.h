@@ -27,6 +27,10 @@
                             failureBlock:(void (^)(NSError *))failureBlock
                            progressBlock:(void (^)(float progress))progressBlock;
 
+- (BaasioRequest*)fileUpdateInBackground:(void (^)(BaasioFile *file))successBlock
+                            failureBlock:(void (^)(NSError *))failureBlock
+                           progressBlock:(void (^)(float progress))progressBlock;
+
 - (BaasioRequest*)updateInBackground:(void (^)(id entity))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
