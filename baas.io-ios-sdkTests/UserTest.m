@@ -31,14 +31,7 @@
 
 - (void)test_sync_1_SignUp
 {
-//    BaasioUser *user = [BaasioUser user];
-//    user.username = @"cetauri";
-//    user.email = @"cetauri@gmail.com";
-//    user.name = @"권오상";
-//    user.password = @"cetauri";
-
     NSError *error = nil;
-//    [user signUp:&error];
     [BaasioUser signUp:@"cetauri"
               password:@"cetauri"
                   name:@"권오상"
