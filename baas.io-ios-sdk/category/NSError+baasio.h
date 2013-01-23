@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NSString *_uuid;
 @interface NSError (Baasio)
 -(void)setUuid:(NSString *)uuid;
 - (NSString *)uuid;

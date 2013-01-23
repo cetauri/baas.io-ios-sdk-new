@@ -8,8 +8,6 @@
 
 #import "NSError+baasio.h"
 
-NSString *_uuid;
-
 @implementation NSError (Baasio)
 -(void)setUuid:(NSString *)uuid{
     _uuid = uuid;
