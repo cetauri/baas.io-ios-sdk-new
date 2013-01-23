@@ -45,11 +45,14 @@
                                                        failure:failureBlock];
 }
 
-- (void)signIn:(NSError**)error {
++ (void)signIn:(NSString *)username
+      password:(NSString *)password
+         error:(NSError**)error
+{
     NSDictionary *params = @{
                                 @"grant_type" : @"password",
-                                @"username" : self.username,
-                                @"password" : self.password
+                                @"username" : username,
+                                @"password" : password
                             };
 
     id result = [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"token"
@@ -71,13 +74,15 @@
     return;
 }
 
-- (BaasioRequest*)signInBackground:(void (^)(void))successBlock
-            failureBlock:(void (^)(NSError *error))failureBlock
++ (BaasioRequest*)signInBackground:(NSString *)username
+                          password:(NSString *)password
+                      successBlock:(void (^)(void))successBlock
+                      failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSDictionary *params = @{
                                 @"grant_type" : @"password",
-                                @"username" : self.username,
-                                @"password" : self.password
+                                @"username" : username,
+                                @"password" : password
                             };
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:@"token"
                                                     withMethod:@"POST"
@@ -98,13 +103,17 @@
                                                        failure:failureBlock];
 }
 
-- (void)signUp:(NSError**)error
++ (void)signUp:(NSString *)username
+      password:(NSString *)password
+          name:(NSString *)name
+         email:(NSString *)email
+         error:(NSError**)error
 {
     NSDictionary *params = @{
-                                @"name":[self objectForKey:@"name"],
-                                @"password":self.password,
-                                @"username":self.username,
-                                @"email":self.email
+                                @"name":name,
+                                @"password":password,
+                                @"username":username,
+                                @"email":email
                             };
 
     [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"users" withMethod:@"POST" params:params error:error];
@@ -112,14 +121,18 @@
 }
 
 
-- (BaasioRequest*)signUpInBackground:(void (^)(void))successBlock
-              failureBlock:(void (^)(NSError *error))failureBlock
++ (BaasioRequest*)signUpInBackground:(NSString *)username
+                            password:(NSString *)password
+                                name:(NSString *)name
+                               email:(NSString *)email
+                        successBlock:(void (^)(void))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSDictionary *params = @{
-                                @"name":[self objectForKey:@"name"],
-                                @"password":self.password,
-                                @"username":self.username,
-                                @"email":self.email
+                                @"name":name,
+                                @"password":password,
+                                @"username":username,
+                                @"email":email
                             };
 
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:@"users"
@@ -175,7 +188,7 @@
                                           error:(void (^)(void))successBlock
                                    failureBlock:(void (^)(NSError *error))failureBlock
 {
-    [self signUpViaFacebookInBackground:accessToken
+    return [self signUpViaFacebookInBackground:accessToken
                                   error:successBlock
                            failureBlock:failureBlock];
 }
@@ -186,29 +199,7 @@
     return [self objectForKey:@"username"];
 }
 
--(NSString*)email{
-    return [self objectForKey:@"email"];
-}
-
--(NSString*)password{
-    return [self objectForKey:@"password"];
-}
--(NSString*)name{
-    return [self objectForKey:@"name"];
-}
 -(void)setUsername:(NSString*)username{
     [self setObject:username forKey:@"username"];
 }
-
--(void)setEmail:(NSString*)email{
-    [self setObject:email forKey:@"email"];
-}
-
--(void)setPassword:(NSString*)password{
-    [self setObject:password forKey:@"password"];
-}
--(void)setName:(NSString*)name{
-    [self setObject:name forKey:@"name"];
-}
-
 @end

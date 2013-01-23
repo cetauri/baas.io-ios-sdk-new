@@ -29,27 +29,28 @@
     [super tearDown];
 }
 
-//- (void)test_sync_1_SignUp
-//{
+- (void)test_sync_1_SignUp
+{
 //    BaasioUser *user = [BaasioUser user];
 //    user.username = @"cetauri";
 //    user.email = @"cetauri@gmail.com";
 //    user.name = @"권오상";
 //    user.password = @"cetauri";
-//
-//    NSError *error = nil;
+
+    NSError *error = nil;
 //    [user signUp:&error];
-//    NSLog(@"response : ---------------------- %@", error.localizedDescription );
-//}
+    [BaasioUser signUp:@"cetauri"
+              password:@"cetauri"
+                  name:@"권오상"
+                 email:@"cetauri@gmail.com"
+                 error:&error];
+    NSLog(@"response : ---------------------- %@", error.localizedDescription );
+}
 
 - (void)test_sync_2_SignIn
 {
-    BaasioUser *user = [BaasioUser user];
-    user.username = @"cetauri";
-    user.password = @"cetauri";
-    
     NSError *error = nil;
-    [user signIn:&error];
+    [BaasioUser signIn:@"cetauri" password:@"cetauri" error:&error];
     NSLog(@"response : ---------------------- %@", error.localizedDescription );
 }
 

@@ -12,11 +12,7 @@
  A bass.io Framework User Object.
 */
 @interface BaasioUser : BaasioEntity
-
 @property(strong) NSString *username;
-@property(strong) NSString *email;
-@property(strong) NSString *password;
-@property(strong) NSString *name;
 
 /**
  user
@@ -37,35 +33,58 @@
 /**
  signIn
 
+ @param username username
+ @param password password
  @param error error
  */
-- (void)signIn:(NSError**)error;
++ (void)signIn:(NSString *)username
+      password:(NSString *)password
+         error:(NSError**)error;
 
 /**
  sign asynchronously
 
- @param successBlock successBlock
+ @param username username
+ @param password password
+ @param failureBlock failureBlock
  @param failureBlock failureBlock
  */
-- (BaasioRequest*)signInBackground:(void (^)(void))successBlock
-            failureBlock:(void (^)(NSError *error))failureBlock;
++ (BaasioRequest*)signInBackground:(NSString *)username
+                          password:(NSString *)password
+                      successBlock:(void (^)(void))successBlock
+                      failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
  signUp
 
+ @param username username
+ @param password password
+ @param name name
+ @param email email
  @param error error
  */
-- (void)signUp:(NSError**)error;
++ (void)signUp:(NSString *)username
+      password:(NSString *)password
+          name:(NSString *)name
+         email:(NSString *)email
+         error:(NSError**)error;
 
 /**
  signUp asynchronously
 
+ @param username username
+ @param password password
+ @param name name
+ @param email email
  @param successBlock successBlock
  @param failureBlock failureBlock
  */
-- (BaasioRequest*)signUpInBackground:(void (^)(void))successBlock
-              failureBlock:(void (^)(NSError *error))failureBlock;
-
++ (BaasioRequest*)signUpInBackground:(NSString *)username
+                            password:(NSString *)password
+                                name:(NSString *)name
+                               email:(NSString *)email
+                        successBlock:(void (^)(void))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
  unsubscribe
@@ -123,7 +142,5 @@
 + (BaasioRequest*)signInViaFacebookInBackground:(NSString *)accessToken
                                           error:(void (^)(void))successBlock
                                    failureBlock:(void (^)(NSError *error))failureBlock;
-
-
 
 @end
