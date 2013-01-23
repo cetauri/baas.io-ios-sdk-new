@@ -12,7 +12,6 @@
 #import "BaasioPush.h"
 #import "BaasioMessage.h"
 #import "BaasioFile.h"
-#import "BaasioFileOptions.h"
 #import "BaasioGroup.h"
 #import "BaasioHelp.h"
 #import "NSError+baasio.h"
