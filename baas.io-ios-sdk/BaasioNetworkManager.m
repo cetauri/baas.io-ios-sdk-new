@@ -126,14 +126,14 @@
         return error;
     }
 
-    NSString *message = [NSString stringWithFormat:@"%@ (uuid : %@)", JSON[@"error_description"], JSON[@"error_uuid"]];
+    NSString *message = JSON[@"error_description"];
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:message forKey:NSLocalizedDescriptionKey];
     
     int error_code = [JSON[@"error_code"] intValue];
     
     NSError *e = [NSError errorWithDomain:@"BassioError" code:error_code userInfo:details];
-
+    e.uuid = JSON[@"error_uuid"];
     return e;
 }
 @end

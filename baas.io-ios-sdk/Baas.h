@@ -15,5 +15,5 @@
 #import "BaasioFileOptions.h"
 #import "BaasioGroup.h"
 #import "BaasioHelp.h"
-
+#import "NSError+baasio.h"
 

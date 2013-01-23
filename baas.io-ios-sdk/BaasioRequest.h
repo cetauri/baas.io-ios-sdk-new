@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "NSError+baasio.h"
 @interface BaasioRequest : NSOperation
 
 @end

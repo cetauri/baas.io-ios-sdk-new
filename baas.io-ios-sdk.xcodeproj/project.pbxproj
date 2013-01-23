@@ -30,6 +30,8 @@
 		27F2EBB68B17F0A0788E3393 /* BaasioPush.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */; };
 		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
 		AF09CBC416AEB2D80064DB66 /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF09CBC316AEB2D80064DB66 /* UserTest.m */; };
+		AF09CBCB16AF6C930064DB66 /* NSError+baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AF09CBC916AF6C930064DB66 /* NSError+baasio.m */; };
+		AF09CBCE16AF6CAE0064DB66 /* NSError+baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AF09CBC916AF6C930064DB66 /* NSError+baasio.m */; };
 		AF244A9016772041009524B8 /* BaasioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AF244A8F16772041009524B8 /* BaasioGroup.m */; };
 		AF2575CC168A9E530037919C /* BaasioHelp.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFFFBBF61682B0FD006CAEF1 /* BaasioHelp.h */; };
 		AF2575CE168A9F090037919C /* BaasioHelp.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFFFBBF61682B0FD006CAEF1 /* BaasioHelp.h */; };
@@ -153,6 +155,8 @@
 		27F2EE6A9471C3869236C589 /* BaasioPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioPush.m; sourceTree = "<group>"; };
 		AF09CBC216AEB2D80064DB66 /* UserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTest.h; sourceTree = "<group>"; };
 		AF09CBC316AEB2D80064DB66 /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
+		AF09CBC916AF6C930064DB66 /* NSError+baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+baasio.m"; path = "category/NSError+baasio.m"; sourceTree = "<group>"; };
+		AF09CBCA16AF6C930064DB66 /* NSError+baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+baasio.h"; path = "category/NSError+baasio.h"; sourceTree = "<group>"; };
 		AF244A8E16772041009524B8 /* BaasioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioGroup.h; sourceTree = "<group>"; };
 		AF244A8F16772041009524B8 /* BaasioGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioGroup.m; sourceTree = "<group>"; };
 		AF3A5BA7169BF201006501CB /* NetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkActivityIndicatorManager.m; path = network/NetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				AFB28B3B16AE889100A97240 /* Baasio+Private.h */,
+				AF09CBCA16AF6C930064DB66 /* NSError+baasio.h */,
+				AF09CBC916AF6C930064DB66 /* NSError+baasio.m */,
 			);
 			name = category;
 			sourceTree = "<group>";
@@ -516,6 +522,7 @@
 				AF76585E16789EC80017C217 /* BaasioNetworkManager.m in Sources */,
 				AFFFBBF81682B0FD006CAEF1 /* BaasioHelp.m in Sources */,
 				AF3A5BA9169BF201006501CB /* NetworkActivityIndicatorManager.m in Sources */,
+				AF09CBCB16AF6C930064DB66 /* NSError+baasio.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +530,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF09CBCE16AF6CAE0064DB66 /* NSError+baasio.m in Sources */,
 				AF26A27F166667F5006A7225 /* JSONKit.m in Sources */,
 				27F2E0195C0A4CC3D57C60FD /* FileTest.m in Sources */,
 				AF09CBC416AEB2D80064DB66 /* UserTest.m in Sources */,
