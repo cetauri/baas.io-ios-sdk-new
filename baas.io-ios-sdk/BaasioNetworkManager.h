@@ -7,7 +7,7 @@
 //
 
 #import "BaasioRequest.h"
-
+#import "BaasioFile.h"
 @interface BaasioNetworkManager : NSObject
 + (BaasioNetworkManager *)sharedInstance;
 
@@ -29,7 +29,7 @@
                                  params:(NSDictionary *)params
                                filename:(NSString *)filename
                             contentType:(NSString *)contentType
-                           successBlock:(void (^)(id))successBlock
+                           successBlock:(void (^)(BaasioFile* file))successBlock
                            failureBlock:(void (^)(NSError *))failureBlock
                           progressBlock:(void (^)(float progress))progressBlock;
 
