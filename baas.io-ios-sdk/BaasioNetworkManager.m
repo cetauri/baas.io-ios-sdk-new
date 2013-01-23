@@ -12,6 +12,7 @@
 #import "Baasio+Private.h"
 #import "NetworkActivityIndicatorManager.h"
 
+
 @implementation BaasioNetworkManager
 
 +(BaasioNetworkManager *)sharedInstance
@@ -167,6 +168,10 @@
         [[NetworkActivityIndicatorManager sharedInstance] hide];
         
         NSError *e = [self extractNormalError:error JSON:JSON];
+
+        if ([_delegate respondsToSelector:@selector(hook:)]){
+            [_delegate hook:e];
+        }
         failureBlock(e);
     };
     return failure;

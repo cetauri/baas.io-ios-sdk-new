@@ -8,7 +8,17 @@
 
 #import "BaasioRequest.h"
 #import "BaasioFile.h"
+
+@protocol BassioErrorDelegate <NSObject>;
+@required
+-(void)hook:(NSError *)error;
+@end
+
+
 @interface BaasioNetworkManager : NSObject
+
+@property (nonatomic,assign) id <BassioErrorDelegate> delegate;
+
 + (BaasioNetworkManager *)sharedInstance;
 
 
