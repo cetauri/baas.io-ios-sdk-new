@@ -217,7 +217,7 @@
     return [self queryInBackground:successBlock failureBlock:failureBlock];
 }
 
--(BaasioRequest *)prev:(NSError**)error
+-(NSArray *)prev:(NSError**)error
 {
     _pos -= 2;
     if(_pos < 0 ){

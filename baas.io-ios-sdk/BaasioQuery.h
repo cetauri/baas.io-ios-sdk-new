@@ -102,7 +102,7 @@ typedef enum {
  prev
  @param error error
  */
--(BaasioRequest *)prev:(NSError**)error;
+-(NSArray *)prev:(NSError**)error;
 
 /**
  prev asynchronously
