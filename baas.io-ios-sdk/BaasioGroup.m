@@ -32,12 +32,12 @@
     _user = user;
 }
 
-- (BaasioEntity *)create:(NSError **)error
+- (BaasioEntity *)save:(NSError **)error
 {
     return [super save:error];
 }
 
-- (BaasioRequest*)createInBackground:(void (^)(BaasioGroup *group))successBlock
+- (BaasioRequest*)saveInBackground:(void (^)(BaasioGroup *group))successBlock
                         failureBlock:(void (^)(NSError *error))failureBlock{
     return [super saveInBackground:^(BaasioEntity *entity){
                     BaasioGroup *group = [[BaasioGroup alloc]init];

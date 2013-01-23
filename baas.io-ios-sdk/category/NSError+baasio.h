@@ -7,10 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-
+/**
+    The category of NSError for baas.io.
+*/
 NSString *_uuid;
 @interface NSError (Baasio)
+/**
+ setUuid
+ @param uuid uuid
+ */
 -(void)setUuid:(NSString *)uuid;
+
+/**
+ uuid
+ @param uuid uuid
+ */
 - (NSString *)uuid;
 
 @end

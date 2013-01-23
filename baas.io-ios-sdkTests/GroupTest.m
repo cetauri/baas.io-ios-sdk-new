@@ -34,7 +34,7 @@ static NSString *uuid;
     BaasioGroup *group = [[BaasioGroup alloc]init];
     
     [group setObject:groupName forKey:@"path"];
-    [group createInBackground:^(BaasioGroup *group){
+    [group saveInBackground:^(BaasioGroup *group){
                     NSLog(@"group : %@", group.description);
                     uuid = group.uuid;
                     exitRunLoop = true;

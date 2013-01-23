@@ -17,25 +17,24 @@
 @property(strong) NSString *contentType;
 @property(strong) NSData *data;
 
+
+- (BaasioRequest*)fileDownloadInBackground:(NSString *)downloadPath
+                              successBlock:(void (^)(NSString *))successBlock
+                              failureBlock:(void (^)(NSError *))failureBlock
+                             progressBlock:(void (^)(float progress))progressBlock;
+
+- (BaasioRequest*)fileUploadInBackground:(void (^)(BaasioFile *file))successBlock
+                            failureBlock:(void (^)(NSError *))failureBlock
+                           progressBlock:(void (^)(float progress))progressBlock;
+
+- (BaasioRequest*)updateInBackground:(void (^)(id entity))successBlock
+              failureBlock:(void (^)(NSError *error))failureBlock;
+
+
 - (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
                      failureBlock:(void (^)(NSError *))failureBlock;
 
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *))failureBlock;
-
-- (BaasioRequest*)downloadInBackground:(NSString *)downloadPath
-                          successBlock:(void (^)(NSString *))successBlock
-                failureBlock:(void (^)(NSError *))failureBlock
-               progressBlock:(void (^)(float progress))progressBlock;
-
-- (BaasioRequest*)uploadInBackground:(void (^)(BaasioFile *file))successBlock
-              failureBlock:(void (^)(NSError *))failureBlock
-             progressBlock:(void (^)(float progress))progressBlock;
-
-- (BaasioRequest*)updateFileInBackground:(void (^)(void))successBlock
-                        failureBlock:(void (^)(NSError *))failureBlock
-                       progressBlock:(void (^)(float progress))progressBlock;
-
-
 
 @end

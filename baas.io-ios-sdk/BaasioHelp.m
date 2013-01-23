@@ -10,16 +10,16 @@
 #import "BaasioNetworkManager.h"
 @implementation BaasioHelp
 
-- (BaasioRequest*)getHelps:(void (^)(NSArray *array))successBlock
-              failureBlock:(void (^)(NSError *error))failureBlock
+- (BaasioRequest*)searchHelpsInBackground:(void (^)(NSArray *array))successBlock
+                             failureBlock:(void (^)(NSError *error))failureBlock
 {
 
-    return [self searchHelps:@"" successBlock:successBlock failureBlock:failureBlock];
+    return [self searchHelpsInBackground:@"" successBlock:successBlock failureBlock:failureBlock];
 }
 
-- (BaasioRequest*)searchHelps:(NSString *)keyword
-              successBlock:(void (^)(NSArray *array))successBlock
-              failureBlock:(void (^)(NSError *error))failureBlock
+- (BaasioRequest*)searchHelpsInBackground:(NSString *)keyword
+                             successBlock:(void (^)(NSArray *array))successBlock
+                             failureBlock:(void (^)(NSError *error))failureBlock
 {
 
     NSDictionary *param = @{@"keyword": keyword};
@@ -37,9 +37,9 @@
 
 }
 
-- (BaasioRequest*)getHelpDetail:(NSString *)uuid
-                    successBlock:(void (^)(NSDictionary *dictionary))successBlock
-                    failureBlock:(void (^)(NSError *error))failureBlock{
+- (BaasioRequest*)getHelpDetailInBackground:(NSString *)uuid
+                               successBlock:(void (^)(NSDictionary *dictionary))successBlock
+                               failureBlock:(void (^)(NSError *error))failureBlock{
     
     NSString *path = [@"help/helps/" stringByAppendingString:uuid];
     
@@ -55,48 +55,10 @@
                                                           failure:failureBlock];
 }
 
-
-- (BaasioRequest*)getAnswers:(NSString *)uuid
-                successBlock:(void (^)(NSArray *array))successBlock
-                failureBlock:(void (^)(NSError *error))failureBlock{
-
-    NSString *path = [NSString stringWithFormat:@"help/questions/%@/answers", uuid];
-    
-    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                                       withMethod:@"GET"
-                                                           params:nil
-                                                          success:^(id result){
-                                                              NSDictionary *response = (NSDictionary *)result;
-                                                              NSLog(@"response : %@", response);
-                                                              NSArray *objects = [NSArray arrayWithArray:response[@"entities"]];
-                                                              successBlock(objects);
-                                                          }
-                                                          failure:failureBlock];
-}
-
-//문의 리스트보기
-- (BaasioRequest*)getQuestions:(NSDictionary *)param
-                  successBlock:(void (^)(NSArray *array))successBlock
-                  failureBlock:(void (^)(NSError *error))failureBlock
-{
-    
-    NSString *path = @"help//questions/my_list";
-    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                                       withMethod:@"GET"
-                                                           params:param
-                                                          success:^(id result){
-                                                              NSDictionary *response = (NSDictionary *)result;
-                                                              NSLog(@"response : %@", response);
-                                                              NSArray *objects = [NSArray arrayWithArray:response[@"entities"]];
-                                                              successBlock(objects);
-                                                          }
-                                                          failure:failureBlock];
-}
-
 //문의 하기
-- (BaasioRequest*)sendQuestion:(NSDictionary *)param
-                  successBlock:(void (^)(void))successBlock
-                  failureBlock:(void (^)(NSError *error))failureBlock
+- (BaasioRequest*)sendQuestionInBackground:(NSDictionary *)param
+                              successBlock:(void (^)(void))successBlock
+                              failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSString *path = @"help/questions";
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path

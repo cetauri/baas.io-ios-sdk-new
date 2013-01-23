@@ -106,7 +106,7 @@ static NSString *uuid;
 {
     BaasioFile *file = [[BaasioFile alloc]init];
     file.data = [@"Working at Parse is great!" dataUsingEncoding:NSUTF8StringEncoding];
-    [file uploadInBackground:^(BaasioFile *file){
+    [file fileUploadInBackground:^(BaasioFile *file){
         BaasioEntity *entity = [BaasioEntity entitytWithName:@"GameScore"];
         [entity setObject:[NSNumber numberWithInt:1337] forKey:@"score"];
         [entity setObject:@"Sean Plott" forKey:@"playerName"];

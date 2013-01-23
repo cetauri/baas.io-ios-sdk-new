@@ -131,6 +131,56 @@
                                                        failure:failureBlock];
 }
 
+
++ (void)signUpViaFacebook:(NSString *)accessToken
+                    error:(NSError**)error
+{
+    NSDictionary *params = @{
+                                @"fb_access_token" : accessToken
+                            };
+
+    NSString *path = @"auth/facebook";
+    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                    withMethod:@"GET"
+                                                        params:params
+                                                         error:error];
+}
+
++ (BaasioRequest*)signUpViaFacebookInBackground:(NSString *)accessToken
+                                          error:(void (^)(void))successBlock
+                                   failureBlock:(void (^)(NSError *error))failureBlock
+{
+    NSDictionary *params = @{
+                                @"fb_access_token" : accessToken
+                            };
+
+    NSString *path = @"auth/facebook";
+    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
+                                                    withMethod:@"GET"
+                                                        params:params
+                                                       success:^(id result){
+                                                           successBlock();
+                                                       }
+                                                       failure:failureBlock];
+}
+
+
++ (void)signInViaFacebook:(NSString *)accessToken
+                    error:(NSError**)error
+{
+    [self signUpViaFacebook:accessToken error:error];
+}
+
++ (BaasioRequest*)signInViaFacebookInBackground:(NSString *)accessToken
+                                          error:(void (^)(void))successBlock
+                                   failureBlock:(void (^)(NSError *error))failureBlock
+{
+    [self signUpViaFacebookInBackground:accessToken
+                                  error:successBlock
+                           failureBlock:failureBlock];
+}
+
+
 #pragma mark - etc
 -(NSString*)username{
     return [self objectForKey:@"username"];

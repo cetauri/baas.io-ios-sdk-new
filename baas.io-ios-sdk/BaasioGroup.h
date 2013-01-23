@@ -28,13 +28,13 @@
  create
  @param error error
 */
-- (BaasioEntity *)create:(NSError **)error;
+- (BaasioEntity *)save:(NSError **)error;
 /**
  create asynchronously
  @param successBlock successBlock
  @param failureBlock failureBlock
 */
-- (BaasioRequest*)createInBackground:(void (^)(BaasioGroup *group))successBlock
+- (BaasioRequest*)saveInBackground:(void (^)(BaasioGroup *group))successBlock
                       failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**

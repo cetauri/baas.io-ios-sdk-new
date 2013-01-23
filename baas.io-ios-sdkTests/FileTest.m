@@ -17,7 +17,7 @@
 {
 //    [super setUp];
 //    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
-    [Baasio setApplicationInfo:@"https://devapi.baas.io" baasioID:@"test-organization" applicationName:@"test-app"];
+    [Baasio setApplicationInfo:@"https://stgapi.baas.io" baasioID:@"baas107" applicationName:@"puddings"];
 //    + (void)setApplicationInfo:(NSString *)apiURL baasioID:(NSString *)baasioID applicationName:(NSString *)applicationName
     // Set-up code here.
 }
@@ -33,51 +33,50 @@ static NSString *uuid;
     NSData *data = [@"Baas.io is great!" dataUsingEncoding:NSUTF8StringEncoding];
     BaasioFile *file = [[BaasioFile alloc] init];
     file.data = data;
-    file.fileName = @"cetauri.txt";
-    
-//    [file setObject:@"nickname" forKey:@"nickname"];
-//    
-//    [file setObject:@"filename" forKey:@"filename"];
-    
-    [file uploadInBackground:^(BaasioFile *file) {
-                    NSLog(@"success : %@", file.uuid);
-                    uuid = file.uuid;
-                    [[NSUserDefaults standardUserDefaults]setObject:file.uuid forKey:@"file.uuid"];
-                    exitRunLoop = YES;
-                 }
-                failureBlock:^(NSError *error) {
-                    NSLog(@"error : %@", error.localizedDescription);
-                    
-                    STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                    exitRunLoop = YES;
-                }
-                progressBlock:^(float progress){
-                    NSLog(@"progress : %f", progress);
-                }
-     ];
+    file.filename = @"권오상6.txt";
+    file.contentType = @"application/json";
+    [file setObject:@"cetauri" forKey:@"nickname"];
+
+    [file fileUploadInBackground:^(BaasioFile *file) {
+        NSLog(@"success : %@", file.uuid);
+        uuid = file.uuid;
+        [[NSUserDefaults standardUserDefaults] setObject:file.uuid forKey:@"file.uuid"];
+        exitRunLoop = YES;
+    }
+                    failureBlock:^(NSError *error) {
+                        NSLog(@"error : %@", error.localizedDescription);
+                        NSLog(@"uuid : %@", error.uuid);
+
+                        STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                        exitRunLoop = YES;
+                    }
+                   progressBlock:^(float progress) {
+                       NSLog(@"progress : %f", progress);
+                   }
+    ];
     
     [self runTestLoop];
 }
 
-//- (void)test_2_Get{
-//
-//    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
-//
-//    BaasioFile *file = [[BaasioFile alloc] init];
-//    file.uuid = uuid;
-//    [file getInBackground:^(BaasioFile *file) {
-//                         NSLog(@"success : %@", file.description);
-//                         exitRunLoop = YES;
-//                     }
-//                     failureBlock:^(NSError *error) {
-//                         NSLog(@"error : %@", error.localizedDescription);
-//                         STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-//                         exitRunLoop = YES;
-//                     }];
-//
-//    [self runTestLoop];
-//}
-//
+- (void)test_2_Get{
+
+    NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];
+
+    BaasioFile *file = [[BaasioFile alloc] init];
+    file.uuid = uuid;
+    [file getInBackground:^(BaasioFile *file) {
+                         NSLog(@"success : %@", file.description);
+                         exitRunLoop = YES;
+                     }
+                     failureBlock:^(NSError *error) {
+                         NSLog(@"error : %@", error.localizedDescription);
+                         STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                         exitRunLoop = YES;
+                     }];
+
+    [self runTestLoop];
+}
+
 //
 //- (void)test_3_Download{
 //

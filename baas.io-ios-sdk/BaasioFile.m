@@ -24,44 +24,44 @@
     return self;
 }
 
-- (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
-                     failureBlock:(void (^)(NSError *))failureBlock
-{
-    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+//- (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
+//                     failureBlock:(void (^)(NSError *))failureBlock
+//{
+//    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+//
+//    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
+//                                withMethod:@"GET"
+//                                    params:nil
+//                                   success:^(id result){
+//                                       NSDictionary *response = (NSDictionary *)result;
+//                                       NSDictionary *dictionary = response[@"entities"][0];
+//
+//                                       BaasioFile *_file = [[BaasioFile alloc]init];
+//                                       [_file setEntity:dictionary];
+//                                       successBlock(_file);
+//                                   }
+//                                   failure:failureBlock];
+//}
 
-    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                withMethod:@"GET"
-                                    params:nil
-                                   success:^(id result){
-                                       NSDictionary *response = (NSDictionary *)result;
-                                       NSDictionary *dictionary = response[@"entities"][0];
+//- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
+//              failureBlock:(void (^)(NSError *))failureBlock
+//{
+//    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
+//
+//    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
+//                                withMethod:@"DELETE"
+//                                    params:nil
+//                                   success:^(id result){
+//                                       successBlock();
+//                                   }
+//                                   failure:failureBlock];
+//
+//}
 
-                                       BaasioFile *_file = [[BaasioFile alloc]init];
-                                       [_file setEntity:dictionary];
-                                       successBlock(_file);
-                                   }
-                                   failure:failureBlock];
-}
-
-- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
-              failureBlock:(void (^)(NSError *))failureBlock
-{
-    NSString *path = [self.entityName stringByAppendingFormat:@"/%@", self.uuid];
-
-    return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                withMethod:@"DELETE"
-                                    params:nil
-                                   success:^(id result){
-                                       successBlock();
-                                   }
-                                   failure:failureBlock];
-
-}
-
-- (BaasioRequest*)downloadInBackground:(NSString *)downloadPath
-                          successBlock:(void (^)(NSString *))successBlock
-                          failureBlock:(void (^)(NSError *))failureBlock
-                         progressBlock:(void (^)(float progress))progressBlock
+- (BaasioRequest*)fileDownloadInBackground:(NSString *)downloadPath
+                              successBlock:(void (^)(NSString *))successBlock
+                              failureBlock:(void (^)(NSError *))failureBlock
+                             progressBlock:(void (^)(float progress))progressBlock
 {
     NSURL *url = [[Baasio sharedInstance] getAPIURL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -87,9 +87,9 @@
     return (BaasioRequest*)operation;
 }
 
-- (BaasioRequest*)uploadInBackground:(void (^)(BaasioFile *file))successBlock
-              failureBlock:(void (^)(NSError *))failureBlock
-             progressBlock:(void (^)(float progress))progressBlock
+- (BaasioRequest*)fileUploadInBackground:(void (^)(BaasioFile *file))successBlock
+                            failureBlock:(void (^)(NSError *))failureBlock
+                           progressBlock:(void (^)(float progress))progressBlock
 {
     return [[BaasioNetworkManager sharedInstance] multipartFormRequest:self.entityName
                                                            withMethod:@"POST"
@@ -104,14 +104,6 @@
                                                         progressBlock:progressBlock];
 }
 
-
-//- (BaasioRequest*)updateFileInBackground:(void (^)(void))successBlock
-//                            failureBlock:(void (^)(NSError *))failureBlock
-//                           progressBlock:(void (^)(float progress))progressBlock{
-//    
-//    
-//    
-//}
 
 #pragma mark - entity
 
