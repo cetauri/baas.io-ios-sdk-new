@@ -91,54 +91,19 @@
               failureBlock:(void (^)(NSError *))failureBlock
              progressBlock:(void (^)(float progress))progressBlock
 {
-    
-    NSURL *url = [[Baasio sharedInstance] getAPIURL];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST"
-                                                                         path:self.entityName
-                                                                   parameters:nil
-                                                    constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-
-                                                                        if (_contentType  == nil || [_contentType isEqualToString:@""]) {
-                                                                            _contentType = [self mimeTypeForFileAtPath:_fileName];
-                                                                        }
-                                                        
-                                                                        [formData appendPartWithFileData:_data
-                                                                                                    name:@"file"
-                                                                                                fileName:_fileName
-                                                                                                mimeType:_contentType];
-
-                                                                    }];
-    request = [[Baasio sharedInstance] setAuthorization:request];
-
-    NSError *error;
-    NSData *data = [self.dictionary JSONDataWithOptions:JKSerializeOptionNone error:&error];
-    if (error != nil) {
-        failureBlock(error);
-        return nil;
-    }
-    request.HTTPBody = data;
-    
-    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[BaasioNetworkManager sharedInstance] failure:failureBlock];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
-                                                                                            NSDictionary *dictionary = JSON[@"entities"][0];
-                                                                                            
-                                                                                            BaasioFile *_file = [[BaasioFile alloc]init];
-                                                                                            [_file setEntity:dictionary];
-                                                                                            successBlock(_file);
-                                                                                        }
-                                                                                        failure:failure];
-    
-    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        float progress = totalBytesWritten / totalBytesExpectedToWrite;
-        progressBlock(progress);
-    }];
-    
-    [operation start];
-    [[NetworkActivityIndicatorManager sharedInstance]show];
-    return (BaasioRequest*)operation;
+    return [[BaasioNetworkManager sharedInstance] multipartFormRequest:self.entityName
+                                                           withMethod:@"POST"
+                                                             withBody:_data
+                                                               params:self.dictionary
+                                                             filename:self.filename
+                                                          contentType:_contentType
+                                                         successBlock:^(BaasioFile *file) {
+                                                             successBlock(file);
+                                                         }
+                                                         failureBlock:failureBlock
+                                                        progressBlock:progressBlock];
 }
+
 
 //- (BaasioRequest*)updateFileInBackground:(void (^)(void))successBlock
 //                            failureBlock:(void (^)(NSError *))failureBlock
@@ -148,19 +113,14 @@
 //    
 //}
 
-#pragma mark - etc
+#pragma mark - entity
 
-- (NSString*) mimeTypeForFileAtPath: (NSString *) path {
+- (void)setFilename:(NSString *)filename{
+    [super setObject:filename forKey:@"filename"];
+}
 
-    // Borrowed from http://stackoverflow.com/questions/5996797/determine-mime-type-of-nsdata-loaded-from-a-file
-    // itself, derived from  http://stackoverflow.com/questions/2439020/wheres-the-iphone-mime-type-database
-    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
-    CFStringRef mimeType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
-    CFRelease(UTI);
-    if (!mimeType) {
-        return @"application/octet-stream";
-    }
-    return (NSString *)CFBridgingRelease(mimeType);
+- (NSString*)filename{
+    return [super objectForKey:@"filename"];
 }
 
 

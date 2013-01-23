@@ -13,8 +13,7 @@
 */
 @interface BaasioFile : BaasioEntity
 
-@property(strong) NSString *fileName;
-@property(assign) int *size;
+@property(strong) NSString *filename;
 @property(strong) NSString *contentType;
 @property(strong) NSData *data;
 

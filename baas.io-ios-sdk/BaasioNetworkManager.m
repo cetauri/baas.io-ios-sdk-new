@@ -98,6 +98,66 @@
 
 }
 
+
+- (BaasioRequest *)multipartFormRequest:(NSString *)path
+                             withMethod:(NSString *)httpMethod
+                               withBody:(NSData *)bodyData
+                                 params:(NSDictionary *)params
+                               filename:(NSString *)filename
+                            contentType:(NSString *)contentType
+                           successBlock:(void (^)(id))successBlock
+                           failureBlock:(void (^)(NSError *))failureBlock
+                          progressBlock:(void (^)(float progress))progressBlock
+{
+    NSURL *url = [[Baasio sharedInstance] getAPIURL];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:httpMethod
+                                                                         path:path
+                                                                   parameters:nil
+                                                    constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+                                                                        NSString *_contentType = contentType;
+                                                                        if (_contentType == nil || [_contentType isEqualToString:@""]) {
+                                                                            _contentType = [self mimeTypeForFileAtPath:filename];
+                                                                        }
+
+                                                                        [formData appendPartWithFileData:bodyData
+                                                                                                    name:@"file"
+                                                                                                fileName:filename
+                                                                                                mimeType:_contentType];
+
+                                                                    }];
+    request = [[Baasio sharedInstance] setAuthorization:request];
+
+    NSError *error;
+    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
+    if (error != nil) {
+        failureBlock(error);
+        return nil;
+    }
+    request.HTTPBody = data;
+
+    void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[BaasioNetworkManager sharedInstance] failure:failureBlock];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            NSDictionary *dictionary = JSON[@"entities"][0];
+
+                                                                                            BaasioFile *_file = [[BaasioFile alloc]init];
+                                                                                            [_file setEntity:dictionary];
+                                                                                            successBlock(_file);
+                                                                                        }
+                                                                                        failure:failure];
+
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        float progress = totalBytesWritten / totalBytesExpectedToWrite;
+        progressBlock(progress);
+    }];
+
+    [operation start];
+    [[NetworkActivityIndicatorManager sharedInstance]show];
+    return (BaasioRequest*)operation;
+}
+
+
 #pragma mark - API response method
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock {
     
@@ -136,4 +196,21 @@
     e.uuid = JSON[@"error_uuid"];
     return e;
 }
+
+#pragma mark - etc
+
+- (NSString*) mimeTypeForFileAtPath: (NSString *) path {
+
+    // Borrowed from http://stackoverflow.com/questions/5996797/determine-mime-type-of-nsdata-loaded-from-a-file
+    // itself, derived from  http://stackoverflow.com/questions/2439020/wheres-the-iphone-mime-type-database
+    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
+    CFStringRef mimeType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
+    CFRelease(UTI);
+    if (!mimeType) {
+        return @"application/octet-stream";
+    }
+    return (NSString *)CFBridgingRelease(mimeType);
+}
+
+
 @end

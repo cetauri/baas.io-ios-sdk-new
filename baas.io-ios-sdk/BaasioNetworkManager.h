@@ -23,6 +23,16 @@
                            success:(void (^)(id result))successBlock
                            failure:(void (^)(NSError *error))failureBlock;
 
+- (BaasioRequest *)multipartFormRequest:(NSString *)path
+                             withMethod:(NSString *)httpMethod
+                               withBody:(NSData *)data
+                                 params:(NSDictionary *)params
+                               filename:(NSString *)filename
+                            contentType:(NSString *)contentType
+                           successBlock:(void (^)(id))successBlock
+                           failureBlock:(void (^)(NSError *))failureBlock
+                          progressBlock:(void (^)(float progress))progressBlock;
+
 #pragma mark - API response method
 - (void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id))failure:(void (^)(NSError *))failureBlock;
 
