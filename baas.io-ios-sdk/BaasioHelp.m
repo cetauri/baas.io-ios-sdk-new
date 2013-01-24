@@ -55,7 +55,6 @@
                                                           failure:failureBlock];
 }
 
-//문의 하기
 - (BaasioRequest*)sendQuestionInBackground:(NSDictionary *)param
                               successBlock:(void (^)(void))successBlock
                               failureBlock:(void (^)(NSError *error))failureBlock

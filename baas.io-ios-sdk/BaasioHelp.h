@@ -22,15 +22,6 @@
 - (BaasioRequest*)getHelpsInBackground:(void (^)(NSArray *array))successBlock
                            failureBlock:(void (^)(NSError *error))failureBlock;
 
-/**
- asynchronously 도움말 검색
- @param keyword keyword
- @param successBlock successBlock
- @param failureBlock failureBlock
-*/
-- (BaasioRequest*)searchHelpsInBackground:(NSString *)keyword
-                             successBlock:(void (^)(NSArray *array))successBlock
-                             failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
  asynchronously 도움말 상세보기
