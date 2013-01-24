@@ -27,19 +27,22 @@
 
 - (void)unsubscribe:(NSError**)error
 {
-    NSString *path = [@"users/" stringByAppendingString:self.username];
+    
+    NSString *path = [@"users/" stringByAppendingString:[BaasioUser currentUser].uuid];
     [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path withMethod:@"DELETE" params:nil error:error];
+    [BaasioUser signOut];
     return;
 }
 
 - (BaasioRequest*)unsubscribeInBackground:(void (^)(void))successBlock
                              failureBlock:(void (^)(NSError *error))failureBlock
 {
-    NSString *path = [@"users/" stringByAppendingString:self.username];
+    NSString *path = [@"users/" stringByAppendingString:[BaasioUser currentUser].uuid];
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                                     withMethod:@"DELETE"
                                                         params:nil
                                                        success:^(id result){
+                                                           [BaasioUser signOut];
                                                            successBlock();
                                                         }
                                                        failure:failureBlock];

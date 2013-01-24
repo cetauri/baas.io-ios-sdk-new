@@ -29,7 +29,6 @@
 		27F2E8F0565C911B20E307BE /* BaasioFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */; };
 		27F2EBB68B17F0A0788E3393 /* BaasioPush.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27F2E4EEDBB127A400CFBA8C /* BaasioPush.h */; };
 		27F2EF1CA361D24482B8CDE9 /* BaasioPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2EE6A9471C3869236C589 /* BaasioPush.m */; };
-		AF09CBC416AEB2D80064DB66 /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF09CBC316AEB2D80064DB66 /* UserTest.m */; };
 		AF09CBCB16AF6C930064DB66 /* NSError+baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AF09CBC916AF6C930064DB66 /* NSError+baasio.m */; };
 		AF09CBCE16AF6CAE0064DB66 /* NSError+baasio.m in Sources */ = {isa = PBXBuildFile; fileRef = AF09CBC916AF6C930064DB66 /* NSError+baasio.m */; };
 		AF244A9016772041009524B8 /* BaasioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AF244A8F16772041009524B8 /* BaasioGroup.m */; };
@@ -40,6 +39,14 @@
 		AF515B5E16703F930005F743 /* BaasioMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AF515B5D16703F930005F743 /* BaasioMessage.m */; };
 		AF76584816788C1C0017C217 /* BaasioRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76584716788C1C0017C217 /* BaasioRequest.m */; };
 		AF76585E16789EC80017C217 /* BaasioNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76585D16789EC70017C217 /* BaasioNetworkManager.m */; };
+		AF76AE0616B146AF00F82916 /* NSError+baasio.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF09CBCA16AF6C930064DB66 /* NSError+baasio.h */; };
+		AF76AE1616B1470000F82916 /* EntityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76AE0816B1470000F82916 /* EntityTest.m */; };
+		AF76AE1716B1470000F82916 /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76AE0916B1470000F82916 /* UserTest.m */; };
+		AF76AE1816B1470000F82916 /* HelprTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76AE0A16B1470000F82916 /* HelprTest.m */; };
+		AF76AE1916B1470000F82916 /* GroupTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76AE0B16B1470000F82916 /* GroupTest.m */; };
+		AF76AE1A16B1470000F82916 /* PushTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76AE1016B1470000F82916 /* PushTest.m */; };
+		AF76AE1B16B1470000F82916 /* QueryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76AE1216B1470000F82916 /* QueryTest.m */; };
+		AF76AE1C16B1470000F82916 /* RelationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF76AE1416B1470000F82916 /* RelationTest.m */; };
 		AF9EF304167EBDE700FDFDDF /* Baasio.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E1165A2BDC0021AA4C /* Baasio.h */; };
 		AF9EF305167EBDE700FDFDDF /* BaasioRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF76584616788C1C0017C217 /* BaasioRequest.h */; };
 		AF9EF306167EBDE700FDFDDF /* BaasioEntity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFB9E3E3165A2BDC0021AA4C /* BaasioEntity.h */; };
@@ -109,6 +116,7 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Versions/A/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				AF76AE0616B146AF00F82916 /* NSError+baasio.h in CopyFiles */,
 				AF2575CC168A9E530037919C /* BaasioHelp.h in CopyFiles */,
 				AF9EF36B167EC22E00FDFDDF /* Baas.h in CopyFiles */,
 				AF9EF36C167EC22E00FDFDDF /* Baasio.h in CopyFiles */,
@@ -153,8 +161,6 @@
 		27F2EC430E1D01B6CAEE6DF4 /* BaasioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioFile.h; sourceTree = "<group>"; };
 		27F2EDE6DD9FE4D30839706E /* FileTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTest.h; sourceTree = "<group>"; };
 		27F2EE6A9471C3869236C589 /* BaasioPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioPush.m; sourceTree = "<group>"; };
-		AF09CBC216AEB2D80064DB66 /* UserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTest.h; sourceTree = "<group>"; };
-		AF09CBC316AEB2D80064DB66 /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
 		AF09CBC916AF6C930064DB66 /* NSError+baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+baasio.m"; path = "category/NSError+baasio.m"; sourceTree = "<group>"; };
 		AF09CBCA16AF6C930064DB66 /* NSError+baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+baasio.h"; path = "category/NSError+baasio.h"; sourceTree = "<group>"; };
 		AF244A8E16772041009524B8 /* BaasioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioGroup.h; sourceTree = "<group>"; };
@@ -170,6 +176,20 @@
 		AF76584716788C1C0017C217 /* BaasioRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioRequest.m; sourceTree = "<group>"; };
 		AF76585C16789EC70017C217 /* BaasioNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaasioNetworkManager.h; sourceTree = "<group>"; };
 		AF76585D16789EC70017C217 /* BaasioNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaasioNetworkManager.m; sourceTree = "<group>"; };
+		AF76AE0816B1470000F82916 /* EntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityTest.m; sourceTree = "<group>"; };
+		AF76AE0916B1470000F82916 /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
+		AF76AE0A16B1470000F82916 /* HelprTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelprTest.m; sourceTree = "<group>"; };
+		AF76AE0B16B1470000F82916 /* GroupTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTest.m; sourceTree = "<group>"; };
+		AF76AE0C16B1470000F82916 /* EntityTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTest.h; sourceTree = "<group>"; };
+		AF76AE0D16B1470000F82916 /* GroupTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupTest.h; sourceTree = "<group>"; };
+		AF76AE0E16B1470000F82916 /* HelprTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelprTest.h; sourceTree = "<group>"; };
+		AF76AE0F16B1470000F82916 /* PushTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTest.h; sourceTree = "<group>"; };
+		AF76AE1016B1470000F82916 /* PushTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTest.m; sourceTree = "<group>"; };
+		AF76AE1116B1470000F82916 /* QueryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryTest.h; sourceTree = "<group>"; };
+		AF76AE1216B1470000F82916 /* QueryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryTest.m; sourceTree = "<group>"; };
+		AF76AE1316B1470000F82916 /* RelationTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationTest.h; sourceTree = "<group>"; };
+		AF76AE1416B1470000F82916 /* RelationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationTest.m; sourceTree = "<group>"; };
+		AF76AE1516B1470000F82916 /* UserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTest.h; sourceTree = "<group>"; };
 		AFB28B3B16AE889100A97240 /* Baasio+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Baasio+Private.h"; path = "category/Baasio+Private.h"; sourceTree = "<group>"; };
 		AFB9E3E1165A2BDC0021AA4C /* Baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baasio.h; sourceTree = "<group>"; };
 		AFB9E3E2165A2BDC0021AA4C /* Baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baasio.m; sourceTree = "<group>"; };
@@ -370,8 +390,20 @@
 		AFD93F21165A2B0E00FC9ED0 /* baas.io-ios-sdkTests */ = {
 			isa = PBXGroup;
 			children = (
-				AF09CBC216AEB2D80064DB66 /* UserTest.h */,
-				AF09CBC316AEB2D80064DB66 /* UserTest.m */,
+				AF76AE0E16B1470000F82916 /* HelprTest.h */,
+				AF76AE0A16B1470000F82916 /* HelprTest.m */,
+				AF76AE0D16B1470000F82916 /* GroupTest.h */,
+				AF76AE0B16B1470000F82916 /* GroupTest.m */,
+				AF76AE0C16B1470000F82916 /* EntityTest.h */,
+				AF76AE0816B1470000F82916 /* EntityTest.m */,
+				AF76AE0F16B1470000F82916 /* PushTest.h */,
+				AF76AE1016B1470000F82916 /* PushTest.m */,
+				AF76AE1116B1470000F82916 /* QueryTest.h */,
+				AF76AE1216B1470000F82916 /* QueryTest.m */,
+				AF76AE1316B1470000F82916 /* RelationTest.h */,
+				AF76AE1416B1470000F82916 /* RelationTest.m */,
+				AF76AE1516B1470000F82916 /* UserTest.h */,
+				AF76AE0916B1470000F82916 /* UserTest.m */,
 				27F2EDE6DD9FE4D30839706E /* FileTest.h */,
 				27F2E22B2FFF3122F1CDEA60 /* FileTest.m */,
 				AFD93F22165A2B0E00FC9ED0 /* Supporting Files */,
@@ -533,7 +565,13 @@
 				AF09CBCE16AF6CAE0064DB66 /* NSError+baasio.m in Sources */,
 				AF26A27F166667F5006A7225 /* JSONKit.m in Sources */,
 				27F2E0195C0A4CC3D57C60FD /* FileTest.m in Sources */,
-				AF09CBC416AEB2D80064DB66 /* UserTest.m in Sources */,
+				AF76AE1616B1470000F82916 /* EntityTest.m in Sources */,
+				AF76AE1716B1470000F82916 /* UserTest.m in Sources */,
+				AF76AE1816B1470000F82916 /* HelprTest.m in Sources */,
+				AF76AE1916B1470000F82916 /* GroupTest.m in Sources */,
+				AF76AE1A16B1470000F82916 /* PushTest.m in Sources */,
+				AF76AE1B16B1470000F82916 /* QueryTest.m in Sources */,
+				AF76AE1C16B1470000F82916 /* RelationTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
