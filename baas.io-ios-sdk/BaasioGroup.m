@@ -47,6 +47,11 @@
                failureBlock:failureBlock];
 }
 
+- (BaasioEntity *)update:(NSError **)error
+{
+    return [super update:error];
+}
+
 
 - (BaasioRequest*)updateInBackground:(void (^)(BaasioGroup *group))successBlock
                         failureBlock:(void (^)(NSError *error))failureBlock
