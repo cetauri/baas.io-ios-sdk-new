@@ -115,7 +115,7 @@
                                                              withBody:_data
                                                                params:self.dictionary
                                                              filename:self.filename
-                                                          contentType:_contentType
+                                                          contentType:self.contentType
                                                          successBlock:^(BaasioFile *file) {
                                                              successBlock(file);
                                                          }
@@ -134,7 +134,7 @@
                                                               withBody:_data
                                                                 params:self.dictionary
                                                               filename:self.filename
-                                                           contentType:_contentType
+                                                           contentType:self.contentType
                                                           successBlock:^(BaasioFile *file) {
                                                               successBlock(file);
                                                           }
@@ -143,6 +143,13 @@
 }
 
 #pragma mark - entity
+- (void)setContentType:(NSString *)contentType{
+    [super setObject:contentType forKey:@"content-type"];
+}
+
+- (NSString*)contentType{
+    return [super objectForKey:@"content-type"];
+}
 
 - (void)setFilename:(NSString *)filename{
     [super setObject:filename forKey:@"filename"];

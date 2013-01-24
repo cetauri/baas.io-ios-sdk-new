@@ -30,12 +30,13 @@
 static NSString *uuid;
 
 - (void)test_1_Upload{
-    NSData *data = [@"Baas.io is great!" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [@"Baas.io is great! " dataUsingEncoding:NSUTF8StringEncoding];
     BaasioFile *file = [[BaasioFile alloc] init];
     file.data = data;
-    file.filename = @"권오상6.txt";
+    file.filename = @"김상열7.txt";
     file.contentType = @"application/json";
     [file setObject:@"cetauri" forKey:@"nickname"];
+    [file setObject:@"권오상" forKey:@"realname"];
 
     [file fileUploadInBackground:^(BaasioFile *file) {
         NSLog(@"success : %@", file.uuid);
@@ -119,6 +120,7 @@ static NSString *uuid;
     BaasioFile *file = [[BaasioFile alloc] init];
     file.uuid = uuid;
     [file setObject:@"권오상" forKey:@"cetauri"];
+    [file setObject:@"짐승" forKey:@"realname"];
     [file updateInBackground:^(BaasioFile *entity){
                     NSLog(@"success : %@", entity.description);
 
@@ -142,10 +144,11 @@ static NSString *uuid;
     file.uuid = uuid;
     file.data = [@"Updated Baas.io is great!" dataUsingEncoding:NSUTF8StringEncoding];
     
+    file.filename = @"1.txt";
     [file setObject:@"Kwon oh sang" forKey:@"cetauri"];
-    [file updateInBackground:^(BaasioFile *entity){
+    [file fileUpdateInBackground:^(BaasioFile *entity){
                     NSLog(@"success : %@", entity.description);
-                    
+        
                     exitRunLoop = YES;
                 }
                 failureBlock:^(NSError *error) {
@@ -153,11 +156,18 @@ static NSString *uuid;
                     
                     STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
                     exitRunLoop = YES;
-                }];
+                }
+     
+                   progressBlock:^(float progress){
+                       NSLog(@"progress : %f", progress);
+                   }];
     
     [self runTestLoop];
 }
 
+- (void)test_7_updateFile{
+    [self test_3_Download];
+}
 - (void)test_9_Delete{
 
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"file.uuid"];

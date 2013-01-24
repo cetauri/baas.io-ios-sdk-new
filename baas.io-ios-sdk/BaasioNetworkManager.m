@@ -116,26 +116,36 @@
                                                                          path:path
                                                                    parameters:nil
                                                     constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-                                                                        NSString *_contentType = contentType;
-                                                                        if (_contentType == nil || [_contentType isEqualToString:@""]) {
-                                                                            _contentType = [self mimeTypeForFileAtPath:filename];
-                                                                        }
+                                                        NSMutableDictionary *mutableParams = [NSMutableDictionary dictionaryWithDictionary:params];
+                                                        if (bodyData != nil){
+                                                            NSString *_contentType = contentType;
+                                                            if (_contentType == nil || [_contentType isEqualToString:@""]) {
+                                                                _contentType = [self mimeTypeForFileAtPath:filename];
+                                                                [mutableParams setObject:_contentType forKey:@"content-type"];
+                                                            }
+                                                            
+                                                            [formData appendPartWithFileData:bodyData
+                                                                                        name:@"file"
+                                                                                    fileName:filename
+                                                                                    mimeType:_contentType];
+                                                        }
+                                                        
+                                                        if (bodyData != nil){
+                                                            
+                                                            NSError *error;
+                                                            NSData *data = [mutableParams JSONDataWithOptions:JKSerializeOptionNone error:&error];
+                                                            
+                                                            [formData appendPartWithFileData:data
+                                                                                        name:@"entity"
+                                                                                    fileName:@"entity"
+                                                                                    mimeType:@"application/json"];
+                                                        }
 
-                                                                        [formData appendPartWithFileData:bodyData
-                                                                                                    name:@"file"
-                                                                                                fileName:filename
-                                                                                                mimeType:_contentType];
 
-                                                                    }];
+                                                    }];
+    
     request = [[Baasio sharedInstance] setAuthorization:request];
 
-    NSError *error;
-    NSData *data = [params JSONDataWithOptions:JKSerializeOptionNone error:&error];
-    if (error != nil) {
-        failureBlock(error);
-        return nil;
-    }
-    request.HTTPBody = data;
 
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[BaasioNetworkManager sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
@@ -205,7 +215,6 @@
 #pragma mark - etc
 
 - (NSString*) mimeTypeForFileAtPath: (NSString *) path {
-
     // Borrowed from http://stackoverflow.com/questions/5996797/determine-mime-type-of-nsdata-loaded-from-a-file
     // itself, derived from  http://stackoverflow.com/questions/2439020/wheres-the-iphone-mime-type-database
     CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
