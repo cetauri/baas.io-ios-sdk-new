@@ -9,6 +9,7 @@
 #import "BaasioQuery.h"
 #import "Baasio.h"
 #import "BaasioEntity.h"
+#import "UnitTestConstant.h"
 @implementation QueryTest {
     BOOL exitRunLoop;
 }
@@ -16,8 +17,8 @@
 {
     [super setUp];
     exitRunLoop = NO;
-
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+    
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
 }
 
 - (void)tearDown

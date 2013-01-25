@@ -10,19 +10,22 @@
 #import "BaasioGroup.h"
 #import "BaasioQuery.h"
 #import "Baasio.h"
+#import "UnitTestConstant.h"
 @implementation GroupTest {
     BOOL exitRunLoop;
     NSString *groupName;
 }
-static NSString *uuid;
+NSString *uuid;
 
 - (void)setUp
 {
     //    [super setUp];
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
     // Set-up code here.
     
     groupName = @"path";
+    uuid = [[NSUserDefaults standardUserDefaults]objectForKey:@"group.uuid"];
+
 }
 
 - (void)tearDown
@@ -37,6 +40,12 @@ static NSString *uuid;
     [group saveInBackground:^(BaasioGroup *group){
                     NSLog(@"group : %@", group.description);
                     uuid = group.uuid;
+        
+        NSLog(@"group.created : %@", group.created);
+        NSLog(@"group.uuid : %@", group.uuid);
+        
+                    [[NSUserDefaults standardUserDefaults] setObject:group.uuid forKey:@"group.uuid"];
+                    [[NSUserDefaults standardUserDefaults]synchronize];
                     exitRunLoop = true;
                     
                 }
@@ -141,6 +150,7 @@ static NSString *uuid;
 }
 
 - (void)test_6_deleteGroup{
+    
    BaasioGroup *group = [[BaasioGroup alloc]init];
     group.uuid = uuid;
     [group deleteInBackground:^(void){

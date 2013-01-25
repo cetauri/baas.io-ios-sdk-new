@@ -8,6 +8,7 @@
 #import "FileTest.h"
 #import "BaasioFile.h"
 #import "Baasio.h"
+#import "UnitTestConstant.h"
 
 @implementation FileTest {
     BOOL exitRunLoop;
@@ -16,9 +17,8 @@
 - (void)setUp
 {
 //    [super setUp];
-//    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
-    [Baasio setApplicationInfo:@"https://stgapi.baas.io" baasioID:@"baas107" applicationName:@"puddings"];
-//    + (void)setApplicationInfo:(NSString *)apiURL baasioID:(NSString *)baasioID applicationName:(NSString *)applicationName
+    
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
     // Set-up code here.
 }
 
@@ -189,8 +189,8 @@ static NSString *uuid;
 
 
 - (void)runTestLoop{
-    while (!exitRunLoop){
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-    }
+//    while (!exitRunLoop){
+//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+//    }
 }
 @end

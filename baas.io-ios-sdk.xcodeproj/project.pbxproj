@@ -190,6 +190,7 @@
 		AF76AE1316B1470000F82916 /* RelationTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationTest.h; sourceTree = "<group>"; };
 		AF76AE1416B1470000F82916 /* RelationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationTest.m; sourceTree = "<group>"; };
 		AF76AE1516B1470000F82916 /* UserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTest.h; sourceTree = "<group>"; };
+		AF87FF5016B24ABE0095C815 /* UnitTestConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestConstant.h; sourceTree = "<group>"; };
 		AFB28B3B16AE889100A97240 /* Baasio+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Baasio+Private.h"; path = "category/Baasio+Private.h"; sourceTree = "<group>"; };
 		AFB9E3E1165A2BDC0021AA4C /* Baasio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baasio.h; sourceTree = "<group>"; };
 		AFB9E3E2165A2BDC0021AA4C /* Baasio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baasio.m; sourceTree = "<group>"; };
@@ -390,6 +391,7 @@
 		AFD93F21165A2B0E00FC9ED0 /* baas.io-ios-sdkTests */ = {
 			isa = PBXGroup;
 			children = (
+				AF87FF5016B24ABE0095C815 /* UnitTestConstant.h */,
 				AF76AE0E16B1470000F82916 /* HelprTest.h */,
 				AF76AE0A16B1470000F82916 /* HelprTest.m */,
 				AF76AE0D16B1470000F82916 /* GroupTest.h */,

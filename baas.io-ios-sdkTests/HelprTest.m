@@ -9,6 +9,7 @@
 #import "HelprTest.h"
 #import "BaasioHelp.h"
 #import "BaasioUser.h"
+#import "UnitTestConstant.h"
 @implementation HelprTest {
     BOOL exitRunLoop;
 }
@@ -17,9 +18,7 @@
 - (void)setUp
 {
     [super setUp];
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
-    // Set-up code here.
-    
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
 }
 
 - (void)tearDown

@@ -10,6 +10,7 @@
 #import "BaasioEntity.h"
 #import "BaasioQuery.h"
 #import "Baasio.h"
+#import "UnitTestConstant.h"
 @implementation RelationTest{
     BOOL exitRunLoop;
     NSString *relationship;
@@ -20,7 +21,7 @@
 - (void)setUp
 {
     //    [super setUp];
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
     // Set-up code here.
     
     relationship = @"relationship";

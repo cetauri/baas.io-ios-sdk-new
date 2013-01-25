@@ -8,6 +8,7 @@
 #import "UserTest.h"
 #import "Baasio.h"
 #import "BaasioUser.h"
+#import "UnitTestConstant.h"
 
 @implementation UserTest {
     BOOL exitRunLoop;
@@ -18,8 +19,7 @@
     [super setUp];
     exitRunLoop = NO;
 
-//    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
-    [Baasio setApplicationInfo:@"https://devapi.baas.io" baasioID:@"test-organization" applicationName:@"test-app"];
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
 }
 
 - (void)tearDown

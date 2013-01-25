@@ -8,6 +8,7 @@
 #import "PushTest.h"
 #import "BaasioPush.h"
 #import "Baasio.h"
+#import "UnitTestConstant.h"
 @implementation PushTest {
     BOOL exitRunLoop;
 }
@@ -16,7 +17,7 @@
     [super setUp];
     exitRunLoop = NO;
     
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
     
     // Set-up code here.
 }
