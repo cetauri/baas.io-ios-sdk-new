@@ -31,7 +31,7 @@
     _user = user;
 }
 
-- (BaasioEntity *)save:(NSError **)error
+- (BaasioGroup *)save:(NSError **)error
 {
     return [super save:error];
 }
@@ -40,7 +40,7 @@
                         failureBlock:(void (^)(NSError *error))failureBlock{
     return [super saveInBackground:^(BaasioEntity *entity){
                     BaasioGroup *group = [[BaasioGroup alloc]init];
-        [group set:entity.dictionary];
+                    [group set:entity.dictionary];
                     successBlock(group);
                 }
                failureBlock:failureBlock];
@@ -57,26 +57,10 @@
 {
     return [super updateInBackground:^(BaasioEntity *entity){
                             BaasioGroup *group = [[BaasioGroup alloc]init];
-        [group set:entity.dictionary];
+                            [group set:entity.dictionary];
                             successBlock(group);
                         }
                         failureBlock:failureBlock];
-}
-
-
-- (void)delete:(NSError **)error
-{
-    return; [super delete:error];
-}
-
-- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
-                        failureBlock:(void (^)(NSError *error))failureBlock{
-    {
-        return [super deleteInBackground:^(void){
-                                successBlock();
-                            }
-                            failureBlock:failureBlock];
-    }
 }
 
 

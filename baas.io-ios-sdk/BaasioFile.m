@@ -109,16 +109,11 @@
                         failureBlock:(void (^)(NSError *error))failureBlock
 {
     return [super updateInBackground:^(BaasioEntity *entity){
-        BaasioFile *_file = [[BaasioFile alloc]init];
-        [_file set:entity.dictionary];
-        successBlock(_file);
-    }
+                            BaasioFile *_file = [[BaasioFile alloc]init];
+                            [_file set:entity.dictionary];
+                            successBlock(_file);
+                        }
                         failureBlock:failureBlock];
-}
-- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
-                        failureBlock:(void (^)(NSError *))failureBlock
-{
-    return [super deleteInBackground:successBlock failureBlock:failureBlock];
 }
 
 - (void) connect:(BaasioEntity *)entity
@@ -135,6 +130,7 @@
     [NSException raise:@"BaasioUnsupportedException" format:@"Don't connect in Baasiofile."];
     return nil;
 }
+
 
 #pragma mark - entity
 - (void)setContentType:(NSString *)contentType{

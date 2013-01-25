@@ -89,4 +89,27 @@
  */
 - (BaasioRequest*)removeInBackground:(void (^)(void))successBlock
                         failureBlock:(void (^)(NSError *error))failureBlock;
+
+/**
+ objectForKey
+ @param key key
+ */
+- (NSString *)objectForKey:(NSString *)key;
+
+/**
+ setObject
+ @param value value
+ @param key key
+ */
+- (void)setObject:(id)value forKey:(NSString *)key;
+
+/**
+ description
+ */
+- (NSString *)description;
+
+/**
+ dictionary
+ */
+- (NSDictionary *)dictionary;
 @end
