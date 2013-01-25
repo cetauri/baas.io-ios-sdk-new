@@ -17,16 +17,33 @@
 @property(strong) NSString *contentType;
 @property(strong) NSData *data;
 
-
+/**
+ file download asynchronously
+ 
+ @param downloadPath downloadPath
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ @param progressBlock progressBlock
+ */
 - (BaasioRequest*)fileDownloadInBackground:(NSString *)downloadPath
                               successBlock:(void (^)(NSString *))successBlock
                               failureBlock:(void (^)(NSError *))failureBlock
                              progressBlock:(void (^)(float progress))progressBlock;
-
+/**
+ file upload  asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ @param progressBlock progressBlock
+ */
 - (BaasioRequest*)fileUploadInBackground:(void (^)(BaasioFile *file))successBlock
                             failureBlock:(void (^)(NSError *))failureBlock
                            progressBlock:(void (^)(float progress))progressBlock;
-
+/**
+ file update asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ @param progressBlock progressBlock
+ */
 - (BaasioRequest*)fileUpdateInBackground:(void (^)(BaasioFile *file))successBlock
                             failureBlock:(void (^)(NSError *))failureBlock
                            progressBlock:(void (^)(float progress))progressBlock;
