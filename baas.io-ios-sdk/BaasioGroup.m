@@ -8,7 +8,6 @@
 
 #import "BaasioGroup.h"
 #import "BaasioNetworkManager.h"
-#import "Baasio+Private.h"
 
 @implementation BaasioGroup{
     NSString *_user;
@@ -41,7 +40,7 @@
                         failureBlock:(void (^)(NSError *error))failureBlock{
     return [super saveInBackground:^(BaasioEntity *entity){
                     BaasioGroup *group = [[BaasioGroup alloc]init];
-                    [group setEntity:entity.dictionary];
+        [group set:entity.dictionary];
                     successBlock(group);
                 }
                failureBlock:failureBlock];
@@ -58,7 +57,7 @@
 {
     return [super updateInBackground:^(BaasioEntity *entity){
                             BaasioGroup *group = [[BaasioGroup alloc]init];
-                            [group setEntity:entity.dictionary];
+        [group set:entity.dictionary];
                             successBlock(group);
                         }
                         failureBlock:failureBlock];
@@ -102,7 +101,7 @@
                                        NSDictionary *dictionary = result[@"entities"][0];
                                        
                                        BaasioGroup *group = [[BaasioGroup alloc]init];
-                                       [group setEntity:dictionary];
+                                       [group set:dictionary];
                                        successBlock(group);
                                        
                                    }

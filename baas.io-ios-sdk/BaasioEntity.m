@@ -23,7 +23,7 @@
     return self;
 }
 
--(void)setEntity:(NSDictionary *)entity
+-(void)set:(NSDictionary *)entity
 {
     _entity = [NSMutableDictionary dictionaryWithDictionary:entity];
 }
@@ -56,7 +56,7 @@
                                        NSString *type = response[@"type"];
                                        
                                        BaasioEntity *entity = [BaasioEntity entitytWithName:type];
-                                       [entity setEntity:dictionary];
+                                       [entity set:dictionary];
                                        
                                        successBlock(entity);
                                    }
@@ -111,7 +111,7 @@
                                        NSString *type = response[@"type"];
                                        
                                        BaasioEntity *entity = [BaasioEntity entitytWithName:type];
-                                       [entity setEntity:dictionary];
+                                       [entity set:dictionary];
                                        
                                        successBlock(entity);
                                    }
@@ -190,9 +190,9 @@
 
 #pragma mark - Entity
 
-+ (BaasioEntity *)getEntity:(NSString*)entityName
-                       uuid:(NSString *)uuid
-                      error:(NSError **)error
++ (BaasioEntity *)get:(NSString *)entityName
+                 uuid:(NSString *)uuid
+                error:(NSError **)error
 {
     NSString *path = [entityName stringByAppendingFormat:@"/%@", uuid];
     return [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
@@ -201,10 +201,10 @@
                                                                 error:error];
 }
 
-+ (BaasioRequest*)getEntityInBackground:(NSString*)entityName
-                         uuid:(NSString *)uuid
-                           successBlock:(void (^)(BaasioEntity *entity))successBlock
-                           failureBlock:(void (^)(NSError *error))failureBlock;
++ (BaasioRequest*)getInBackground:(NSString *)entityName
+                             uuid:(NSString *)uuid
+                     successBlock:(void (^)(BaasioEntity *entity))successBlock
+                     failureBlock:(void (^)(NSError *error))failureBlock;
 {
     NSString *path = [entityName stringByAppendingFormat:@"/%@", uuid];
 
@@ -218,7 +218,7 @@
                                        NSString *type = response[@"type"];
                                        
                                        BaasioEntity *entity = [BaasioEntity entitytWithName:type];
-                                       [entity setEntity:dictionary];
+                                       [entity set:dictionary];
                                        
                                        successBlock(entity);
                                    }

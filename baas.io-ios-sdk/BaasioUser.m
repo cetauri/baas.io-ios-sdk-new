@@ -70,7 +70,7 @@
     
     NSDictionary *userReponse = response[@"user"];
     BaasioUser *loginUser = [BaasioUser user];
-    [loginUser setEntity:userReponse];
+    [loginUser set:userReponse];
     [baasio setCurrentUser:loginUser];
     
     
@@ -98,7 +98,7 @@
                                                            
                                                            NSDictionary *userReponse = response[@"user"];
                                                            BaasioUser *loginUser = [BaasioUser user];
-                                                           [loginUser setEntity:userReponse];
+                                                           [loginUser set:userReponse];
                                                            [baasio setCurrentUser:loginUser];
                                                            
                                                            successBlock();

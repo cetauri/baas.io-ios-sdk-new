@@ -95,14 +95,14 @@
 - (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
                      failureBlock:(void (^)(NSError *))failureBlock
 {
-    return [BaasioFile getEntityInBackground:self.entityName
-                                        uuid:self.uuid
-                                successBlock:^(BaasioEntity *entity){
-                                    BaasioFile *_file = [[BaasioFile alloc]init];
-                                    [_file setEntity:entity.dictionary];
-                                    successBlock(_file);
-                                }
-                                failureBlock:failureBlock];
+    return [BaasioFile getInBackground:self.entityName
+                                  uuid:self.uuid
+                          successBlock:^(BaasioEntity *entity) {
+                              BaasioFile *_file = [[BaasioFile alloc] init];
+                              [_file set:entity.dictionary];
+                              successBlock(_file);
+                          }
+                          failureBlock:failureBlock];
 }
 
 - (BaasioRequest*)updateInBackground:(void (^)(BaasioFile *file))successBlock
@@ -110,7 +110,7 @@
 {
     return [super updateInBackground:^(BaasioEntity *entity){
         BaasioFile *_file = [[BaasioFile alloc]init];
-        [_file setEntity:entity.dictionary];
+        [_file set:entity.dictionary];
         successBlock(_file);
     }
                         failureBlock:failureBlock];

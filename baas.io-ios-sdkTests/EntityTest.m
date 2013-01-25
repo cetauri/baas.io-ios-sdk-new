@@ -80,17 +80,17 @@ static NSString *uuid;
 - (void)test_4_EntityInfo
 {
     NSLog(@"_entity : %@", uuid);
-    [BaasioEntity getEntityInBackground:@"GameScore"
+    [BaasioEntity getInBackground:@"GameScore"
                              uuid:uuid
                      successBlock:^(BaasioEntity *entity) {
                          NSLog(@"entity : %@", entity.description);
-                        exitRunLoop = YES;
-                    }
-                    failureBlock:^(NSError *error) {
-                        NSLog(@"fail : %@", error.localizedDescription);
-                        STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                        exitRunLoop = YES;
-                    }];
+                         exitRunLoop = YES;
+                     }
+                     failureBlock:^(NSError *error) {
+                         NSLog(@"fail : %@", error.localizedDescription);
+                         STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                         exitRunLoop = YES;
+                     }];
 
     [self runTestLoop];
 }

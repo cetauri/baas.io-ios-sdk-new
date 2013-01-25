@@ -155,7 +155,7 @@
                                                                                             NSDictionary *dictionary = JSON[@"entities"][0];
 
                                                                                             BaasioFile *_file = [[BaasioFile alloc]init];
-                                                                                            [_file setEntity:dictionary];
+                                                                                            [_file set:dictionary];
                                                                                             
                                                                                             successBlock(_file);
                                                                                         }
