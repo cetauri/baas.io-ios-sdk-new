@@ -46,7 +46,7 @@
 
  @param username username
  @param password password
- @param failureBlock failureBlock
+ @param successBlock successBlock
  @param failureBlock failureBlock
  */
 + (BaasioRequest*)signInBackground:(NSString *)username
