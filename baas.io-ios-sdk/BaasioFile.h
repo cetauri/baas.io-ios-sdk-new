@@ -48,13 +48,28 @@
                             failureBlock:(void (^)(NSError *))failureBlock
                            progressBlock:(void (^)(float progress))progressBlock;
 
-- (BaasioRequest*)updateInBackground:(void (^)(id entity))successBlock
+/**
+ update asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
+- (BaasioRequest*)updateInBackground:(void (^)(BaasioFile *file))successBlock
               failureBlock:(void (^)(NSError *error))failureBlock;
 
 
+/**
+ get asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
 - (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
                      failureBlock:(void (^)(NSError *))failureBlock;
 
+/**
+ delete asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
               failureBlock:(void (^)(NSError *))failureBlock;
 
