@@ -18,7 +18,9 @@
 {
 //    [super setUp];
     
-    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
+//    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
+    [Baasio setApplicationInfo:@"https://stgapi.baas.io" baasioID:@"baas107" applicationName:@"puddings"];
+
     // Set-up code here.
 }
 
@@ -122,7 +124,7 @@ static NSString *uuid;
     [file setObject:@"권오상" forKey:@"cetauri"];
     [file setObject:@"짐승" forKey:@"realname"];
     [file updateInBackground:^(BaasioFile *entity){
-                    NSLog(@"success : %@", entity.description);
+                    NSLog(@"success : %@, %@", entity.description, entity.filename);
 
                     exitRunLoop = YES;
                 }
@@ -189,8 +191,8 @@ static NSString *uuid;
 
 
 - (void)runTestLoop{
-//    while (!exitRunLoop){
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-//    }
+    while (!exitRunLoop){
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+    }
 }
 @end
