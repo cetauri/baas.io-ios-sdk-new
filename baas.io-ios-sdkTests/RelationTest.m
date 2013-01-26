@@ -76,21 +76,6 @@
 }
 
 
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship/gamescore/1f09ce74-44e2-11e2-9c36-06ebb80000ba
-//
-//
-//
-//
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship
-//
-//
-//
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship/gamescore/1f09ce74-44e2-11e2-9c36-06ebb80000ba
-//
-//
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship/gamescore/1f09ce74-44e2-11e2-9c36-06ebb80000ba
-//
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship
 //- (void)test_2_selectConnect{
 //    BaasioQuery *query = [BaasioQuery queryWithRelationship:relationship];
 //    
