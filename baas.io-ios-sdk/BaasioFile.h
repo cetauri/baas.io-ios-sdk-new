@@ -65,13 +65,69 @@
 - (BaasioRequest*)getInBackground:(void (^)(BaasioFile *file))successBlock
                      failureBlock:(void (^)(NSError *))failureBlock;
 
+
+#pragma mark - for super document
+/**
+ delete
+ @param error error
+ */
+- (void)delete:(NSError **)error;
+
 /**
  delete asynchronously
  @param successBlock successBlock
  @param failureBlock failureBlock
  */
 - (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
-              failureBlock:(void (^)(NSError *))failureBlock;
+                        failureBlock:(void (^)(NSError *error))failureBlock;
+
+/**
+ set
+ @param entity entity
+ */
+-(void)set:(NSDictionary *)entity;
+
+/**
+ connect
+ @param entity entity
+ @param relationship relationship
+ @param error error
+ */
+- (void) connect:(BaasioEntity *)entity
+    relationship:(NSString*)relationship
+           error:(NSError **)error;
+/**
+ connect asynchronously
+ @param entity entity
+ @param relationship relationship
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
+- (BaasioRequest*)connectInBackground:(BaasioEntity *)entity
+                         relationship:(NSString*)relationship
+                         successBlock:(void (^)(void))successBlock
+                         failureBlock:(void (^)(NSError *error))failureBlock;
+/**
+ disconnect
+ @param entity entity
+ @param relationship relationship
+ @param error error
+ */
+- (void) disconnect:(BaasioEntity *)entity
+       relationship:(NSString*)relationship
+              error:(NSError **)error;
+
+/**
+ disconnect asynchronously
+ @param entity entity
+ @param relationship relationship
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
+- (BaasioRequest*)disconnectInBackground:(BaasioEntity *)entity
+                            relationship:(NSString*)relationship
+                            successBlock:(void (^)(void))successBlock
+                            failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
  objectForKey
@@ -84,6 +140,7 @@
  @param key key
  */
 - (void)setObject:(id)value forKey:(NSString *)key;
+
 
 /**
  description
