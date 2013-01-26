@@ -42,6 +42,7 @@
 
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            [[NetworkActivityIndicatorManager sharedInstance]hide];
                                                                                             successBlock(downloadPath);
                                                                                         }
                                                                                         failure:failure];
