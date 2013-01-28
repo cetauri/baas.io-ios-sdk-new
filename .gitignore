@@ -26,3 +26,4 @@ build/
 # AppCode files
 .idea/
 
+docset-installed.txt
