@@ -42,10 +42,14 @@
 {
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
     NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
-
+    
+    NSDictionary *params = @{
+        @"state" : [NSNumber numberWithBool:false]
+    };
+    
     [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
                                                     withMethod:@"PUT"
-                                                        params:nil
+                                                        params:params
                                                          error:error];
     return;
 }
@@ -54,14 +58,18 @@
 {
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
     NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
+
+    NSDictionary *params = @{
+        @"state" : [NSNumber numberWithBool:false]
+    };
     
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                withMethod:@"DELETE"
-                                    params:nil
-                                   success:^(id result){
-                                       successBlock();
-                                   }
-                                   failure:failureBlock];
+                                                        withMethod:@"PUT"
+                                                            params:params
+                                                           success:^(id result){
+                                                               successBlock();
+                                                           }
+                                                           failure:failureBlock];
 }
 
 - (void)register:(NSString *)deviceID
