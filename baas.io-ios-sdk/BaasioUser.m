@@ -20,6 +20,26 @@
     return user;
 }
 
+- (BaasioUser *)update:(NSError **)error
+{
+    BaasioEntity *entity = [super update:error];
+    BaasioUser *user = [[BaasioUser alloc]init];
+    [user set:entity.dictionary];
+    return user;
+}
+
+
+- (BaasioRequest*)updateInBackground:(void (^)(BaasioUser *group))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock
+{
+    return [super updateInBackground:^(BaasioEntity *entity){
+                            BaasioUser *user = [[BaasioUser alloc]init];
+                            [user set:entity.dictionary];
+                            successBlock(user);
+                        }
+                        failureBlock:failureBlock];
+}
+
 + (void)signOut {
     [[Baasio sharedInstance] setCurrentUser:nil];
     [[Baasio sharedInstance] setToken:nil];
@@ -91,19 +111,23 @@
                                                     withMethod:@"POST"
                                                         params:params
                                                        success:^(id result){
-                                                           NSDictionary *response = (NSDictionary *)result;
-                                                           Baasio *baasio = [Baasio sharedInstance];
-                                                           NSString *access_token = response[@"access_token"];
-                                                           [baasio setToken:access_token];
-                                                           
-                                                           NSDictionary *userReponse = response[@"user"];
-                                                           BaasioUser *loginUser = [BaasioUser user];
-                                                           [loginUser set:userReponse];
-                                                           [baasio setCurrentUser:loginUser];
-                                                           
+                                                           [self saveLoginInfomation:result];
+
                                                            successBlock();
                                                        }
                                                        failure:failureBlock];
+}
+
++ (void)saveLoginInfomation:(id)result {
+    NSDictionary *response = (NSDictionary *)result;
+    Baasio *baasio = [Baasio sharedInstance];
+    NSString *access_token = response[@"access_token"];
+    [baasio setToken:access_token];
+
+    NSDictionary *userReponse = response[@"user"];
+    BaasioUser *loginUser = [BaasioUser user];
+    [loginUser set:userReponse];
+    [baasio setCurrentUser:loginUser];
 }
 
 + (void)signUp:(NSString *)username
@@ -156,14 +180,15 @@
                             };
 
     NSString *path = @"auth/facebook";
-    [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
-                                                    withMethod:@"GET"
-                                                        params:params
-                                                         error:error];
+    id result = [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
+                                                                withMethod:@"GET"
+                                                                    params:params
+                                                                     error:error];
+    [self saveLoginInfomation:result];
 }
 
 + (BaasioRequest*)signUpViaFacebookInBackground:(NSString *)accessToken
-                                          error:(void (^)(void))successBlock
+                                   successBlock:(void (^)(void))successBlock
                                    failureBlock:(void (^)(NSError *error))failureBlock
 {
     NSDictionary *params = @{
@@ -175,6 +200,7 @@
                                                     withMethod:@"GET"
                                                         params:params
                                                        success:^(id result){
+                                                           [self saveLoginInfomation:result];
                                                            successBlock();
                                                        }
                                                        failure:failureBlock];
@@ -188,12 +214,12 @@
 }
 
 + (BaasioRequest*)signInViaFacebookInBackground:(NSString *)accessToken
-                                          error:(void (^)(void))successBlock
+                                   successBlock:(void (^)(void))successBlock
                                    failureBlock:(void (^)(NSError *error))failureBlock
 {
     return [self signUpViaFacebookInBackground:accessToken
-                                  error:successBlock
-                           failureBlock:failureBlock];
+                                  successBlock:successBlock
+                                  failureBlock:failureBlock];
 }
 
 

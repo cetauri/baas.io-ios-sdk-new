@@ -44,48 +44,51 @@
 {
     NSError *error = nil;
     [BaasioUser signIn:@"cetauri" password:@"cetauri" error:&error];
-    NSLog(@"response : ---------------------- %@", error.localizedDescription );
+    if (!error) {
+        //성공
+        NSLog(@"Success");
+    } else {
+        //실패
+        NSLog(@"Error: %@", error.localizedDescription);
+    }
 }
 
 - (void)test_sync_3_unsubscribe
 {
-    BaasioUser *user = [BaasioUser user];
+
+
+    BaasioUser *user = [BaasioUser currentUser];
     user.username = @"cetauri";
-    
-    NSError *error = nil;
-    [user unsubscribe:&error];
-    NSLog(@"response : ---------------------- %@", error.localizedDescription );
-    
-    [self runTestLoop];
+    [user updateInBackground:^(BaasioUser *user) {
+                   	    NSLog(@"success.");
+                    }
+                    failureBlock:^(NSError *error) {
+                    	NSLog(@"error : %@", error.localizedDescription);
+                    }];
+
 }
 
 //- (void)test_1_SignUp
 //{
-//    BaasioUser *user = [BaasioUser user];
-//    user.username = @"cetauri";
-//    user.email = @"cetauri@gmail.com";
-//    user.name = @"권오상";
-//    user.password = @"cetauri";
 //
-//    [user signUpInBackground:^(void) {
-//            NSLog(@"success");
-//            exitRunLoop = YES;
-//          }
-//          failureBlock:^(NSError *error) {
-//              NSLog(@"fail : %@", error.localizedDescription);
-//              STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-//              exitRunLoop = YES;
-//          }];
-//        [self runTestLoop];
+//
+//    [BaasioUser signUpInBackground:@"My ID"
+//                          password:@"My Password"
+//                              name:@"My name"
+//                             email:@"email@baas.io"
+//                      successBlock:^(void) {
+//                          NSLog(@"success");
+//                      }
+//                      failureBlock:^(NSError *error) {
+//                          NSLog(@"fail : %@", error.localizedDescription);
+//                      }];
 //}
 //
 //- (void)test_2_SignIn
 //{
-//    BaasioUser *user = [BaasioUser user];
-//    user.username = @"cetauri";
-//    user.password = @"cetauri";
-//
-//    [user signInBackground:^(void) {
+//    [BaasioUser signInBackground:@"cetauri"
+//                  password:@"password"
+//              successBlock:^(void) {
 //                    NSLog(@"success");
 //                    exitRunLoop = YES;
 //              }
@@ -98,20 +101,14 @@
 //    [self runTestLoop];
 //}
 //
-//
 //- (void)test_9_unsubscribe
 //{
 //    BaasioUser *user = [BaasioUser user];
-//    user.username = @"cetauri";
 //    [user unsubscribeInBackground:^(void) {
 //                            NSLog(@"success");
-//                            exitRunLoop = YES;
-//                        }
+//                      }
 //                      failureBlock:^(NSError *error) {
 //                          NSLog(@"fail : %@", error.localizedDescription);
-//                          STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-//                          
-//                          exitRunLoop = YES;
 //                      }];
 //    [self runTestLoop];
 //}

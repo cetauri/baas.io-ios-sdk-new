@@ -67,38 +67,23 @@
 
 //- (void)test_3_sendQuestion
 //{
-//    BaasioUser *user = [BaasioUser user];
-//    user.username = @"helpdesk";
-//    user.password = @"helpdesk";
-//    [user signInBackground:^(void){
+//
+//    [BaasioUser signInBackground:@"helpdesk"
+//                        password:@"helpdesk"
+//                    successBlock:^(void){
 //
 //        BaasioHelp *helpdesk = [[BaasioHelp alloc]init];
-//        NSDictionary *param = @{
-//            @"email" : @"email@email.com",
-//            @"content" : @"내용입니다 내용입니다.2",
-//            @"temporary_answer" : @"temporary_answer",  //
-//            @"classification_id" : @"classification_id",//
-//            @"satisfaction_level_id" : @"satisfaction_level_id",//
-//            @"status_id" : @"status_id",//
-//            @"device_info" : @"device_info",//
-//            @"official" : @"official",//
-//            @"publicaccessable" : @"publicaccessable",//
-//            @"app_info" : @"app_info",//
-//            @"os_info" : @"os_info",//
-//            @"platform" : @"platform",//
-//            @"vote" : @"1",
-//            @"tags" : @"아야, 어여, 오요,우유"
-//        };
 //        
-//        [helpdesk sendQuestion:(NSDictionary *)param
-//                  successBlock:^(void) {
-//                      exitRunLoop = YES;
-//                  }
-//                  failureBlock:^(NSError *error) {
-//                      NSLog(@"fail : %@", error.localizedDescription);
-//                      STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-//                      exitRunLoop = YES;
-//                  }];
+//        [helpdesk sendQuestionInBackground:@"email@email.com"
+//                                   content:@"내용입니다 내용입니다.2"
+//                              successBlock:^(void) {
+//                                  exitRunLoop = YES;
+//                              }
+//                              failureBlock:^(NSError *error) {
+//                                  NSLog(@"fail : %@", error.localizedDescription);
+//                                  STFail(@"Test Fail in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+//                                  exitRunLoop = YES;
+//                              }];
 //    }
 //      failureBlock:^(NSError *error){
 //           NSLog(@"fail : %@", error.localizedDescription);

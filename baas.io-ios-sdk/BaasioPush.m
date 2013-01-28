@@ -11,10 +11,10 @@
 
 }
 
-- (void)sendPush:(BaasioMessage *)config
+- (void)sendPush:(BaasioMessage *)message
            error:(NSError**)error
 {
-    NSDictionary *params = [config dictionary];
+    NSDictionary *params = [message dictionary];
     [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"pushes"
                                                     withMethod:@"POST"
                                                         params:params
@@ -44,7 +44,7 @@
     NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
 
     [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
-                                                    withMethod:@"DELETE"
+                                                    withMethod:@"PUT"
                                                         params:nil
                                                          error:error];
     return;
