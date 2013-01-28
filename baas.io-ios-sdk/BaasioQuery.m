@@ -10,7 +10,7 @@
 @implementation BaasioQuery {
 
     NSString *_collectionName;
-    NSString *_projections;
+    NSString *_projectionIn;
     NSString *_wheres;
     NSString *_orderKey;
     NSString* _group;
@@ -64,8 +64,8 @@
 //-(void)setRelation:(BaasioRelation*)relation;
 
 
--(void)setProjections:(NSString *)projections{
-    _projections = projections;
+-(void)projectionIn:(NSString *)projectionIn{
+    projectionIn = projectionIn;
 }
 -(void)setWheres:(NSString *)wheres{
     _wheres = wheres;
@@ -111,8 +111,8 @@
 
     NSString *ql = @"select ";
 
-    if (_projections != nil) {
-        ql= [ql stringByAppendingString:_projections];
+    if (_projectionIn != nil) {
+        ql= [ql stringByAppendingString:_projectionIn];
     } else {
         ql= [ql stringByAppendingString:@"*"];
     }
