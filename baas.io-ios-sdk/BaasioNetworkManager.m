@@ -150,10 +150,13 @@
     void (^failure)(NSURLRequest *, NSHTTPURLResponse *, NSError *, id) = [[BaasioNetworkManager sharedInstance] failure:failureBlock];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
+                                                                                            [[NetworkActivityIndicatorManager sharedInstance] hide];
+                                                                                            
                                                                                             NSDictionary *dictionary = JSON[@"entities"][0];
 
                                                                                             BaasioFile *_file = [[BaasioFile alloc]init];
-                                                                                            [_file setEntity:dictionary];
+                                                                                            [_file set:dictionary];
+                                                                                            
                                                                                             successBlock(_file);
                                                                                         }
                                                                                         failure:failure];

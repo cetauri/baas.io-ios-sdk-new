@@ -24,6 +24,22 @@
  */
 + (BaasioUser *)currentUser;
 
+
+/**
+ update
+ @param error error
+ */
+- (BaasioUser *)update:(NSError **)error;
+
+/**
+ update asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
+- (BaasioRequest*)updateInBackground:(void (^)(BaasioUser *group))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock;
+
+
 /**
  signOut
  */
@@ -46,7 +62,7 @@
 
  @param username username
  @param password password
- @param failureBlock failureBlock
+ @param successBlock successBlock
  @param failureBlock failureBlock
  */
 + (BaasioRequest*)signInBackground:(NSString *)username
@@ -120,7 +136,7 @@
  @param failureBlock failureBlock
  */
 + (BaasioRequest*)signUpViaFacebookInBackground:(NSString *)accessToken
-                                          error:(void (^)(void))successBlock
+                                   successBlock:(void (^)(void))successBlock
                                    failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
@@ -140,7 +156,79 @@
  @param failureBlock failureBlock
  */
 + (BaasioRequest*)signInViaFacebookInBackground:(NSString *)accessToken
-                                          error:(void (^)(void))successBlock
+                                   successBlock:(void (^)(void))successBlock
                                    failureBlock:(void (^)(NSError *error))failureBlock;
 
+
+#pragma mark - for super document
+/**
+ set
+ @param entity entity
+ */
+-(void)set:(NSDictionary *)entity;
+
+/**
+ connect
+ @param entity entity
+ @param relationship relationship
+ @param error error
+ */
+- (void) connect:(BaasioEntity *)entity
+    relationship:(NSString*)relationship
+           error:(NSError **)error;
+/**
+ connect asynchronously
+ @param entity entity
+ @param relationship relationship
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
+- (BaasioRequest*)connectInBackground:(BaasioEntity *)entity
+                         relationship:(NSString*)relationship
+                         successBlock:(void (^)(void))successBlock
+                         failureBlock:(void (^)(NSError *error))failureBlock;
+/**
+ disconnect
+ @param entity entity
+ @param relationship relationship
+ @param error error
+ */
+- (void) disconnect:(BaasioEntity *)entity
+       relationship:(NSString*)relationship
+              error:(NSError **)error;
+
+/**
+ disconnect asynchronously
+ @param entity entity
+ @param relationship relationship
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
+- (BaasioRequest*)disconnectInBackground:(BaasioEntity *)entity
+                            relationship:(NSString*)relationship
+                            successBlock:(void (^)(void))successBlock
+                            failureBlock:(void (^)(NSError *error))failureBlock;
+
+/**
+ objectForKey
+ @param key key
+ */
+- (NSString *)objectForKey:(NSString *)key;
+/**
+ setObject
+ @param value value
+ @param key key
+ */
+- (void)setObject:(id)value forKey:(NSString *)key;
+
+
+/**
+ description
+ */
+- (NSString *)description;
+
+/**
+ dictionary
+ */
+- (NSDictionary *)dictionary;
 @end

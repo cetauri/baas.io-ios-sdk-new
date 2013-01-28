@@ -8,7 +8,6 @@
 
 #import "BaasioGroup.h"
 #import "BaasioNetworkManager.h"
-#import "Baasio+Private.h"
 
 @implementation BaasioGroup{
     NSString *_user;
@@ -30,54 +29,6 @@
 }
 - (void)setUserName:(NSString*)user{
     _user = user;
-}
-
-- (BaasioEntity *)save:(NSError **)error
-{
-    return [super save:error];
-}
-
-- (BaasioRequest*)saveInBackground:(void (^)(BaasioGroup *group))successBlock
-                        failureBlock:(void (^)(NSError *error))failureBlock{
-    return [super saveInBackground:^(BaasioEntity *entity){
-                    BaasioGroup *group = [[BaasioGroup alloc]init];
-                    [group setEntity:entity.dictionary];
-                    successBlock(group);
-                }
-               failureBlock:failureBlock];
-}
-
-- (BaasioEntity *)update:(NSError **)error
-{
-    return [super update:error];
-}
-
-
-- (BaasioRequest*)updateInBackground:(void (^)(BaasioGroup *group))successBlock
-                        failureBlock:(void (^)(NSError *error))failureBlock
-{
-    return [super updateInBackground:^(BaasioEntity *entity){
-                            BaasioGroup *group = [[BaasioGroup alloc]init];
-                            [group setEntity:entity.dictionary];
-                            successBlock(group);
-                        }
-                        failureBlock:failureBlock];
-}
-
-
-- (void)delete:(NSError **)error
-{
-    return; [super delete:error];
-}
-
-- (BaasioRequest*)deleteInBackground:(void (^)(void))successBlock
-                        failureBlock:(void (^)(NSError *error))failureBlock{
-    {
-        return [super deleteInBackground:^(void){
-                                successBlock();
-                            }
-                            failureBlock:failureBlock];
-    }
 }
 
 
@@ -102,7 +53,7 @@
                                        NSDictionary *dictionary = result[@"entities"][0];
                                        
                                        BaasioGroup *group = [[BaasioGroup alloc]init];
-                                       [group setEntity:dictionary];
+                                       [group set:dictionary];
                                        successBlock(group);
                                        
                                    }
@@ -130,6 +81,67 @@
                                        successBlock();
                                    }
                                    failure:failureBlock];
+}
+
++ (BaasioRequest*)getInBackground:(NSString *)uuid
+                     successBlock:(void (^)(BaasioGroup *entity))successBlock
+                     failureBlock:(void (^)(NSError *error))failureBlock
+{
+    return [BaasioFile getInBackground:@"groups"
+                                  uuid:uuid
+                          successBlock:^(BaasioEntity *entity) {
+                              BaasioGroup *group = [[BaasioGroup alloc]init];
+                              [group set:entity.dictionary];
+                              successBlock(group);
+                          }
+                          failureBlock:failureBlock];
+}
+
++ (BaasioGroup *)get:(NSString *)uuid
+               error:(NSError **)error{
+    BaasioEntity *entity = [super get:@"groups" uuid:uuid error:error];
+    BaasioGroup *group = [[BaasioGroup alloc]init];
+    [group set:entity.dictionary];
+    return group;
+}
+
+
+- (BaasioGroup *)save:(NSError **)error
+{
+    BaasioEntity *entity = [super save:error];
+    BaasioGroup *group = [[BaasioGroup alloc]init];
+    [group set:entity.dictionary];
+    return group;
+}
+
+- (BaasioRequest*)saveInBackground:(void (^)(BaasioGroup *group))successBlock
+                      failureBlock:(void (^)(NSError *error))failureBlock{
+    return [super saveInBackground:^(BaasioEntity *entity){
+        BaasioGroup *group = [[BaasioGroup alloc]init];
+        [group set:entity.dictionary];
+        successBlock(group);
+    }
+                      failureBlock:failureBlock];
+}
+
+- (BaasioGroup *)update:(NSError **)error
+{
+    BaasioEntity *entity = [super update:error];
+    BaasioGroup *group = [[BaasioGroup alloc]init];
+    [group set:entity.dictionary];
+    return group;
+}
+
+
+- (BaasioRequest*)updateInBackground:(void (^)(BaasioGroup *group))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock
+{
+    return [super updateInBackground:^(BaasioEntity *entity){
+        BaasioGroup *group = [[BaasioGroup alloc]init];
+        [group set:entity.dictionary];
+        successBlock(group);
+    }
+                        failureBlock:failureBlock];
 }
 
 @end

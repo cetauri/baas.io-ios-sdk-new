@@ -8,6 +8,7 @@
 #import "FileTest.h"
 #import "BaasioFile.h"
 #import "Baasio.h"
+#import "UnitTestConstant.h"
 
 @implementation FileTest {
     BOOL exitRunLoop;
@@ -16,9 +17,9 @@
 - (void)setUp
 {
 //    [super setUp];
-//    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
-    [Baasio setApplicationInfo:@"https://stgapi.baas.io" baasioID:@"baas107" applicationName:@"puddings"];
-//    + (void)setApplicationInfo:(NSString *)apiURL baasioID:(NSString *)baasioID applicationName:(NSString *)applicationName
+    
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
+
     // Set-up code here.
 }
 
@@ -39,23 +40,22 @@ static NSString *uuid;
     [file setObject:@"권오상" forKey:@"realname"];
 
     [file fileUploadInBackground:^(BaasioFile *file) {
-        NSLog(@"success : %@", file.uuid);
-        uuid = file.uuid;
-        [[NSUserDefaults standardUserDefaults] setObject:file.uuid forKey:@"file.uuid"];
-        exitRunLoop = YES;
-    }
-                    failureBlock:^(NSError *error) {
-                        NSLog(@"error : %@", error.localizedDescription);
-                        NSLog(@"uuid : %@", error.uuid);
+            NSLog(@"success : %@", file.uuid);
+            uuid = file.uuid;
+            [[NSUserDefaults standardUserDefaults] setObject:file.uuid forKey:@"file.uuid"];
+            exitRunLoop = YES;
+        }
+        failureBlock:^(NSError *error) {
+            NSLog(@"error : %@", error.localizedDescription);
+            NSLog(@"uuid : %@", error.uuid);
 
-                        STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                        exitRunLoop = YES;
-                    }
-                   progressBlock:^(float progress) {
-                       NSLog(@"progress : %f", progress);
-                   }
-    ];
-    
+            STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+            exitRunLoop = YES;
+        }
+        progressBlock:^(float progress) {
+           NSLog(@"progress : %f", progress);
+        }];
+
     [self runTestLoop];
 }
 
@@ -87,29 +87,28 @@ static NSString *uuid;
     BaasioFile *file = [[BaasioFile alloc] init];
     file.uuid = uuid;
     [file fileDownloadInBackground:path
-                  successBlock:^(NSString *downloadPath) {
-                      NSLog(@"success : %@", downloadPath);
-                      // 파일 읽기.
-                      NSString *entireFileInString = [NSString stringWithContentsOfFile:downloadPath encoding:NSStringEncodingConversionAllowLossy error:nil];
-                      // 라인별로 읽기.
-                      NSArray *lines = [entireFileInString componentsSeparatedByString:@"\n"];
-                      // 테스트.
-                      for (NSString *line in lines) {
-                          NSLog(@"%@",[NSString stringWithFormat:@"line: %@", line]);
-                      }
+          successBlock:^(NSString *downloadPath) {
+              NSLog(@"success : %@", downloadPath);
+              // 파일 읽기.
+              NSString *entireFileInString = [NSString stringWithContentsOfFile:downloadPath encoding:NSStringEncodingConversionAllowLossy error:nil];
+              // 라인별로 읽기.
+              NSArray *lines = [entireFileInString componentsSeparatedByString:@"\n"];
+              // 테스트.
+              for (NSString *line in lines) {
+                  NSLog(@"%@",[NSString stringWithFormat:@"line: %@", line]);
+              }
 
-                      exitRunLoop = YES;
-                 }
-                 failureBlock:^(NSError *error) {
-                     NSLog(@"error : %@", error.localizedDescription);
+              exitRunLoop = YES;
+         }
+         failureBlock:^(NSError *error) {
+             NSLog(@"error : %@", error.localizedDescription);
 
-                     STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                     exitRunLoop = YES;
-                 }
-                 progressBlock:^(float progress){
-                     NSLog(@"progress : %f", progress);
-                 }
-             ];
+             STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+             exitRunLoop = YES;
+         }
+         progressBlock:^(float progress){
+             NSLog(@"progress : %f", progress);
+         } ];
     
     [self runTestLoop];
 }
@@ -122,16 +121,16 @@ static NSString *uuid;
     [file setObject:@"권오상" forKey:@"cetauri"];
     [file setObject:@"짐승" forKey:@"realname"];
     [file updateInBackground:^(BaasioFile *entity){
-                    NSLog(@"success : %@", entity.description);
+            NSLog(@"success : %@, %@", entity.description, entity.filename);
 
-                    exitRunLoop = YES;
-                }
-                failureBlock:^(NSError *error) {
-                    NSLog(@"error : %@", error.localizedDescription);
-                    
-                    STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                    exitRunLoop = YES;
-                }];
+            exitRunLoop = YES;
+        }
+        failureBlock:^(NSError *error) {
+            NSLog(@"error : %@", error.localizedDescription);
+
+            STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+            exitRunLoop = YES;
+        }];
     
     [self runTestLoop];
 }
@@ -147,20 +146,20 @@ static NSString *uuid;
     file.filename = @"1.txt";
     [file setObject:@"Kwon oh sang" forKey:@"cetauri"];
     [file fileUpdateInBackground:^(BaasioFile *entity){
-                    NSLog(@"success : %@", entity.description);
-        
-                    exitRunLoop = YES;
-                }
-                failureBlock:^(NSError *error) {
-                    NSLog(@"error : %@", error.localizedDescription);
-                    
-                    STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
-                    exitRunLoop = YES;
-                }
-     
-                   progressBlock:^(float progress){
-                       NSLog(@"progress : %f", progress);
-                   }];
+                NSLog(@"success : %@", entity.description);
+
+                exitRunLoop = YES;
+            }
+            failureBlock:^(NSError *error) {
+                NSLog(@"error : %@", error.localizedDescription);
+
+                STFail(@"Test Faiil in %@ : %@", NSStringFromSelector(_cmd), error.localizedDescription);
+                exitRunLoop = YES;
+            }
+
+            progressBlock:^(float progress){
+               NSLog(@"progress : %f", progress);
+            }];
     
     [self runTestLoop];
 }
@@ -189,8 +188,8 @@ static NSString *uuid;
 
 
 - (void)runTestLoop{
-    while (!exitRunLoop){
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
-    }
+//    while (!exitRunLoop){
+//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+//    }
 }
 @end

@@ -55,10 +55,28 @@
                                                           failure:failureBlock];
 }
 
-- (BaasioRequest*)sendQuestionInBackground:(NSDictionary *)param
+- (BaasioRequest*)sendQuestionInBackground:(NSString *)email
+                                   content:(NSString *)content
                               successBlock:(void (^)(void))successBlock
                               failureBlock:(void (^)(NSError *error))failureBlock
 {
+
+    NSDictionary *param = @{
+        @"email" : email,
+        @"content" : content,
+        @"temporary_answer" : @"temporary_answer",  //
+        @"classification_id" : @"classification_id",//
+        @"satisfaction_level_id" : @"satisfaction_level_id",//
+        @"status_id" : @"status_id",//
+        @"device_info" : @"device_info",//
+        @"official" : @"official",//
+        @"publicaccessable" : @"publicaccessable",//
+        @"app_info" : @"app_info",//
+        @"os_info" : @"os_info",//
+        @"platform" : @"platform",//
+        @"vote" : @"1",
+        @"tags" : @""
+    };
     NSString *path = @"help/questions";
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
                                                        withMethod:@"POST"

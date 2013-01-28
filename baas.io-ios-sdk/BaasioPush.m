@@ -11,10 +11,10 @@
 
 }
 
-- (void)sendPush:(BaasioMessage *)config
+- (void)sendPush:(BaasioMessage *)message
            error:(NSError**)error
 {
-    NSDictionary *params = [config dictionary];
+    NSDictionary *params = [message dictionary];
     [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:@"pushes"
                                                     withMethod:@"POST"
                                                         params:params
@@ -42,10 +42,14 @@
 {
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
     NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
-
+    
+    NSDictionary *params = @{
+        @"state" : [NSNumber numberWithBool:false]
+    };
+    
     [[BaasioNetworkManager sharedInstance] connectWithHTTPSync:path
-                                                    withMethod:@"DELETE"
-                                                        params:nil
+                                                    withMethod:@"PUT"
+                                                        params:params
                                                          error:error];
     return;
 }
@@ -54,14 +58,18 @@
 {
     NSString *uuid = [[NSUserDefaults standardUserDefaults]objectForKey:PUSH_DEVICE_ID];
     NSString *path = [@"pushes/devices/" stringByAppendingString:uuid];
+
+    NSDictionary *params = @{
+        @"state" : [NSNumber numberWithBool:false]
+    };
     
     return [[BaasioNetworkManager sharedInstance] connectWithHTTP:path
-                                withMethod:@"DELETE"
-                                    params:nil
-                                   success:^(id result){
-                                       successBlock();
-                                   }
-                                   failure:failureBlock];
+                                                        withMethod:@"PUT"
+                                                            params:params
+                                                           success:^(id result){
+                                                               successBlock();
+                                                           }
+                                                           failure:failureBlock];
 }
 
 - (void)register:(NSString *)deviceID

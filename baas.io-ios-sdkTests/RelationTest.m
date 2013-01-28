@@ -10,6 +10,7 @@
 #import "BaasioEntity.h"
 #import "BaasioQuery.h"
 #import "Baasio.h"
+#import "UnitTestConstant.h"
 @implementation RelationTest{
     BOOL exitRunLoop;
     NSString *relationship;
@@ -20,7 +21,7 @@
 - (void)setUp
 {
     //    [super setUp];
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
+    [Baasio setApplicationInfo:TEST_APPLICATION_ID applicationName:TEST_BAASIO_ID];
     // Set-up code here.
     
     relationship = @"relationship";
@@ -75,21 +76,6 @@
 }
 
 
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship/gamescore/1f09ce74-44e2-11e2-9c36-06ebb80000ba
-//
-//
-//
-//
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship
-//
-//
-//
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship/gamescore/1f09ce74-44e2-11e2-9c36-06ebb80000ba
-//
-//
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship/gamescore/1f09ce74-44e2-11e2-9c36-06ebb80000ba
-//
-//https://api.baas.io/cetauri/sandbox/user/2f0768f4-44cf-11e2-9c36-06ebb80000ba/relationship
 //- (void)test_2_selectConnect{
 //    BaasioQuery *query = [BaasioQuery queryWithRelationship:relationship];
 //    
